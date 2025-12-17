@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SellGold.Pages.Prices.PricePage"
+             Title="PricePage">
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+
+                <!-- Valor e Moeda -->
+                <Entry Placeholder="Valor base"
+                   Keyboard="Numeric"
+                   Text="{Binding BasePriceAmount}" />
+                <Picker Title="Moeda"
+                    ItemsSource="{Binding AvailableCurrencies}"
+                    SelectedItem="{Binding BasePriceCurrency}" />
+
+                <!-- Status -->
+                <HorizontalStackLayout>
+                    <Label Text="Ativo" VerticalOptions="Center" />
+                    <Switch IsToggled="{Binding IsActive}" />
+                </HorizontalStackLayout>
+
+                <!-- Descontos -->
+                <Label Text="Descontos" FontAttributes="Bold" />
+                <CollectionView ItemsSource="{Binding Discounts}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout>
+                                <Picker Title="Tipo"
+                                    ItemsSource="{Binding DiscountTypes}"
+                                    SelectedItem="{Binding Type}" />
+                                <Entry Placeholder="Valor"
+                                   Keyboard="Numeric"
+                                   Text="{Binding Value}" />
+                                <DatePicker Date="{Binding StartDate}" />
+                                <DatePicker Date="{Binding EndDate}" />
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button Text="Adicionar desconto"
+                    Command="{Binding AddDiscountCommand}" />
+
+                <!-- Políticas -->
+                <Label Text="Políticas" FontAttributes="Bold" />
+                <CollectionView ItemsSource="{Binding Policies}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout>
+                                <Picker Title="Estratégia"
+                                    ItemsSource="{Binding PolicyStrategies}"
+                                    SelectedItem="{Binding Strategy}" />
+                                <Editor Placeholder="Regras"
+                                    MaxLength="500"
+                                    Text="{Binding Rules}" />
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button Text="Adicionar política"
+                    Command="{Binding AddPolicyCommand}" />
+
+                <!-- Impostos -->
+                <Label Text="Impostos" FontAttributes="Bold" />
+                <CollectionView ItemsSource="{Binding Taxes}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout>
+                                <Entry Placeholder="Nome do imposto"
+                                   Text="{Binding Name}" />
+                                <Slider Minimum="0" Maximum="100"
+                                    Value="{Binding Rate}" />
+                                <Label Text="{Binding Rate, StringFormat='{0:F2}%'}" />
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button Text="Adicionar imposto"
+                    Command="{Binding AddTaxCommand}" />
+
+                <!-- Mensagem de erro -->
+                <Label Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource NullToBoolConverter}}" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+</ContentPage>

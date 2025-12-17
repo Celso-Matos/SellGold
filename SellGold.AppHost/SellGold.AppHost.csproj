@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="13.0.2" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>77412696-a9cc-42fb-bdd0-69fc41583030</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Confluent.Kafka" Version="13.0.2" />
+    <PackageReference Include="Aspire.Hosting" Version="13.0.2" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="13.0.2" />
+    <PackageReference Include="Aspire.Hosting.Kafka" Version="13.0.2" />
+    <PackageReference Include="Aspire.Hosting.SqlServer" Version="13.0.2" />
+    <PackageReference Include="Confluent.Kafka" Version="2.12.0" />
+    <PackageReference Include="MediatR" Version="11.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SellGold.Customers\SellGold.Customers.csproj" />
+    <ProjectReference Include="..\SellGold.Orders\SellGold.Orders.csproj" />
+    <ProjectReference Include="..\SellGold.Prices\SellGold.Prices.csproj" />
+    <ProjectReference Include="..\SellGold.Promotions\SellGold.Promotions.csproj" />
+    <ProjectReference Include="..\SellGold.Stock\SellGold.Stock.csproj" />
+    <ProjectReference Include="..\SellGold.Suppliers\SellGold.Suppliers.csproj" />
+    <ProjectReference Include="..\SellGold.Products\SellGold.Products.csproj" />
+    <ProjectReference Include="..\SellGold\SellGold.csproj" IsAspireProjectResource="false">
+      <SetTargetFramework>TargetFramework=net10.0</SetTargetFramework>
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>

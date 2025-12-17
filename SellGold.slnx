@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".env" />
+    <File Path="docker-compose.yml" />
+  </Folder>
+  <Project Path="SellGold.AppHost/SellGold.AppHost.csproj" />
+  <Project Path="SellGold.Customers/SellGold.Customers.csproj" />
+  <Project Path="SellGold.Orders/SellGold.Orders.csproj" />
+  <Project Path="SellGold.Prices/SellGold.Prices.csproj" />
+  <Project Path="SellGold.Products/SellGold.Products.csproj" />
+  <Project Path="SellGold.Promotions/SellGold.Promotions.csproj" />
+  <Project Path="SellGold.Stock/SellGold.Stock.csproj" />
+  <Project Path="SellGold.Suppliers/SellGold.Suppliers.csproj" />
+  <Project Path="SellGold/SellGold.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+</Solution>

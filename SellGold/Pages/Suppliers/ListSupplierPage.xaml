@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:datagrid="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
+             xmlns:pageModels="clr-namespace:SellGold.PageModels.Suppliers"
+             x:Class="SellGold.Pages.Suppliers.ListSupplierPage"
+             Title="Fornecedores">
+    <Grid>
+        <!-- DataGrid -->
+        <datagrid:DataGrid ItemsSource="{Binding Suppliers}"
+                   HeaderBackground="LightGray"
+                   RowHeight="40"
+                   HeaderHeight="50"
+                   BorderColor="Gray"
+                   BorderThickness="1">
+
+            <!-- Definição manual das colunas -->
+            <datagrid:DataGrid.Columns>
+                <datagrid:DataGridColumn Title="ID" PropertyName="SupplierId" />
+                <datagrid:DataGridColumn Title="Nome" PropertyName="CorporateName" />
+                <datagrid:DataGridColumn Title="Preço" PropertyName="TradeName" />
+            </datagrid:DataGrid.Columns>
+        </datagrid:DataGrid>
+
+        <!-- Indicador de carregamento -->
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                   IsVisible="{Binding IsBusy}"
+                   Color="Blue"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+    </Grid>
+</ContentPage>

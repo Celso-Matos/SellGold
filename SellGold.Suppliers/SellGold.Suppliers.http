@@ -1,0 +1,6 @@
+@SellGold.Suppliers_HostAddress = http://localhost:5192
+
+GET {{SellGold.Suppliers_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

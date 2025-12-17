@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageModels="clr-namespace:SellGold.PageModels.Stock"
+             x:Class="SellGold.Pages.Stock.StockPage"
+             Title="Estoque">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">            
+            <Entry Placeholder="Quantidade Atual" Text="{Binding CurrentQuantity}">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding CurrentQuantity}" Value="">
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry Placeholder="Data do Movimento" Text="{Binding DateMovement}">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding DateMovement}" Value="">
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry Placeholder="Quantidade Movimentada" Text="{Binding AmountMovement}">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding AmountMovement}" Value="">
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry Placeholder="Tipo de Movimento" Text="{Binding MovementType}">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding MovementType}" Value="">
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry Placeholder="Observação" Text="{Binding Observation}">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding Observation}" Value="">
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry Placeholder="Nome do Local" Text="{Binding StockLocationName}">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding StockLocationName}" Value="">
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry Placeholder="Logradouro" Text="{Binding Street}">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding Street}" Value="">
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry Placeholder="Número" Text="{Binding Number}">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding Number}" Value="">
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry Placeholder="Complemento" Text="{Binding Complement}">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding Complement}" Value="">
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry Placeholder="Bairro" Text="{Binding District}">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding District}" Value="">
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry Placeholder="Cidade" Text="{Binding City}">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding City}" Value="">
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry Placeholder="Estado" Text="{Binding State}">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding State}" Value="">
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry Placeholder="CEP" Text="{Binding ZipCode}">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding ZipCode}" Value="">
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry Placeholder="Pais" Text="{Binding Country}">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding Country}" Value="">
+                        <Setter Property="TextColor" Value="Red" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <!-- Mensagem de erro inline -->
+            <Label Text="{Binding ErrorMessage}" TextColor="Red" FontAttributes="Bold" />
+            <Button Text="Salvar" Command="{Binding SaveCommand}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

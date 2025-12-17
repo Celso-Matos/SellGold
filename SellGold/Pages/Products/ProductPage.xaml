@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageModels="clr-namespace:SellGold.PageModels.Products"
+             x:Class="SellGold.Pages.Products.ProductPage"
+             Title="Produto">
+    <VerticalStackLayout Padding="20" Spacing="10">        
+        <Entry Placeholder="Nome do produto" Text="{Binding Name}">
+            <Entry.Triggers>
+                <DataTrigger TargetType="Entry" Binding="{Binding Name}" Value="">
+                    <Setter Property="TextColor" Value="Red" />
+                </DataTrigger>
+            </Entry.Triggers>
+        </Entry>
+        <Entry Placeholder="Descrição" Text="{Binding Description}">
+            <Entry.Triggers>
+                <DataTrigger TargetType="Entry" Binding="{Binding Description}" Value="">
+                    <Setter Property="TextColor" Value="Red" />
+                </DataTrigger>
+            </Entry.Triggers>
+        </Entry>
+        <Switch IsToggled="{Binding IsActive}" />
+        <Label Text="Ativo" />
+        <Entry Placeholder="Código de barras" Text="{Binding Barcode}">
+            <Entry.Triggers>
+                <DataTrigger TargetType="Entry" Binding="{Binding Barcode}" Value="">
+                    <Setter Property="TextColor" Value="Red" />
+                </DataTrigger>
+            </Entry.Triggers>
+        </Entry>
+        <Entry Placeholder="Tipo do código de barras" Text="{Binding BarcodeType}">
+            <Entry.Triggers>
+                <DataTrigger TargetType="Entry" Binding="{Binding BarcodeType}" Value="">
+                    <Setter Property="TextColor" Value="Red" />
+                </DataTrigger>
+            </Entry.Triggers>
+        </Entry>
+        <!-- Mensagem de erro inline -->
+        <Label Text="{Binding ErrorMessage}" TextColor="Red" FontAttributes="Bold" />
+        <Button Text="Salvar" Command="{Binding SaveCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>

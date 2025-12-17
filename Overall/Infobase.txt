@@ -1,0 +1,24 @@
+[
+  {
+    "Name": "Produto Final 1",
+    "Description": "Teste final de persistencia via Kafka.",
+    "Barcode": "1112223334449",
+    "BarcodeType": "EAN-13"
+  },
+  {
+    "Name": "Produto Final 2",
+    "Description": "Teste final de persistencia via Kafka.",
+    "Barcode": "5556667778881",
+    "BarcodeType": "EAN-13"
+  }
+]
+
+
+Base Server: (localdb)\MSSQLLocalDB
+
+docker-compose down
+docker-compose up -d
+docker ps
+Test-NetConnection localhost -Port 9092
+docker exec -it sellgold-kafka-1 kafka-topics --bootstrap-server localhost:9092 --list
+docker exec -it sellgold-kafka-1 kafka-topics --bootstrap-server localhost:9092 --create --topic product-import-topic --partitions 1 --replication-factor 1

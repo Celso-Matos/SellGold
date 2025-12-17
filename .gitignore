@@ -1,0 +1,12 @@
+.env
+# Configuração local
+Release/
+Debug/
+obj/
+bin/
+# Build
+*.slnLaunch.user
+*.suo
+*.user
+.vs/
+# Visual Studio

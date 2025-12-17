@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SellGold.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
+    xmlns:products="clr-namespace:SellGold.Pages.Products"
+    xmlns:suppliers="clr-namespace:SellGold.Pages.Suppliers"
+    xmlns:stock="clr-namespace:SellGold.Pages.Stock"    
+    xmlns:Prices="clr-namespace:SellGold.Pages.Prices"
+    Shell.FlyoutBehavior="Flyout"
+    Title="SellGold">
+
+    <ShellContent
+        Title="Produto"
+        Icon="{StaticResource IconDashboard}"
+        ContentTemplate="{DataTemplate products:ProductPage}"
+        Route="products" />
+
+    <ShellContent
+        Title="Ver Produtos"
+        Icon="{StaticResource IconProjects}"
+        ContentTemplate="{DataTemplate products:ListProductPage}"
+        Route="ListProductPage" />
+
+    <ShellContent
+        Title="Fornecedores"
+        Icon="{StaticResource IconDashboard}"
+        ContentTemplate="{DataTemplate suppliers:SupplierPage}"
+        Route="suppliers" />
+
+    <ShellContent
+    Title="Ver Fornecedores"
+    Icon="{StaticResource IconProjects}"
+    ContentTemplate="{DataTemplate suppliers:ListSupplierPage}"
+    Route="ListSupplierPage" />
+
+    <ShellContent
+    Title="Estoque"
+    Icon="{StaticResource IconDashboard}"
+    ContentTemplate="{DataTemplate stock:StockPage}"
+    Route="stock" />
+
+    <ShellContent
+    Title="Ver Estoque"
+    Icon="{StaticResource IconProjects}"
+    ContentTemplate="{DataTemplate stock:ListStockPage}"
+    Route="ListStockPage" />
+
+    <ShellContent
+    Title="Preços"
+    Icon="{StaticResource IconDashboard}"
+    ContentTemplate="{DataTemplate Prices:PricePage}"
+    Route="prices" />
+
+        <ShellContent
+    Title="Ver Preços"
+    Icon="{StaticResource IconProjects}"
+    ContentTemplate="{DataTemplate Prices:ListPricePage}"
+    Route="ListPricesPage" />
+
+    <Shell.FlyoutFooter>
+        <Grid Padding="15">
+            <sf:SfSegmentedControl x:Name="ThemeSegmentedControl" 
+                VerticalOptions="Center" HorizontalOptions="Center" SelectionChanged="SfSegmentedControl_SelectionChanged"
+                SegmentWidth="40" SegmentHeight="40">
+                <sf:SfSegmentedControl.ItemsSource>
+                    <x:Array Type="{x:Type sf:SfSegmentItem}">
+                        <sf:SfSegmentItem ImageSource="{StaticResource IconLight}" SemanticProperties.Description="Light mode"/>
+                        <sf:SfSegmentItem ImageSource="{StaticResource IconDark}" SemanticProperties.Description="Dark mode"/>
+                    </x:Array>
+                </sf:SfSegmentedControl.ItemsSource>
+            </sf:SfSegmentedControl>
+        </Grid>
+    </Shell.FlyoutFooter>
+
+</Shell>
