@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SellGold.Orders.Infrastructure.Data.Context;
 using SellGold.Orders.Infrastructure.Repositories;
 using SellGold.Orders.Application.Interfaces.Repositories;
+using SellGold.Orders.Application.Contracts.Mappers;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,9 @@ builder.Services.AddScoped<IOrdersRepository, SellGoldOrdersRepository>();
 // DbContext 
 builder.Services.AddDbContext<SellGoldOrdersContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SellGoldOrdersConnection")));
+
+// Adiciona AutoMapper e carrega todos os Profiles
+builder.Services.AddAutoMapper(typeof(OrderProfileMapper));
 
 // Config Cors
 builder.Services.AddCors(options =>

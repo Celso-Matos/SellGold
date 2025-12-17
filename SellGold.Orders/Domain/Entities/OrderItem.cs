@@ -1,15 +1,28 @@
-﻿namespace SellGold.Orders.Domain.Entities
+﻿using SellGold.Orders.Domain.Common;
+
+namespace SellGold.Orders.Domain.Entities
 {
-    public class OrderItemRedponse
+    public class OrderItem
     {
-        // Required fields
+        protected OrderItem() { }
 
-        public Guid OrderItemId { get; set; } = Guid.NewGuid();
-        public Guid ProductId { get; set; }
-        public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public OrderItem(Guid productId, int quantity, decimal unitPrice)
+        {
+            if (quantity <= 0)
+                throw new DomainException("Quantidade inválida.");
 
+            if (unitPrice <= 0)
+                throw new DomainException("Preço inválido.");
+
+            ProductId = productId;
+            Quantity = quantity;
+            UnitPrice = unitPrice;
+        }
+
+        public Guid ProductId { get; private set; }
+        public int Quantity { get; private set; }
+        public decimal UnitPrice { get; private set; }
+
+        public decimal Total => Quantity * UnitPrice;
     }
 }

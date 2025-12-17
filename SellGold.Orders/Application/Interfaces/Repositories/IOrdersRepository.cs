@@ -3,10 +3,10 @@ namespace SellGold.Orders.Application.Interfaces.Repositories
 {
     public interface IOrdersRepository
     {
-        Task<OrderRequest> GetByIdAsync(Guid orderId);
-        Task<IEnumerable<OrderRequest>> GetAllAsync();
-        Task AddAsync(OrderRequest order);
-        Task UpdateAsync(OrderRequest order);
+        Task<Order> GetByIdAsync(Guid orderId);
+        Task<IEnumerable<Order>> GetAllAsync();
+        Task AddAsync(Order order);
+        Task UpdateAsync(Order order);
         Task DeleteAsync(Guid orderId);
     }
 }

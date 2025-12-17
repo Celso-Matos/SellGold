@@ -7,10 +7,9 @@ namespace SellGold.Orders.Infrastructure.Data.Context
         public SellGoldOrdersContext(DbContextOptions<SellGoldOrdersContext> options) : base(options)
         {
         }
+        public DbSet<Order> Orders { get; set; }
 
-        public DbSet<OrderRequest> Orders { get; set; }
-
-        public DbSet<OrderItemRedponse> OrderItems { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
     }
     

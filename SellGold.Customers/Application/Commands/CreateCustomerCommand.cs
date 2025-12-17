@@ -4,5 +4,5 @@ using SellGold.Customers.Application.Contracts.DTOs.Responses;
 
 namespace SellGold.Customers.Application.Commands
 {
-    public record CreateCustomerCommand(CustomerRequest CreateCustomerRequest) : IRequest<CustomerResponse>;
+    public record CreateCustomerCommand(CreateCustomerRequest CreateCustomerRequest) : IRequest<CustomerResponse>;
 }

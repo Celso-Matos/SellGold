@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SellGold.Customers.Domain.Entities;
+using SellGold.Customers.Domain.ValueObject;
 namespace SellGold.Customers.Infrastructure.Data.Context
 {
     public class SellGoldCustomersContext : DbContext

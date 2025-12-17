@@ -13,22 +13,22 @@ namespace SellGold.Orders.Infrastructure.Repositories
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public async Task<OrderRequest> GetByIdAsync(Guid orderId)
+        public async Task<Order> GetByIdAsync(Guid orderId)
         {
             return await _context.Orders
                                         .Include(o => o.OrderItems)
                                         .FirstOrDefaultAsync(o => o.OrderId == orderId) ?? throw new KeyNotFoundException($"Pedido {orderId} não encontrado.");
         }
-        public async Task<IEnumerable<OrderRequest>> GetAllAsync()
+        public async Task<IEnumerable<Order>> GetAllAsync()
         {
             return await _context.Orders.Include(o => o.OrderItems).ToListAsync();
         }
-        public async Task AddAsync(OrderRequest order)
+        public async Task AddAsync(Order order)
         {
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
         }
-        public async Task UpdateAsync(OrderRequest order)
+        public async Task UpdateAsync(Order order)
         {
             _context.Entry(order).State = EntityState.Modified;
             await _context.SaveChangesAsync();
