@@ -1,4 +1,4 @@
-﻿using SellGold.Customers.Domain.Common;
+﻿using SellGold.Customers.Domain.Exceptions;
 using SellGold.Customers.Domain.ValueObject;
 
 namespace SellGold.Customers.Domain.Entities
@@ -7,7 +7,15 @@ namespace SellGold.Customers.Domain.Entities
     {
         private readonly List<Address> _addresses = new();
 
-        protected Customer() { } // EF Core
+        protected Customer() 
+        {
+
+            Name = null!;
+            Document = null!;
+            Email = null!;
+            Phone = null!;
+
+        } // EF Core
 
         public Customer(string name, string document, string email, string phone)
         {

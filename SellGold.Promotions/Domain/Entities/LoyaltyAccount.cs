@@ -1,31 +1,58 @@
-﻿namespace SellGold.Promotions.Domain.Entities
+﻿using SellGold.Customers.Domain.Exceptions;
+
+namespace SellGold.Promotions.Domain.Entities
 {
     public class LoyaltyAccount
     {
-        // Required fields
-        public Guid LoyaltyAccountId { get; private set; } = Guid.NewGuid();
-        public Guid CustomerId { get; set; } // Required
-        public int Points { get; private set; } = 0;
+        // EF Core
+        protected LoyaltyAccount() { }
 
-        // Domain methods
+        public LoyaltyAccount(Guid customerId)
+        {
+            if (customerId == Guid.Empty)
+                throw new DomainException("Cliente inválido.");
+
+            LoyaltyAccountId = Guid.NewGuid();
+            CustomerId = customerId;
+            Points = 0;
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+        public Guid LoyaltyAccountId { get; private set; }
+        public Guid CustomerId { get; private set; }
+        public int Points { get; private set; }
+        public DateTime CreatedAt { get; private set; }
+        public DateTime UpdatedAt { get; private set; }
+
+        // Behavior (DDD)
+
         public void AccumulatePoints(decimal purchaseValue)
         {
-            // Example: 1 point for each $10 spent
-            Points += (int)(purchaseValue / 10);
+            if (purchaseValue <= 0)
+                throw new DomainException("Valor da compra deve ser maior que zero.");
+
+            // Regra explícita de negócio
+            // 1 ponto a cada R$10,00
+            var earnedPoints = (int)(purchaseValue / 10);
+
+            if (earnedPoints <= 0)
+                return;
+
+            Points += earnedPoints;
+            UpdatedAt = DateTime.UtcNow;
         }
 
-        public bool RedeemPoints(int points)
+        public void RedeemPoints(int points)
         {
-            if (points <= Points)
-            {
-                Points -= points;
-                return true;
-            }
-            return false;
+            if (points <= 0)
+                throw new DomainException("Quantidade de pontos inválida.");
+
+            if (points > Points)
+                throw new DomainException("Saldo de pontos insuficiente.");
+
+            Points -= points;
+            UpdatedAt = DateTime.UtcNow;
         }
-
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-
     }
 }

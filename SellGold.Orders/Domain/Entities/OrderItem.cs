@@ -1,4 +1,4 @@
-﻿using SellGold.Orders.Domain.Common;
+﻿using SellGold.Orders.Domain.Exceptions;
 
 namespace SellGold.Orders.Domain.Entities
 {

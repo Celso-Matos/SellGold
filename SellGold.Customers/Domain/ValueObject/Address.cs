@@ -1,4 +1,4 @@
-﻿using SellGold.Customers.Domain.Common;
+﻿using SellGold.Customers.Domain.Exceptions;
 
 namespace SellGold.Customers.Domain.ValueObject
 {

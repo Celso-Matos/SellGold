@@ -6,12 +6,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>3a73088c-d7ec-470f-9ac4-afbfa9bda514</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	<LangVersion>latest</LangVersion>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Confluent.Kafka" Version="13.0.2" />
     <PackageReference Include="Aspire.Hosting" Version="13.0.2" />
     <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="13.0.2" />
+    <PackageReference Include="AutoMapper" Version="16.0.0" />
     <PackageReference Include="Confluent.Kafka" Version="2.12.0" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="15.1.11" />
     <PackageReference Include="HotChocolate.Data" Version="15.1.11" />
@@ -29,6 +33,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="10.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="10.0.1" />
@@ -36,6 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Application\Contracts\DTOs\Messaging\" />
     <Folder Include="Application\Interfaces\Messaging\" />
     <Folder Include="Infrastructure\Data\Migrations\" />
     <Folder Include="Infrastructure\Messaging\" />

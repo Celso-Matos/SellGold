@@ -20,7 +20,7 @@ namespace SellGold.Customers.Application.Handlers.Customers
         public async Task<CustomerResponse> Handle(CreateCustomerCommand command, CancellationToken cancellationToken)
         {
             // Converte o DTO de Request para entidade de domínio
-            var customer = _mapper.Map<Customer>(command.CreateCustomerRequest);
+            var customer = _mapper.Map<Customer>(command.createCustomerRequest);
 
             // Persiste no repositório
             await _customersRepository.AddAsync(customer);

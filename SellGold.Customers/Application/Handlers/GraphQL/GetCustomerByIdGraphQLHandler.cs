@@ -1,29 +1,34 @@
 ﻿using AutoMapper;
 using MediatR;
+using SellGold.Customers.Application.Commons;
 using SellGold.Customers.Application.Contracts.DTOs.Responses;
-using SellGold.Customers.Application.Contracts.Mappers;
 using SellGold.Customers.Application.Interfaces.Repositories;
 using SellGold.Customers.Application.Queries.GraphQL;
-using KeyNotFoundException = System.Collections.Generic.KeyNotFoundException;
+using SellGold.Orders.Application.Commons;
 
 namespace SellGold.Customers.Application.Handlers.GraphQL
 {
-    public class GetCustomertByIdGraphQLHandler : IRequestHandler<GetCustomerByIdGraphQLQuery, CustomerResponse>
+    public class GetCustomerByIdGraphQLHandler : IRequestHandler<GetCustomerByIdGraphQLQuery, CustomerResponse>
     {
         private readonly ICustomersRepository _repository;
         private readonly IMapper _mapper;
+        private readonly ILogger _logger;
 
-        public GetCustomertByIdGraphQLHandler(ICustomersRepository repository, IMapper mapper)
+        public GetCustomerByIdGraphQLHandler(ICustomersRepository repository, IMapper mapper, ILogger logger)
         {
             _repository = repository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<CustomerResponse> Handle(GetCustomerByIdGraphQLQuery query, CancellationToken cancellationToken)
         {
             var customer = await _repository.GetByIdAsync(query.CustomerId);
             if (customer is null)
-                throw new KeyNotFoundException("Cliente não encontrado.");
+            {
+                CustomerLogs.CustomerNotFound(_logger, query.CustomerId);
+                throw new NotFoundException("Customer", query.CustomerId);
+            }               
 
             var response = _mapper.Map<CustomerResponse>(customer);
 

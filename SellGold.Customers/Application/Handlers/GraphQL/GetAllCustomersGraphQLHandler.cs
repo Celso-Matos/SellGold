@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using SellGold.Customers.Application.Contracts.DTOs.Responses;
-using SellGold.Customers.Application.Contracts.Mappers;
 using SellGold.Customers.Application.Interfaces.Repositories;
 using SellGold.Customers.Application.Queries.GraphQL;
 

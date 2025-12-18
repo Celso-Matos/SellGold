@@ -6,6 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>30a6d512-4bbd-4213-bf63-fb1dc426f620</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	<LangVersion>latest</LangVersion>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +34,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="10.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="10.0.1" />
@@ -41,9 +45,7 @@
     <Folder Include="Application\Contracts\DTOs\Messaging\" />
     <Folder Include="Application\Contracts\Mappers\" />
     <Folder Include="Application\Interfaces\Messsaging\" />
-    <Folder Include="Application\Commands\" />
-    <Folder Include="Application\Handlers\" />
-    <Folder Include="Application\Queries\" />
+    <Folder Include="Application\Queries\Orders\" />
     <Folder Include="Infrastructure\Data\Migrations\" />
     <Folder Include="Infrastructure\Messaging\" />
   </ItemGroup>

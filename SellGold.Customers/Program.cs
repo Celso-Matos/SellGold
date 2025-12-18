@@ -1,12 +1,12 @@
-using Confluent.Kafka;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using SellGold.Customers.API.GraphQL.QueryTypes;
 using SellGold.Customers.Application.Contracts.Mappers;
 using SellGold.Customers.Application.Handlers.Customers;
 using SellGold.Customers.Application.Interfaces.Repositories;
 using SellGold.Customers.Infrastructure.Data.Context;
 using SellGold.Customers.Infrastructure.Repositories;
-using SellGold.Customers.API.GraphQL.QueryTypes;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,7 +28,10 @@ builder.Services.AddDbContext<SellGoldCustomersContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SellGoldCustomersConnection")));
 
 // Adiciona AutoMapper e carrega todos os Profiles
-builder.Services.AddAutoMapper(typeof(CustomerProfileMapper));
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<CustomerProfileMapper>();
+});
 
 // MediatR Handlers
 builder.Services.AddMediatR(
