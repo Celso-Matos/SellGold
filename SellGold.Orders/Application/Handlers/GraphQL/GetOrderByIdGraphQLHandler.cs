@@ -13,7 +13,7 @@ namespace SellGold.Orders.Application.Handlers.GraphQL
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
 
-        public GetOrderByIdGraphQLHandler(IOrdersRepository ordersRepository, IMapper mapper, ILogger logger)
+        public GetOrderByIdGraphQLHandler(IOrdersRepository ordersRepository, IMapper mapper, ILogger<GetOrderByIdGraphQLHandler> logger)
         {
             _ordersRepository = ordersRepository;
             _mapper = mapper;
@@ -26,7 +26,7 @@ namespace SellGold.Orders.Application.Handlers.GraphQL
             if (order == null)
             {
                 OrderLogs.OrderNotFound(_logger, query.OrderId);
-                throw new NotFoundException("Order", query.OrderId);
+                throw new NotFoundException("Orders", query.OrderId);
             }
             var response = _mapper.Map<OrderResponse>(order);
 

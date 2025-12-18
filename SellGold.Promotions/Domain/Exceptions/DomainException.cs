@@ -1,4 +1,4 @@
-﻿namespace SellGold.Customers.Domain.Exceptions
+﻿namespace SellGold.Promotions.Domain.Exceptions
 {
     public class DomainException : Exception
     {

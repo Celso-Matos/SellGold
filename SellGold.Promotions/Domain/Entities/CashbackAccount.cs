@@ -1,4 +1,4 @@
-﻿using SellGold.Customers.Domain.Exceptions;
+﻿using SellGold.Promotions.Domain.Exceptions;
 
 namespace SellGold.Promotions.Domain.Entities
 {

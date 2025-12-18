@@ -142,10 +142,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Contracts\DTOs\Customers\Models\" />
+	  <Folder Include="Contracts\DTOs\Orders\Responses\" />
+	  <Folder Include="Contracts\DTOs\Orders\Requests\" />
 	  <Folder Include="Contracts\DTOs\Prices\Models\" />
+	  <Folder Include="Contracts\DTOs\Promotions\Responses\" />
+	  <Folder Include="Contracts\DTOs\Promotions\Requests\" />
 	  <Folder Include="GraphQL\Prices\Mutations\" />
 	  <Folder Include="GraphQL\Products\Mutations\" />
 	  <Folder Include="GraphQL\Stock\Mutations\" />
 	  <Folder Include="GraphQL\Suppliers\Mutations\" />
+	  <Folder Include="Mappings\Customers\" />
+	  <Folder Include="Mappings\Promotions\" />
+	  <Folder Include="Mappings\Orders\" />
 	</ItemGroup>	
 </Project>

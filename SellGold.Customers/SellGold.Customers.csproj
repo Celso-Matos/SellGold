@@ -39,6 +39,7 @@
   <ItemGroup>
     <Folder Include="Application\Contracts\DTOs\Messaging\" />
     <Folder Include="Application\Interfaces\Messaging\" />
+    <Folder Include="Application\Queries\Customers\" />
     <Folder Include="Infrastructure\Data\Migrations\" />
     <Folder Include="Infrastructure\Messsaging\" />
   </ItemGroup>

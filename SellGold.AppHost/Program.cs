@@ -57,12 +57,12 @@ var sqlPromotions = builder.AddSqlServer("sqlserver-promotions")
 // -----------------------------
 builder.AddProject<Projects.SellGold_Products>("sellgold-api-products")
     .WithReference(sqlProducts)
-    .WithEndpoint("http", e => { e.Port = 8000; })   // HTTP
-    .WithEndpoint("https", e => { e.Port = 8001; })  // HTTPS
+    .WithEndpoint("http", e => { e.Port = 11000; })   // HTTP
+    .WithEndpoint("https", e => { e.Port = 11001; })  // HTTPS
     .WithEnvironment("Kafka__BootstrapServers", "localhost:9093");
 
 // -----------------------------
-// API de Fornecedores
+// API de Suppliers
 // -----------------------------
 builder.AddProject<Projects.SellGold_Suppliers>("sellgold-api-suppliers")
     .WithReference(sqlSuppliers)
@@ -90,24 +90,24 @@ builder.AddProject<Projects.SellGold_Prices>("sellgold-api-prices")
 // -----------------------------
 builder.AddProject<Projects.SellGold_Customers>("sellgold-api-customers")
     .WithReference(sqlCustomers)
-    .WithEndpoint("http", e => { e.Port = 100000; })   // HTTP
-    .WithEndpoint("https", e => { e.Port = 100111; });   // HTTPS
+    .WithEndpoint("http", e => { e.Port = 5000; })   // HTTP
+    .WithEndpoint("https", e => { e.Port = 5001; });   // HTTPS
 
 // -----------------------------
 // API de Orders
 // -----------------------------
 builder.AddProject<Projects.SellGold_Orders>("sellgold-api-orders")
     .WithReference(sqlOrders)
-    .WithEndpoint("http", e => { e.Port = 1000000000; })   // HTTP
-    .WithEndpoint("https", e => { e.Port = 1001111111; });   // HTTPS
+    .WithEndpoint("http", e => { e.Port = 13000; })   // HTTP
+    .WithEndpoint("https", e => { e.Port = 13001; });   // HTTPS
 
 // -----------------------------
 // API de Promotions
 // -----------------------------
 builder.AddProject<Projects.SellGold_Promotions>("sellgold-api-promotions")
     .WithReference(sqlPromotions)
-    .WithEndpoint("http", e => { e.Port = 10000000; })   // HTTP
-    .WithEndpoint("https", e => { e.Port = 10011111; });   // HTTPS
+    .WithEndpoint("http", e => { e.Port = 7000; })   // HTTP
+    .WithEndpoint("https", e => { e.Port = 7001; });   // HTTPS
 
 
 // -----------------------------

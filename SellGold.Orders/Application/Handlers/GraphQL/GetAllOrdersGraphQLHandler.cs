@@ -6,7 +6,7 @@ using SellGold.Orders.Application.Queries.GraphQL;
 
 namespace SellGold.Orders.Application.Handlers.GraphQL
 {
-    public class GetAllOrdersGraphQLHandler : IRequestHandler<GetAllOrderGraphQLQuery, List<OrderResponse>>
+    public class GetAllOrdersGraphQLHandler : IRequestHandler<GetAllOrdersGraphQLQuery, List<OrderResponse>>
     {
         private readonly IOrdersRepository _ordersRepository;
         private readonly IMapper _mapper;
@@ -17,7 +17,7 @@ namespace SellGold.Orders.Application.Handlers.GraphQL
             _mapper = mapper;
         }
 
-        public async Task<List<OrderResponse>> Handle(GetAllOrderGraphQLQuery query, CancellationToken cancellationToken)
+        public async Task<List<OrderResponse>> Handle(GetAllOrdersGraphQLQuery query, CancellationToken cancellationToken)
         {
             var order = await _ordersRepository.GetAllAsync();
             return _mapper.Map<List<OrderResponse>>(order);

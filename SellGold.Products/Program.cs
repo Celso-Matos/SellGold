@@ -8,7 +8,7 @@ using SellGold.Products.Application.Interfaces.Repositories;
 using SellGold.Products.Infrastructure.Data.Context;
 using SellGold.Products.Infrastructure.Messaging.Kafka.Producers;
 using SellGold.Products.Infrastructure.Repositories;
-using SellGoldProducts.Infrastructure.Messaging.Kafka.Consumers;
+using SellGold.Products.Infrastructure.Messaging.Kafka.Consumers;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);

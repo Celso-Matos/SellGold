@@ -1,10 +1,11 @@
-using Confluent.Kafka;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using SellGold.Orders.API.GraphQL.QueryTypes;
+using SellGold.Orders.Application.Contracts.Mappers;
+using SellGold.Orders.Application.Handlers.Orders;
+using SellGold.Orders.Application.Interfaces.Repositories;
 using SellGold.Orders.Infrastructure.Data.Context;
 using SellGold.Orders.Infrastructure.Repositories;
-using SellGold.Orders.Application.Interfaces.Repositories;
-using SellGold.Orders.Application.Contracts.Mappers;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,7 +27,22 @@ builder.Services.AddDbContext<SellGoldOrdersContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SellGoldOrdersConnection")));
 
 // Adiciona AutoMapper e carrega todos os Profiles
-builder.Services.AddAutoMapper(typeof(OrderProfileMapper));
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<OrderProfileMapper>();
+});
+
+// MediatR Handlers
+builder.Services.AddMediatR(
+    typeof(CreateOrderHandler).Assembly
+);
+
+// Adiciona serviços GraphQL
+builder.Services
+    .AddGraphQLServer()
+    .AddQueryType<OrderQueryType>()
+    .AddFiltering()
+    .AddSorting();
 
 // Config Cors
 builder.Services.AddCors(options =>

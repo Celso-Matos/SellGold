@@ -1,8 +1,11 @@
-using Confluent.Kafka;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SellGold.Promotions.Infrastructure.Data.Context;
+using Microsoft.Extensions.DependencyInjection;
+using SellGold.Promotions.API.GraphQL.QueryTypes;
+using SellGold.Promotions.Application.Contracts.Mappers;
+using SellGold.Promotions.Application.Handlers.Promotions;
 using SellGold.Promotions.Application.Interfaces.Repositories;
+using SellGold.Promotions.Infrastructure.Data.Context;
 using SellGold.Promotions.Infrastructure.Repositories;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
@@ -23,6 +26,24 @@ builder.Services.AddScoped<IPromotionsRepository, SellGoldPromotionsRepository>(
 // DbContext 
 builder.Services.AddDbContext<SellGoldPromotionsContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SellGoldPromotionsConnection")));
+
+// Adiciona AutoMapper e carrega todos os Profiles
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<PromotionProfileMapper>();
+});
+
+// MediatR Handlers
+builder.Services.AddMediatR(
+    typeof(CreatePromotionHandler).Assembly
+);
+
+// Adiciona serviços GraphQL
+builder.Services
+    .AddGraphQLServer()
+    .AddQueryType<PromotionQueryType>()
+    .AddFiltering()
+    .AddSorting();
 
 // Config Cors
 builder.Services.AddCors(options =>

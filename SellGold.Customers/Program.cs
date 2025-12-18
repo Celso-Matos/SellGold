@@ -1,6 +1,5 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using SellGold.Customers.API.GraphQL.QueryTypes;
 using SellGold.Customers.Application.Contracts.Mappers;
 using SellGold.Customers.Application.Handlers.Customers;

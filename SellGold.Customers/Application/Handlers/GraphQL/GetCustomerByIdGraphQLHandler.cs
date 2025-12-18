@@ -14,7 +14,7 @@ namespace SellGold.Customers.Application.Handlers.GraphQL
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
 
-        public GetCustomerByIdGraphQLHandler(ICustomersRepository repository, IMapper mapper, ILogger logger)
+        public GetCustomerByIdGraphQLHandler(ICustomersRepository repository, IMapper mapper, ILogger<GetCustomerByIdGraphQLHandler> logger)
         {
             _repository = repository;
             _mapper = mapper;
@@ -27,7 +27,7 @@ namespace SellGold.Customers.Application.Handlers.GraphQL
             if (customer is null)
             {
                 CustomerLogs.CustomerNotFound(_logger, query.CustomerId);
-                throw new NotFoundException("Customer", query.CustomerId);
+                throw new NotFoundException("Customers", query.CustomerId);
             }               
 
             var response = _mapper.Map<CustomerResponse>(customer);

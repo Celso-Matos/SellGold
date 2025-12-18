@@ -6,7 +6,7 @@ using SellGold.Products.Application.Contracts.DTOs.Requests;
 using SellGold.Products.Infrastructure.Messaging.Kafka.Config;
 
 
-namespace SellGoldProducts.Infrastructure.Messaging.Kafka.Consumers
+namespace SellGold.Products.Infrastructure.Messaging.Kafka.Consumers
 {
     public class ProductsConsumerService : BackgroundService
     {
