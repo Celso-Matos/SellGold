@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using SellGold.Configurations.Products;
 using SellGold.Contracts.DTOs.Products.Requests;
-using SellGold.Contracts.DTOs.Products.Responses;
 using System.Net.Http.Json;
-
 
 namespace SellGold.Services.Products
 {
@@ -18,12 +16,12 @@ namespace SellGold.Services.Products
             _httpClient.BaseAddress = new Uri(_settings.BaseUrl);
 
         }
-        public async Task<bool> AddProductAsync(CreateProductRequest product)
+        public async Task<bool> AddProductAsync(CreateProductRequest product, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(_settings.Endpoints.AddProduct))
                 throw new InvalidOperationException("Endpoint AddProduct não configurado em ProductsApiSettings.");
             var payload = new { CreateProductRequest = product };
-            var response = await _httpClient.PostAsJsonAsync(_settings.Endpoints.AddProduct, payload);
+            var response = await _httpClient.PostAsJsonAsync(_settings.Endpoints.AddProduct, payload, cancellationToken);
             if (response.IsSuccessStatusCode)
             {
                 return true; // sucesso
@@ -33,14 +31,7 @@ namespace SellGold.Services.Products
                 var error = await response.Content.ReadAsStringAsync();
                 throw new HttpRequestException($"Erro ao adicionar produto: {response.StatusCode} - {error}");
             }
-        }
-        public async Task<IEnumerable<ProductResponse>> GetProductsAsync()
-        {
-            var response = await _httpClient.GetAsync(_settings.Endpoints.GetProducts);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<IEnumerable<ProductResponse>>() ?? throw new InvalidOperationException("A resposta da API não trouxe produtos.");            
-
-        }
+        }       
 
     }
 }

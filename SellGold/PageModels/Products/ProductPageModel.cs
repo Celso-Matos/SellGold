@@ -9,8 +9,6 @@ namespace SellGold.PageModels.Products
     public class ProductPageModel : BindableObject
     {
         private readonly IMediator _mediator;
-
-        // Propriedades ligadas aos campos da tela
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public bool IsActive { get; set; }
@@ -43,8 +41,7 @@ namespace SellGold.PageModels.Products
                     ErrorMessage = "Failed to save product.";
                     return;
                 }
-
-                // Limpa os campos
+                
                 CleanFields();
             }
             catch (ValidationException ex)

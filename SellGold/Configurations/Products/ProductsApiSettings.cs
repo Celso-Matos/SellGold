@@ -13,8 +13,7 @@
     {
         public string AddProduct { get; set; } = "";
         public string SendProductProduceMessage { get; set; } = "";
-        public string GetProducts { get; set; } = "";
-        public string ProductGraphQL { get; set; } = "";
+        public string GetProductsGraphQL { get; set; } = "";
     }
 
 }

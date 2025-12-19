@@ -14,7 +14,7 @@
         public string AddStock { get; set; } = "";
         public string SendStockProduceMessage { get; set; } = "";
         public string GetStock { get; set; } = "";
-        public string StockGraphQL { get; set; } = "";
+        public string GetStockGraphQL { get; set; } = "";
     }
 
 }

@@ -10,7 +10,7 @@ namespace SellGold.Orders.Application.Contracts.DTOs.Requests
         [Range(1, int.MaxValue, ErrorMessage = "A quantidade deve ser maior que zero.")]
         public int Quantity { get; set; }
 
-        [Range(0.01, double.MaxValue, ErrorMessage = "O preço unitário deve ser maior que zero.")]
+        [Range(typeof(decimal), "0", "79228162514264337593543950335", ErrorMessage = "O preço unitário deve ser maior que zero.")]
         public decimal UnitPrice { get; set; }
 
     }

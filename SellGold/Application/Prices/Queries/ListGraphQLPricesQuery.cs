@@ -3,5 +3,5 @@ using SellGold.Contracts.DTOs.Prices.Responses;
 
 namespace SellGold.Application.Prices.Queries
 {
-    public record ListPriceQuery() : IRequest<List<PriceResponse>>;
+    public record ListGraphQLPricesQuery() : IRequest<List<PriceResponse>>;
 }

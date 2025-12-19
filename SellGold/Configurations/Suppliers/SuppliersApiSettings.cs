@@ -12,6 +12,6 @@ namespace SellGold.Configurations.Suppliers
     public class EndpointsSettings
     {
         public string AddSupplier { get; set; } = "";        
-        public string SupplierGraphQL { get; set; } = "";
+        public string GetSuppliersGraphQL { get; set; } = "";
     }
 }

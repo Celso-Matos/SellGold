@@ -8,6 +8,9 @@
     xmlns:suppliers="clr-namespace:SellGold.Pages.Suppliers"
     xmlns:stock="clr-namespace:SellGold.Pages.Stock"    
     xmlns:Prices="clr-namespace:SellGold.Pages.Prices"
+    xmlns:Promotions="clr-namespace:SellGold.Pages.Promotions"
+    xmlns:Orders="clr-namespace:SellGold.Pages.Orders"
+    xmlns:Customers="clr-namespace:SellGold.Pages.Customers"
     Shell.FlyoutBehavior="Flyout"
     Title="SellGold">
 
@@ -58,6 +61,42 @@
     Icon="{StaticResource IconProjects}"
     ContentTemplate="{DataTemplate Prices:ListPricePage}"
     Route="ListPricesPage" />
+
+    <ShellContent
+    Title="Promoção"
+    Icon="{StaticResource IconDashboard}"
+    ContentTemplate="{DataTemplate Promotions:PromotionPage}"
+    Route="promotions" />
+
+    <ShellContent
+    Title="Ver Promoções"
+    Icon="{StaticResource IconProjects}"
+    ContentTemplate="{DataTemplate Promotions:ListPromotionPage}"
+    Route="ListPricesPage" />
+
+    <ShellContent
+    Title="Pedido"
+    Icon="{StaticResource IconDashboard}"
+    ContentTemplate="{DataTemplate Orders:OrderPage}"
+    Route="orders" />
+
+        <ShellContent
+    Title="Ver Pedidos"
+    Icon="{StaticResource IconProjects}"
+    ContentTemplate="{DataTemplate Orders:ListOrderPage}"
+    Route="ListOrdersPage" />
+
+    <ShellContent
+    Title="Cliente"
+    Icon="{StaticResource IconDashboard}"
+    ContentTemplate="{DataTemplate Customers:CustomerPage}"
+    Route="customers" />
+
+        <ShellContent
+    Title="Ver Clientes"
+    Icon="{StaticResource IconProjects}"
+    ContentTemplate="{DataTemplate Customers:ListCustomerPage}"
+    Route="ListCustomerPage" />
 
     <Shell.FlyoutFooter>
         <Grid Padding="15">

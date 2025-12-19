@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SellGold.Pages.Orders.OrderPage"
+             Title="Pedido">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- CustomerId -->
+            <Label Text="Cliente (Guid)" />
+            <Entry Text="{Binding CustomerId}" Placeholder="Digite o ID do cliente" />
+
+            <!-- Data do Pedido -->
+            <Label Text="Data do Pedido" />
+            <DatePicker Date="{Binding OrderDate}" />
+
+            <!-- Itens do Pedido -->
+            <Label Text="Itens" />
+            <CollectionView ItemsSource="{Binding Items}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout Padding="5">
+                            <Label Text="{Binding ProductId}" />
+                            <Label Text="{Binding Quantity}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Mensagem de erro -->
+            <Label Text="{Binding ErrorMessage}" TextColor="Red" />
+
+            <!-- Botão salvar -->
+            <Button Text="Salvar Pedido"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="Green"
+                    TextColor="White" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

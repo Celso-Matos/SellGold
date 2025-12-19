@@ -16,7 +16,7 @@ namespace SellGold.GraphQL.Suppliers.Services
         {
             
             var settings = apiSettings.Value;
-            var graphQlEndpoint = $"{settings.BaseUrl}{settings.Endpoints.SupplierGraphQL}";
+            var graphQlEndpoint = $"{settings.BaseUrl}{settings.Endpoints.GetSuppliersGraphQL}";
             _client = new GraphQLHttpClient(graphQlEndpoint, new SystemTextJsonSerializer());
 
         }

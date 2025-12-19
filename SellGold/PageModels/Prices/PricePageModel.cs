@@ -44,7 +44,7 @@ namespace SellGold.PageModels.Prices
                     ErrorMessage = "Failed to save price.";
                     return;
                 }
-                // Limpa os campos
+                
                 CleanFields();
             }
             catch (ValidationException ex)

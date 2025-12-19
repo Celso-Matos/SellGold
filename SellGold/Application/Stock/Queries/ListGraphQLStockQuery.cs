@@ -3,5 +3,5 @@ using SellGold.Contracts.DTOs.Stock.Responses;
 
 namespace SellGold.Application.Stock.Queries
 {
-    public record ListStockQuery() : IRequest<List<StockResponse>>;
+    public record ListGraphQLStockQuery() : IRequest<List<StockResponse>>;
 }

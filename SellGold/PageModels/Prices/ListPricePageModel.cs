@@ -34,7 +34,7 @@ namespace SellGold.PageModels.Prices
         {
             try
             {
-                var prices = await _mediator.Send(new ListPriceQuery());
+                var prices = await _mediator.Send(new ListGraphQLPricesQuery());
                 Prices = prices;
             }
             catch (ValidationException ex)

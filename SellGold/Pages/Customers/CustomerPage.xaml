@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SellGold.Pages.Customers.CustomerPage"
+             Title="Cliente">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Nome -->
+            <Label Text="Nome" />
+            <Entry Text="{Binding Name}" Placeholder="Digite o nome" />
+
+            <!-- Documento -->
+            <Label Text="Documento" />
+            <Entry Text="{Binding Document}" Placeholder="Digite o documento" />
+
+            <!-- Email -->
+            <Label Text="Email" />
+            <Entry Text="{Binding Email}" Placeholder="Digite o email" Keyboard="Email" />
+
+            <!-- Telefone -->
+            <Label Text="Telefone" />
+            <Entry Text="{Binding Phone}" Placeholder="Digite o telefone" Keyboard="Telephone" />
+
+            <!-- Endereços -->
+            <Label Text="Endereços" FontAttributes="Bold" />
+
+            <!-- Lista de endereços -->
+            <CollectionView ItemsSource="{Binding Addresses}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout Padding="5">
+                            <Label Text="{Binding Street}" />
+                            <Label Text="{Binding City}" />
+                            <Label Text="{Binding ZipCode}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Formulário para adicionar endereço -->
+            <Label Text="Novo Endereço" FontAttributes="Bold" />
+            <Entry Text="{Binding NewStreet}" Placeholder="Rua" />
+            <Entry Text="{Binding NewCity}" Placeholder="Cidade" />
+            <Entry Text="{Binding NewZipCode}" Placeholder="CEP" />
+
+            <Button Text="Adicionar Endereço"
+                    Command="{Binding AddAddressCommand}" />
+
+            <!-- Botão salvar -->
+            <Button Text="Salvar Cliente"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="Green"
+                    TextColor="White" />
+
+            <!-- Mensagem de erro -->
+            <Label Text="{Binding ErrorMessage}" TextColor="Red" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

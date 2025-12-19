@@ -15,7 +15,7 @@ namespace SellGold.Application.Products.Handlers
         }
         public async Task<bool> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            var product = request.CreateProductRequest;
+            var product = request.createProductRequest;
             var context = new ValidationContext(product);
             var results = new List<ValidationResult>();
             if (!Validator.TryValidateObject(product, context, results, true))
@@ -23,7 +23,7 @@ namespace SellGold.Application.Products.Handlers
                 var errors = string.Join("\n", results.Select(r => r.ErrorMessage));
                 throw new ValidationException(errors);
             }
-            return await _service.AddProductAsync(product);
+            return await _service.AddProductAsync(product, cancellationToken);
         }
     }
 }

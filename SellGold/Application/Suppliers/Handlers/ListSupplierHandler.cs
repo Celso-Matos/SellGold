@@ -5,14 +5,14 @@ using SellGold.GraphQL.Suppliers.Services;
 
 namespace SellGold.Application.Suppliers.Handlers
 {
-    public class ListSupplierHandler : IRequestHandler<ListSupplierQuery, List<SupplierResponse>>
+    public class ListSupplierHandler : IRequestHandler<ListGraphQLSuppliersQuery, List<SupplierResponse>>
     {
         private readonly ListSupplierGraphQLService _service;
         public ListSupplierHandler(ListSupplierGraphQLService service)
         {
             _service = service;
         }
-        public async Task<List<SupplierResponse>> Handle(ListSupplierQuery request, CancellationToken cancellationToken)
+        public async Task<List<SupplierResponse>> Handle(ListGraphQLSuppliersQuery request, CancellationToken cancellationToken)
         {
             var suppliers = await _service.GetAllSuppliersGraphQLAsync();
             return suppliers ?? new List<SupplierResponse>();

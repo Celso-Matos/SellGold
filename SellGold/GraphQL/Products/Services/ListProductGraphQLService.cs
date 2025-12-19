@@ -17,19 +17,19 @@ namespace SellGold.GraphQL.Products.Services
         {
             
             var settings = apiSettings.Value; 
-            var graphQlEndpoint = $"{settings.BaseUrl}{settings.Endpoints.ProductGraphQL}";
+            var graphQlEndpoint = $"{settings.BaseUrl}{settings.Endpoints.GetProductsGraphQL}";
             _client = new GraphQLHttpClient(graphQlEndpoint, new SystemTextJsonSerializer());
 
         }
 
-        public async Task<List<ProductResponse>> GetAllProductsGraphQLAsync()
+        public async Task<List<ProductResponse>> GetAllProductsGraphQLAsync(CancellationToken cancellationToken)
         {
             
             var request = new GraphQLRequest
             {
                 Query = ListProductGraphQLQuery.GetProducts
             };
-            var response = await _client.SendQueryAsync<ProductListWrapper>(request);
+            var response = await _client.SendQueryAsync<ProductListWrapper>(request, cancellationToken);
             return response.Data.AllProductsGraphQL;
 
         } 

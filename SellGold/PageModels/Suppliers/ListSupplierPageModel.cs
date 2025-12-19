@@ -36,7 +36,7 @@ namespace SellGold.PageModels.Suppliers
         {
             try
             {
-                var suppliers = await _mediator.Send(new ListSupplierQuery());
+                var suppliers = await _mediator.Send(new ListGraphQLSuppliersQuery());
                 Suppiers = suppliers;
             }
             catch (ValidationException ex)

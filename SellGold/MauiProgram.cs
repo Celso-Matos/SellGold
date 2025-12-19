@@ -6,26 +6,44 @@ using SellGold.Application.Products.Handlers;
 using SellGold.Application.Suppliers.Handlers;
 using SellGold.Application.Stock.Handlers;
 using SellGold.Application.Prices.Handlers;
+using SellGold.Application.Promotions.Handlers;
+using SellGold.Application.Orders.Handlers;
+using SellGold.Application.Customers.Handlers;
 using SellGold.Services.Products;
 using SellGold.Services.Suppliers;
 using SellGold.Services.Stock;
 using SellGold.Services.Prices;
+using SellGold.Services.Promotions;
+using SellGold.Services.Orders;
+using SellGold.Services.Customers;
 using SellGold.Configurations.Products;
 using SellGold.Configurations.Suppliers;
 using SellGold.Configurations.Stock;
 using SellGold.Configurations.Prices;
+using SellGold.Configurations.Promotions;
+using SellGold.Configurations.Orders;
+using SellGold.Configurations.Customers;
 using SellGold.GraphQL.Products.Services;
 using SellGold.GraphQL.Suppliers.Services;
 using SellGold.GraphQL.Stock.Services;
 using SellGold.GraphQL.Prices.Services;
+using SellGold.GraphQL.Promotions.Services;
+using SellGold.GraphQL.Orders.Services;
+using SellGold.GraphQL.Customers.Services;
 using SellGold.PageModels.Products;
 using SellGold.PageModels.Suppliers;
 using SellGold.PageModels.Stock;
-using SellGold.PageModels.Prices;   
+using SellGold.PageModels.Prices;
+using SellGold.PageModels.Promotions;
+using SellGold.PageModels.Orders;
+using SellGold.PageModels.Customers;
 using SellGold.Pages.Products;
 using SellGold.Pages.Suppliers;
 using SellGold.Pages.Stock;
 using SellGold.Pages.Prices;
+using SellGold.Pages.Promotions;
+using SellGold.Pages.Orders;
+using SellGold.Pages.Customers;
 using Syncfusion.Maui.Toolkit.Hosting;
 using System.Runtime.Versioning;
 
@@ -130,6 +148,58 @@ public static class MauiProgram
         if (PricesApiSettings == null)
             throw new InvalidOperationException("Configuração PricesApiSettings não encontrada.");
 
+
+        // Promotions
+        PromotionsApiSettings? PromotionsApiSettings;
+
+        if (DeviceInfo.Platform == DevicePlatform.Android)
+            PromotionsApiSettings = aConfig.GetSection("PromotionsApiSettingsAndroid").Get<PromotionsApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.iOS)
+            PromotionsApiSettings = aConfig.GetSection("PromotionsApiSettingsiOS").Get<PromotionsApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.macOS)
+            PromotionsApiSettings = aConfig.GetSection("PromotionsApiSettingsMacOS").Get<PromotionsApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.WinUI)
+            PromotionsApiSettings = aConfig.GetSection("PromotionsApiSettingsWin").Get<PromotionsApiSettings>();
+        else
+            throw new InvalidOperationException("Plataforma não suportada para PromotionsApiSettings.");
+
+        if (PromotionsApiSettings == null)
+            throw new InvalidOperationException("Configuração PromotionsApiSettings não encontrada.");
+
+        // Orders
+        OrdersApiSettings? OrdersApiSettings;
+
+        if (DeviceInfo.Platform == DevicePlatform.Android)
+            OrdersApiSettings = aConfig.GetSection("OrdersApiSettingsAndroid").Get<OrdersApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.iOS)
+            OrdersApiSettings = aConfig.GetSection("OrdersApiSettingsiOS").Get<OrdersApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.macOS)
+            OrdersApiSettings = aConfig.GetSection("OrdersApiSettingsMacOS").Get<OrdersApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.WinUI)
+            OrdersApiSettings = aConfig.GetSection("OrdersApiSettingsWin").Get<OrdersApiSettings>();
+        else
+            throw new InvalidOperationException("Plataforma não suportada para OrdersApiSettings.");
+
+        if (OrdersApiSettings == null)
+            throw new InvalidOperationException("Configuração OrdersApiSettings não encontrada.");
+
+        // Customers
+        CustomersApiSettings? CustomersApiSettings;
+
+        if (DeviceInfo.Platform == DevicePlatform.Android)
+            CustomersApiSettings = aConfig.GetSection("CustomersApiSettingsAndroid").Get<CustomersApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.iOS)
+            CustomersApiSettings = aConfig.GetSection("CustomersApiSettingsiOS").Get<CustomersApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.macOS)
+            CustomersApiSettings = aConfig.GetSection("CustomersApiSettingsMacOS").Get<CustomersApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.WinUI)
+            CustomersApiSettings = aConfig.GetSection("CustomersApiSettingsWin").Get<CustomersApiSettings>();
+        else
+            throw new InvalidOperationException("Plataforma não suportada para CustomersApiSettings.");
+
+        if (CustomersApiSettings == null)
+            throw new InvalidOperationException("Configuração CustomersApiSettings não encontrada.");
+
         builder.Services.Configure<PricesApiSettings>(options =>
         {
             options.BaseUrl = PricesApiSettings.BaseUrl;
@@ -159,7 +229,10 @@ public static class MauiProgram
                 typeof(CreateProductHandler).Assembly,
                 typeof(CreateSupplierHandler).Assembly,
                 typeof(CreateStockHandler).Assembly,
-                typeof(CreatePriceHandler).Assembly
+                typeof(CreatePriceHandler).Assembly,
+                typeof(CreatePromotionHandler).Assembly,
+                typeof(CreateOrderHandler).Assembly,
+                typeof(CreateCustomerHandler).Assembly
                 );
 
         // 🔹 Serviços e Repositórios (Singleton)    
@@ -177,6 +250,15 @@ public static class MauiProgram
 
         builder.Services.AddScoped<PriceService>();
         builder.Services.AddHttpClient<PriceService>();
+
+        builder.Services.AddScoped<PromotionService>();
+        builder.Services.AddHttpClient<PromotionService>();
+
+        builder.Services.AddScoped<OrderService>();
+        builder.Services.AddHttpClient<OrderService>();
+
+        builder.Services.AddScoped<CustomerService>();
+        builder.Services.AddHttpClient<CustomerService>();
 
 
         // 🔹 PageModels principais (Transient)  
@@ -196,26 +278,45 @@ public static class MauiProgram
         builder.Services.AddTransient<ListPricePageModel>();
         builder.Services.AddTransient<ListPriceGraphQLService>();
 
+        builder.Services.AddTransient<PromotionPageModel>();
+        builder.Services.AddTransient<ListPromotionPageModel>();
+        builder.Services.AddTransient<ListPromotionGraphQLService>();
+
+        builder.Services.AddTransient<OrderPageModel>();
+        builder.Services.AddTransient<ListOrderPageModel>();
+        builder.Services.AddTransient<ListOrderGraphQLService>();
+
+        builder.Services.AddTransient<CustomerPageModel>();
+        builder.Services.AddTransient<ListCustomerPageModel>();
+        builder.Services.AddTransient<ListCustomerGraphQLService>();
+
 
         // 🔹 Páginas com Shell Route
         builder.Services.AddTransientWithShellRoute<ProductPage, ProductPageModel>("products");
         builder.Services.AddTransientWithShellRoute<SupplierPage, SupplierPageModel>("suppliers");
         builder.Services.AddTransientWithShellRoute<StockPage, StockPageModel>("stock");
         builder.Services.AddTransientWithShellRoute<PricePage, PricePageModel>("prices");
+        builder.Services.AddTransientWithShellRoute<PromotionPage, PromotionPageModel>("promotions");
+        builder.Services.AddTransientWithShellRoute<OrderPage, OrderPageModel>("orders");
+        builder.Services.AddTransientWithShellRoute<CustomerPage, CustomerPageModel>("customers");
 
 
         builder.Services.AddTransientWithShellRoute<ListProductPage, ListProductPageModel>(nameof(ListProductPage));
         builder.Services.AddTransientWithShellRoute<ListSupplierPage, ListSupplierPageModel>(nameof(ListSupplierPage));
         builder.Services.AddTransientWithShellRoute<ListStockPage, ListStockPageModel>(nameof(ListStockPage));
         builder.Services.AddTransientWithShellRoute<ListPricePage, ListPricePageModel>(nameof(ListPricePage));
-
+        builder.Services.AddTransientWithShellRoute<ListPromotionPage, ListPromotionPageModel>(nameof(ListPromotionPage));
+        builder.Services.AddTransientWithShellRoute<ListOrderPage, ListOrderPageModel>(nameof(ListOrderPage));
+        builder.Services.AddTransientWithShellRoute<ListCustomerPage, ListCustomerPageModel>(nameof(ListCustomerPage));
 
         // Injeta ApiSettings via IOptions
         builder.Services.Configure<ProductsApiSettings>(builder.Configuration.GetSection("ProductsApiSettings"));
         builder.Services.Configure<SuppliersApiSettings>(builder.Configuration.GetSection("SuppliersApiSettings"));
         builder.Services.Configure<StockApiSettings>(builder.Configuration.GetSection("StockApiSettings"));
         builder.Services.Configure<PricesApiSettings>(builder.Configuration.GetSection("PricesApiSettings"));
-
+        builder.Services.Configure<PromotionsApiSettings>(builder.Configuration.GetSection("PromotionsApiSettings"));
+        builder.Services.Configure<OrdersApiSettings>(builder.Configuration.GetSection("OrdersApiSettings"));
+        builder.Services.Configure<CustomersApiSettings>(builder.Configuration.GetSection("CustomersApiSettings"));
 
         builder
             .UseMauiApp<App>()

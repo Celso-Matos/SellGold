@@ -1,6 +1,4 @@
-﻿using MediatR;
-using SellGold.Contracts.DTOs.Prices.Requests;
-using SellGold.Contracts.DTOs.Products.Requests;
+﻿using SellGold.Contracts.DTOs.Prices.Requests;
 using SellGold.PageModels.Prices;
 
 namespace SellGold.Mappings.Prices

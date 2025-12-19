@@ -69,6 +69,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Contracts\DTOs\Orders\NovaPasta\**" />
+	  <EmbeddedResource Remove="Contracts\DTOs\Orders\NovaPasta\**" />
+	  <MauiCss Remove="Contracts\DTOs\Orders\NovaPasta\**" />
+	  <MauiXaml Remove="Contracts\DTOs\Orders\NovaPasta\**" />
+	  <None Remove="Contracts\DTOs\Orders\NovaPasta\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="appsettings.json" />
 	</ItemGroup>
 
@@ -115,6 +123,18 @@
 	  <MauiXaml Update="AppShell.xaml">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Customers\CustomerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Customers\ListCustomerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Orders\ListOrderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Orders\OrderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Prices\ListPricePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -125,6 +145,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Products\ProductPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Promotions\ListPromotionPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Promotions\PromotionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Stock\ListStockPage.xaml">
@@ -143,17 +169,15 @@
 
 	<ItemGroup>
 	  <Folder Include="Contracts\DTOs\Customers\Models\" />
-	  <Folder Include="Contracts\DTOs\Orders\Responses\" />
-	  <Folder Include="Contracts\DTOs\Orders\Requests\" />
+	  <Folder Include="Contracts\DTOs\Orders\Models\" />
 	  <Folder Include="Contracts\DTOs\Prices\Models\" />
-	  <Folder Include="Contracts\DTOs\Promotions\Responses\" />
-	  <Folder Include="Contracts\DTOs\Promotions\Requests\" />
+	  <Folder Include="Contracts\DTOs\Promotions\Models\" />
+	  <Folder Include="GraphQL\Customers\Mutations\" />
+	  <Folder Include="GraphQL\Orders\Mutations\" />
 	  <Folder Include="GraphQL\Prices\Mutations\" />
 	  <Folder Include="GraphQL\Products\Mutations\" />
+	  <Folder Include="GraphQL\Promotions\Mutations\" />
 	  <Folder Include="GraphQL\Stock\Mutations\" />
 	  <Folder Include="GraphQL\Suppliers\Mutations\" />
-	  <Folder Include="Mappings\Customers\" />
-	  <Folder Include="Mappings\Promotions\" />
-	  <Folder Include="Mappings\Orders\" />
 	</ItemGroup>	
 </Project>

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:datagrid="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
              x:Class="SellGold.Pages.Prices.ListPricePage"
-             Title="ListPricePage">
+             Title="Preços">
     <Grid>
         <!-- DataGrid -->
         <datagrid:DataGrid ItemsSource="{Binding Prices}"

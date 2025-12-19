@@ -33,7 +33,7 @@ namespace SellGold.PageModels.Stock
         {
             try
             {
-                var stocks = await _mediator.Send(new ListStockQuery());
+                var stocks = await _mediator.Send(new ListGraphQLStockQuery());
                 Stocks = stocks;
             }
             catch (ValidationException ex)
