@@ -1,26 +1,28 @@
 ﻿using AutoMapper;
-using SellGold.Customers.Application.Contracts.DTOs.Requests;
-using SellGold.Customers.Application.Contracts.DTOs.Responses;
-using SellGold.Customers.Domain.Entities;
-using SellGold.Customers.Domain.ValueObjects;
+using SellGold.Suppliers.Application.Contracts.DTOs.Requests;
+using SellGold.Suppliers.Application.Contracts.DTOs.Responses;
+using SellGold.Suppliers.Domain.Entities;
+using SellGold.Suppliers.Domain.ValueObjects;
 
-namespace SellGold.Customers.Application.Contracts.Mappers
+namespace SellGold.Suppliers.Application.Contracts.Mappers
 {
-    public class CustomerProfileMapper : Profile
+    public class SupplierProfileMapper : Profile
     {
-        public CustomerProfileMapper()
+        public SupplierProfileMapper()
         {
             // =========================
             // Request → Domain
             // =========================
 
-            CreateMap<CreateCustomerRequest, Customer>()
-                .ConstructUsing(dto => new Customer(
-                    dto.Name,
-                    dto.Document,
+            CreateMap<CreateSupplierRequest, Supplier>()
+                .ConstructUsing(dto => new Supplier(
+                    dto.CorporateName,
+                    dto.TradeName,
+                    dto.Cnpj,
                     dto.Email,
-                    dto.Phone))
-                .AfterMap((dto, customer) =>
+                    dto.Phone,
+                    dto.StateRegistration))
+                .AfterMap((dto, Supplier) =>
                 {
                     foreach (var addressDto in dto.Addresses)
                     {
@@ -37,7 +39,7 @@ namespace SellGold.Customers.Application.Contracts.Mappers
                             addressDto.ZipCode,
                             addressDto.Type);
 
-                        customer.AddAddress(address);
+                        Supplier.AddAddress(address);
                     }
                 });
 
@@ -45,7 +47,7 @@ namespace SellGold.Customers.Application.Contracts.Mappers
             // Domain → Response
             // =========================
 
-            CreateMap<Customer, CustomerResponse>()
+            CreateMap<Supplier, SupplierResponse>()
                 .ForMember(dest => dest.Addresses, opt => opt.MapFrom(src =>
                     src.Addresses.Select(address => new AddressResponse
                     {

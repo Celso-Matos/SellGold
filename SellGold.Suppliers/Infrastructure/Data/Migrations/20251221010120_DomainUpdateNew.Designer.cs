@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SellGold.Customers.Infrastructure.Data.Context;
+using SellGold.Suppliers.Infrastructure.Data.Context;
 
 #nullable disable
 
-namespace SellGold.Customers.Infrastructure.Data.Migrations
+namespace SellGold.Suppliers.Infrastructure.Data.Migrations
 {
-    [DbContext(typeof(SellGoldCustomersContext))]
-    partial class SellGoldCustomersContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(SellGoldSuppliersContext))]
+    [Migration("20251221010120_DomainUpdateNew")]
+    partial class DomainUpdateNew
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,18 +25,23 @@ namespace SellGold.Customers.Infrastructure.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SellGold.Customers.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("SellGold.Suppliers.Domain.Entities.Supplier", b =>
                 {
-                    b.Property<Guid>("CustomerId")
+                    b.Property<Guid>("SupplierId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Cnpj")
+                        .IsRequired()
+                        .HasMaxLength(18)
+                        .HasColumnType("nvarchar(18)");
+
+                    b.Property<string>("CorporateName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Document")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -41,40 +49,42 @@ namespace SellGold.Customers.Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("StateRegistration")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("TradeName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("CustomerId");
+                    b.HasKey("SupplierId");
+
+                    b.HasIndex("Cnpj")
+                        .IsUnique();
 
                     b.HasIndex("CreatedAt");
-
-                    b.HasIndex("Document")
-                        .IsUnique();
 
                     b.HasIndex("Email");
 
                     b.HasIndex("IsActive");
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Suppliers", (string)null);
                 });
 
-            modelBuilder.Entity("SellGold.Customers.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("SellGold.Suppliers.Domain.Entities.Supplier", b =>
                 {
-                    b.OwnsMany("SellGold.Customers.Domain.ValueObjects.Address", "Addresses", b1 =>
+                    b.OwnsMany("SellGold.Suppliers.Domain.ValueObjects.Address", "Addresses", b1 =>
                         {
                             b1.Property<int>("Id")
                                 .ValueGeneratedOnAdd()
@@ -82,7 +92,13 @@ namespace SellGold.Customers.Infrastructure.Data.Migrations
 
                             SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"));
 
-                            b1.Property<Guid>("CustomerId")
+                            b1.Property<string>("Location_City")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("StreetInfo_Street")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<Guid>("SupplierId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("Type")
@@ -99,16 +115,16 @@ namespace SellGold.Customers.Infrastructure.Data.Migrations
 
                             b1.HasKey("Id");
 
-                            b1.HasIndex("CustomerId");
+                            b1.HasIndex("SupplierId");
 
                             b1.HasIndex("ZipCode");
 
-                            b1.ToTable("CustomerAddresses", (string)null);
+                            b1.ToTable("SupplierAddresses", (string)null);
 
                             b1.WithOwner()
-                                .HasForeignKey("CustomerId");
+                                .HasForeignKey("SupplierId");
 
-                            b1.OwnsOne("SellGold.Customers.Domain.ValueObjects.Place", "Location", b2 =>
+                            b1.OwnsOne("SellGold.Suppliers.Domain.ValueObjects.Place", "Location", b2 =>
                                 {
                                     b2.Property<int>("AddressId")
                                         .HasColumnType("int");
@@ -141,13 +157,13 @@ namespace SellGold.Customers.Infrastructure.Data.Migrations
 
                                     b2.HasKey("AddressId");
 
-                                    b2.ToTable("CustomerAddresses");
+                                    b2.ToTable("SupplierAddresses");
 
                                     b2.WithOwner()
                                         .HasForeignKey("AddressId");
                                 });
 
-                            b1.OwnsOne("SellGold.Customers.Domain.ValueObjects.StreetInfo", "StreetInfo", b2 =>
+                            b1.OwnsOne("SellGold.Suppliers.Domain.ValueObjects.StreetInfo", "StreetInfo", b2 =>
                                 {
                                     b2.Property<int>("AddressId")
                                         .HasColumnType("int");
@@ -171,7 +187,7 @@ namespace SellGold.Customers.Infrastructure.Data.Migrations
 
                                     b2.HasKey("AddressId");
 
-                                    b2.ToTable("CustomerAddresses");
+                                    b2.ToTable("SupplierAddresses");
 
                                     b2.WithOwner()
                                         .HasForeignKey("AddressId");

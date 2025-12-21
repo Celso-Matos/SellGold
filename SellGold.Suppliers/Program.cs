@@ -25,7 +25,7 @@ builder.Services.AddScoped<ISupplierRepository, SellGoldSuppliersRepository>();
 
 
 // DbContext 
-builder.Services.AddDbContext<SellGoldSupplierContext>(options =>
+builder.Services.AddDbContext<SellGoldSuppliersContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SellGoldSuppliersConnection")));
 
 // MediatR Handlers

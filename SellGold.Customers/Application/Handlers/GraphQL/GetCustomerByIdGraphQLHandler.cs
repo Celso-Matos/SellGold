@@ -4,7 +4,6 @@ using SellGold.Customers.Application.Commons;
 using SellGold.Customers.Application.Contracts.DTOs.Responses;
 using SellGold.Customers.Application.Interfaces.Repositories;
 using SellGold.Customers.Application.Queries.GraphQL;
-using SellGold.Orders.Application.Commons;
 
 namespace SellGold.Customers.Application.Handlers.GraphQL
 {

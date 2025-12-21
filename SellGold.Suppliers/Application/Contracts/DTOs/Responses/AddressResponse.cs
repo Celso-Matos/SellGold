@@ -33,5 +33,8 @@ namespace SellGold.Suppliers.Application.Contracts.DTOs.Responses
 
         [JsonPropertyName("country")]
         public required string Country { get; set; }
+
+        [JsonPropertyName("type")]
+        public string Type { get; init; } = string.Empty;
     }
 }

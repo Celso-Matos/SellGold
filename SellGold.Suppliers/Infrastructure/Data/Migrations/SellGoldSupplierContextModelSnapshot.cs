@@ -10,7 +10,7 @@ using SellGold.Suppliers.Infrastructure.Data.Context;
 
 namespace SellGold.Suppliers.Infrastructure.Data.Migrations
 {
-    [DbContext(typeof(SellGoldSupplierContext))]
+    [DbContext(typeof(SellGoldSuppliersContext))]
     partial class SellGoldSupplierContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -22,111 +22,181 @@ namespace SellGold.Suppliers.Infrastructure.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SellGold.Suppliers.Domain.Entities.Address", b =>
-                {
-                    b.Property<Guid>("AddressId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Complement")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("District")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("SupplierId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AddressId");
-
-                    b.HasIndex("SupplierId");
-
-                    b.ToTable("Addresses");
-                });
-
             modelBuilder.Entity("SellGold.Suppliers.Domain.Entities.Supplier", b =>
                 {
                     b.Property<Guid>("SupplierId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Cnpj")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(18)
+                        .HasColumnType("nvarchar(18)");
 
                     b.Property<string>("CorporateName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("StateRegistration")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("TradeName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("SupplierId");
 
-                    b.ToTable("Suppliers");
-                });
+                    b.HasIndex("Cnpj")
+                        .IsUnique();
 
-            modelBuilder.Entity("SellGold.Suppliers.Domain.Entities.Address", b =>
-                {
-                    b.HasOne("SellGold.Suppliers.Domain.Entities.Supplier", null)
-                        .WithMany("Addresses")
-                        .HasForeignKey("SupplierId");
+                    b.HasIndex("CreatedAt");
+
+                    b.HasIndex("Email");
+
+                    b.HasIndex("IsActive");
+
+                    b.ToTable("Suppliers", (string)null);
                 });
 
             modelBuilder.Entity("SellGold.Suppliers.Domain.Entities.Supplier", b =>
                 {
+                    b.OwnsMany("SellGold.Suppliers.Domain.ValueObjects.Address", "Addresses", b1 =>
+                        {
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"));
+
+                            b1.Property<string>("Location_City")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("StreetInfo_Street")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<Guid>("SupplierId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Type")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)")
+                                .HasColumnName("AddressType");
+
+                            b1.Property<string>("ZipCode")
+                                .IsRequired()
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("ZipCode");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("SupplierId");
+
+                            b1.HasIndex("ZipCode");
+
+                            b1.ToTable("SupplierAddresses", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("SupplierId");
+
+                            b1.OwnsOne("SellGold.Suppliers.Domain.ValueObjects.Place", "Location", b2 =>
+                                {
+                                    b2.Property<int>("AddressId")
+                                        .HasColumnType("int");
+
+                                    b2.Property<string>("City")
+                                        .IsRequired()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("nvarchar(100)")
+                                        .HasColumnName("City");
+
+                                    b2.Property<string>("Country")
+                                        .IsRequired()
+                                        .ValueGeneratedOnAdd()
+                                        .HasMaxLength(50)
+                                        .HasColumnType("nvarchar(50)")
+                                        .HasDefaultValue("Brasil")
+                                        .HasColumnName("Country");
+
+                                    b2.Property<string>("District")
+                                        .IsRequired()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("nvarchar(100)")
+                                        .HasColumnName("District");
+
+                                    b2.Property<string>("State")
+                                        .IsRequired()
+                                        .HasMaxLength(50)
+                                        .HasColumnType("nvarchar(50)")
+                                        .HasColumnName("State");
+
+                                    b2.HasKey("AddressId");
+
+                                    b2.ToTable("SupplierAddresses");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("AddressId");
+                                });
+
+                            b1.OwnsOne("SellGold.Suppliers.Domain.ValueObjects.StreetInfo", "StreetInfo", b2 =>
+                                {
+                                    b2.Property<int>("AddressId")
+                                        .HasColumnType("int");
+
+                                    b2.Property<string>("Complement")
+                                        .HasMaxLength(100)
+                                        .HasColumnType("nvarchar(100)")
+                                        .HasColumnName("Complement");
+
+                                    b2.Property<string>("Number")
+                                        .IsRequired()
+                                        .HasMaxLength(20)
+                                        .HasColumnType("nvarchar(20)")
+                                        .HasColumnName("Number");
+
+                                    b2.Property<string>("Street")
+                                        .IsRequired()
+                                        .HasMaxLength(200)
+                                        .HasColumnType("nvarchar(200)")
+                                        .HasColumnName("Street");
+
+                                    b2.HasKey("AddressId");
+
+                                    b2.ToTable("SupplierAddresses");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("AddressId");
+                                });
+
+                            b1.Navigation("Location")
+                                .IsRequired();
+
+                            b1.Navigation("StreetInfo")
+                                .IsRequired();
+                        });
+
                     b.Navigation("Addresses");
                 });
 #pragma warning restore 612, 618

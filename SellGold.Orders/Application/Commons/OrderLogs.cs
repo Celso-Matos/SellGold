@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace SellGold.Orders.Application.Commons
+﻿namespace SellGold.Orders.Application.Commons
 {
     internal static partial class OrderLogs
     {

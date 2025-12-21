@@ -8,9 +8,9 @@ namespace SellGold.Suppliers.Infrastructure.Repositories
 {
     public class SellGoldSuppliersRepository : ISupplierRepository
     {
-        private readonly SellGoldSupplierContext _context;
+        private readonly SellGoldSuppliersContext _context;
 
-        public SellGoldSuppliersRepository(SellGoldSupplierContext context)
+        public SellGoldSuppliersRepository(SellGoldSuppliersContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

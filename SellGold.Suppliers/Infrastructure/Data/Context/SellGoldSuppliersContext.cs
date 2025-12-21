@@ -1,51 +1,54 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SellGold.Customers.Domain.Entities;
-using SellGold.Customers.Domain.Exceptions;
-using SellGold.Customers.Domain.ValueObjects;
+using SellGold.Suppliers.Domain.Entities;
+using SellGold.Suppliers.Domain.Exceptions;
+using SellGold.Suppliers.Domain.ValueObjects;
 
-namespace SellGold.Customers.Infrastructure.Data.Context
+namespace SellGold.Suppliers.Infrastructure.Data.Context
 {
-    public class SellGoldCustomersContext : DbContext
+    public class SellGoldSuppliersContext : DbContext
     {
-        public SellGoldCustomersContext(DbContextOptions<SellGoldCustomersContext> options)
+        public SellGoldSuppliersContext(DbContextOptions<SellGoldSuppliersContext> options)
             : base(options)
         {
-        }
-
+        }       
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 // Configuração para design-time (migrations)
-                optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=SellGoldCustomers;Trusted_Connection=True;MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=SellGoldSuppliers;Trusted_Connection=True;MultipleActiveResultSets=true");
             }
         }
 
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configuração da entidade Customer
-            modelBuilder.Entity<Customer>(entity =>
+            // Configuração da entidade Supplier
+            modelBuilder.Entity<Supplier>(entity =>
             {
-                entity.ToTable("Customers");
+                entity.ToTable("Suppliers");
 
                 // Chave primária
-                entity.HasKey(e => e.CustomerId);
+                entity.HasKey(e => e.SupplierId);
 
                 // Propriedades
-                entity.Property(e => e.CustomerId)
+                entity.Property(e => e.SupplierId)
                     .ValueGeneratedNever(); // Guid gerado pela aplicação
 
-                entity.Property(e => e.Name)
+                entity.Property(e => e.CorporateName)
                     .IsRequired()
                     .HasMaxLength(200);
 
-                entity.Property(e => e.Document)
+                entity.Property(e => e.TradeName)
                     .IsRequired()
-                    .HasMaxLength(20);
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.Cnpj)
+                    .IsRequired()
+                    .HasMaxLength(18);
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -55,9 +58,11 @@ namespace SellGold.Customers.Infrastructure.Data.Context
                     .IsRequired()
                     .HasMaxLength(20);
 
+                entity.Property(e => e.StateRegistration)
+                    .HasMaxLength(20);
+
                 entity.Property(e => e.IsActive)
-                    .IsRequired()
-                    .HasDefaultValue(true);
+                    .IsRequired();
 
                 entity.Property(e => e.CreatedAt)
                     .IsRequired();
@@ -69,8 +74,8 @@ namespace SellGold.Customers.Infrastructure.Data.Context
                 // Address é um Value Object que contém outros Value Objects
                 entity.OwnsMany(e => e.Addresses, address =>
                 {
-                    address.WithOwner().HasForeignKey("CustomerId");
-                    address.ToTable("CustomerAddresses");
+                    address.WithOwner().HasForeignKey("SupplierId");
+                    address.ToTable("SupplierAddresses");
 
                     // Chave primária para a tabela
                     address.Property<int>("Id")
@@ -135,12 +140,17 @@ namespace SellGold.Customers.Infrastructure.Data.Context
                     });
 
                     // Índices para Address
-                    address.HasIndex("CustomerId");
+                    address.HasIndex("SupplierId");
                     address.HasIndex(a => a.ZipCode);
+
+                    // Configurar que Address é um Value Object (comparação por valor)
+                    // O EF Core precisa saber como comparar Addresses
+                    address.Property<string>("StreetInfo_Street"); // Shadow properties para ajudar
+                    address.Property<string>("Location_City");
                 });
 
-                // Índices para Customer
-                entity.HasIndex(e => e.Document)
+                // Índices para Supplier
+                entity.HasIndex(e => e.Cnpj)
                     .IsUnique();
 
                 entity.HasIndex(e => e.Email);
@@ -169,14 +179,16 @@ namespace SellGold.Customers.Infrastructure.Data.Context
         private void UpdateTimestamps()
         {
             var entries = ChangeTracker
-                .Entries<Customer>()
+                .Entries<Supplier>()
                 .Where(e => e.State == EntityState.Modified || e.State == EntityState.Added);
 
             foreach (var entry in entries)
             {
+                var supplier = entry.Entity;
+
                 if (entry.State == EntityState.Added)
                 {
-                    // Para CreatedAt
+                    // Para CreatedAt, precisamos usar reflection pois é private set
                     var createdAtProp = entry.Property("CreatedAt");
                     if (createdAtProp != null)
                     {
@@ -184,7 +196,7 @@ namespace SellGold.Customers.Infrastructure.Data.Context
                     }
                 }
 
-                // Para UpdatedAt (sempre atualizar)
+                // Para UpdatedAt
                 var updatedAtProp = entry.Property("UpdatedAt");
                 if (updatedAtProp != null)
                 {

@@ -1,6 +1,6 @@
 ﻿using SellGold.Customers.Domain.Exceptions;
 
-namespace SellGold.Customers.Domain.ValueObject
+namespace SellGold.Customers.Domain.ValueObjects
 {
     public class Address : HitObject
     {

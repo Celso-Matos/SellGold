@@ -1,6 +1,6 @@
-﻿using SellGold.Customers.Domain.Exceptions;
+﻿using SellGold.Suppliers.Domain.Exceptions;
 
-namespace SellGold.Customers.Domain.ValueObject
+namespace SellGold.Suppliers.Domain.ValueObjects
 {
     public class StreetInfo : HitObject
     {

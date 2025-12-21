@@ -1,5 +1,5 @@
 ﻿using SellGold.Customers.Domain.Exceptions;
-using SellGold.Customers.Domain.ValueObject;
+using SellGold.Customers.Domain.ValueObjects;
 
 namespace SellGold.Customers.Domain.Entities
 {

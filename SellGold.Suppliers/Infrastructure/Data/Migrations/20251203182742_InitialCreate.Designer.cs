@@ -11,7 +11,7 @@ using SellGold.Suppliers.Infrastructure.Data.Context;
 
 namespace SellGold.Suppliers.Infrastructure.Data.Migrations
 {
-    [DbContext(typeof(SellGoldSupplierContext))]
+    [DbContext(typeof(SellGoldSuppliersContext))]
     [Migration("20251203182742_InitialCreate")]
     partial class InitialCreate
     {
