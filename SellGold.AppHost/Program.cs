@@ -1,16 +1,17 @@
+
 using Aspire.Hosting;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
 // -----------------------------
-// SQL Server - Produtos
+// SQL Server - Products
 // -----------------------------
 var sqlProducts = builder.AddSqlServer("sqlserver-products")
     .WithDataVolume()
     .AddDatabase("SellGoldProducts");
 
 // -----------------------------
-// SQL Server - Fornecedores
+// SQL Server - Suppliers
 // -----------------------------
 var sqlSuppliers = builder.AddSqlServer("sqlserver-suppliers")
     .WithDataVolume()
@@ -50,6 +51,14 @@ var sqlOrders = builder.AddSqlServer("sqlserver-orders")
 var sqlPromotions = builder.AddSqlServer("sqlserver-promotions")
     .WithDataVolume()
     .AddDatabase("SellGoldPromotions");
+
+// -----------------------------
+// SQL Server - Payments
+// -----------------------------
+var sqlPayments = builder.AddSqlServer("sqlserver-payments")
+    .WithDataVolume()
+    .AddDatabase("SellGoldPayments");
+
 
 
 // -----------------------------
@@ -108,6 +117,32 @@ builder.AddProject<Projects.SellGold_Promotions>("sellgold-api-promotions")
     .WithReference(sqlPromotions)
     .WithEndpoint("http", e => { e.Port = 7000; })   // HTTP
     .WithEndpoint("https", e => { e.Port = 7001; });   // HTTPS
+
+// -----------------------------
+// API de Payments
+// -----------------------------
+
+// ===============================
+// MongoDB
+// ===============================
+var mongo = builder.AddMongoDB("mongo-payment")
+    .WithDataVolume()
+    .WithLifetime(ContainerLifetime.Persistent);
+
+// ===============================
+// Redis
+// ===============================
+var redis = builder.AddRedis("redis")
+    .WithDataVolume()
+    .WithLifetime(ContainerLifetime.Persistent);
+
+builder.AddProject<Projects.SellGold_Payments>("sellgold-api-payments")
+    .WithReference(sqlPayments)
+    .WithReference(mongo)
+    .WithReference(redis)
+    .WithEndpoint("http", e => { e.Port = 15000; })   // HTTP
+    .WithEndpoint("https", e => { e.Port = 15001; });   // HTTPS
+
 
 
 // -----------------------------

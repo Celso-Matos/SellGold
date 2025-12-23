@@ -7,6 +7,7 @@
   <Project Path="SellGold.AppHost/SellGold.AppHost.csproj" />
   <Project Path="SellGold.Customers/SellGold.Customers.csproj" />
   <Project Path="SellGold.Orders/SellGold.Orders.csproj" />
+  <Project Path="SellGold.Payments/SellGold.Payments.csproj" />
   <Project Path="SellGold.Prices/SellGold.Prices.csproj" />
   <Project Path="SellGold.Products/SellGold.Products.csproj" />
   <Project Path="SellGold.Promotions/SellGold.Promotions.csproj" />

@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Sdk Name="Aspire.AppHost.Sdk" Version="13.0.2" />
+  <Sdk Name="Aspire.AppHost.Sdk" Version="13.1.0" />
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -11,22 +11,29 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Confluent.Kafka" Version="13.0.2" />
-    <PackageReference Include="Aspire.Hosting" Version="13.0.2" />
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="13.0.2" />
-    <PackageReference Include="Aspire.Hosting.Kafka" Version="13.0.2" />
-    <PackageReference Include="Aspire.Hosting.SqlServer" Version="13.0.2" />
+    <PackageReference Include="Aspire.Confluent.Kafka" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.Kafka" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.MongoDB" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.SqlServer" Version="13.1.0" />
+    <PackageReference Include="Aspire.MongoDB.Driver" Version="13.1.0" />
+    <PackageReference Include="Aspire.StackExchange.Redis" Version="13.1.0" />
+    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" Version="13.1.0" />
     <PackageReference Include="Confluent.Kafka" Version="2.12.0" />
     <PackageReference Include="MediatR" Version="11.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="MongoDB.Driver" Version="3.5.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SellGold.Customers\SellGold.Customers.csproj" />
     <ProjectReference Include="..\SellGold.Orders\SellGold.Orders.csproj" />
+    <ProjectReference Include="..\SellGold.Payments\SellGold.Payments.csproj" />
     <ProjectReference Include="..\SellGold.Prices\SellGold.Prices.csproj" />
     <ProjectReference Include="..\SellGold.Promotions\SellGold.Promotions.csproj" />
     <ProjectReference Include="..\SellGold.Stock\SellGold.Stock.csproj" />
