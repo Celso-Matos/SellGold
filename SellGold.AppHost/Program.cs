@@ -1,6 +1,4 @@
 
-using Aspire.Hosting;
-
 var builder = DistributedApplication.CreateBuilder(args);
 
 // -----------------------------
@@ -58,7 +56,6 @@ var sqlPromotions = builder.AddSqlServer("sqlserver-promotions")
 var sqlPayments = builder.AddSqlServer("sqlserver-payments")
     .WithDataVolume()
     .AddDatabase("SellGoldPayments");
-
 
 
 // -----------------------------
@@ -121,25 +118,8 @@ builder.AddProject<Projects.SellGold_Promotions>("sellgold-api-promotions")
 // -----------------------------
 // API de Payments
 // -----------------------------
-
-// ===============================
-// MongoDB
-// ===============================
-var mongo = builder.AddMongoDB("mongo-payment")
-    .WithDataVolume()
-    .WithLifetime(ContainerLifetime.Persistent);
-
-// ===============================
-// Redis
-// ===============================
-var redis = builder.AddRedis("redis")
-    .WithDataVolume()
-    .WithLifetime(ContainerLifetime.Persistent);
-
 builder.AddProject<Projects.SellGold_Payments>("sellgold-api-payments")
     .WithReference(sqlPayments)
-    .WithReference(mongo)
-    .WithReference(redis)
     .WithEndpoint("http", e => { e.Port = 15000; })   // HTTP
     .WithEndpoint("https", e => { e.Port = 15001; });   // HTTPS
 

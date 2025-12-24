@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\Persistence\SQL\Data\Migrations\" />
+    <Folder Include="Infrastructure\Data\Migrstions\" />
   </ItemGroup>
 
 </Project>

@@ -12,6 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Application\Contracts\DTOs\Messaging\**" />
+    <Content Remove="Application\Contracts\DTOs\Messaging\**" />
+    <EmbeddedResource Remove="Application\Contracts\DTOs\Messaging\**" />
+    <None Remove="Application\Contracts\DTOs\Messaging\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Aspire.Confluent.Kafka" Version="13.0.2" />
     <PackageReference Include="Aspire.Hosting" Version="13.0.2" />
     <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="13.0.2" />
@@ -37,7 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Contracts\DTOs\Messaging\" />
     <Folder Include="Application\Interfaces\Messaging\" />
     <Folder Include="Application\Queries\Customers\" />
     <Folder Include="Infrastructure\Data\Migrations\" />
