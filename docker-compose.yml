@@ -1,4 +1,13 @@
 services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    ports:
+      - "80:80"
+      - "443:443"
+  
   # Banco de dados para Produtos
   sqlserver-products:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -7,12 +16,14 @@ services:
       - "57707:1433"
     environment:
       SA_PASSWORD: ${SA_PASSWORD}
-      ACCEPT_EULA: ${ACCEPT_EULA}      
-      DB_USER: ${DB_USER_PRODUCTS}
-      DB_PASSWORD: ${DB_PASSWORD_PRODUCTS}
-      DB_NAME: ${DB_NAME_PRODUCTS}
+      ACCEPT_EULA: ${ACCEPT_EULA}
     volumes:
       - sql_data_products:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "echo > /dev/tcp/localhost/1433"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
 
   # Banco de dados para Fornecedores
   sqlserver-suppliers:
@@ -22,12 +33,31 @@ services:
       - "57708:1433"
     environment:
       SA_PASSWORD: ${SA_PASSWORD}
-      ACCEPT_EULA: ${ACCEPT_EULA}
-      DB_USER: ${DB_USER_SUPPLIERS}
-      DB_PASSWORD: ${DB_PASSWORD_SUPPLIERS}
-      DB_NAME: ${DB_NAME_SUPPLIERS}
+      ACCEPT_EULA: ${ACCEPT_EULA}      
     volumes:
       - sql_data_suppliers:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "echo > /dev/tcp/localhost/1433"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  # Banco de dados para Pagamentos
+  sqlserver-payments:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver-payments
+    ports:
+      - "57708:1433"
+    environment:
+      SA_PASSWORD: ${SA_PASSWORD}
+      ACCEPT_EULA: ${ACCEPT_EULA}      
+    volumes:
+      - sql_data_suppliers:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "echo > /dev/tcp/localhost/1433"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
 
   # Zookeeper
   zookeeper:
@@ -93,8 +123,8 @@ services:
       dockerfile: SellGold.Products/Dockerfile
     container_name: sellgold-api-products
     ports:
-      - "5000:8080"   # HTTP
-      - "5001:8081"   # HTTPS
+      - "8000:8080"   # HTTP
+      - "8001:8081"   # HTTPS
     environment:
       - Kafka__BootstrapServers=kafka:9092
       - DOTNET_ENVIRONMENT=Development
@@ -111,8 +141,8 @@ services:
       dockerfile: SellGold.Suppliers/Dockerfile
     container_name: sellgold-api-suppliers
     ports:
-      - "5002:8082"   # HTTP
-      - "5003:8083"   # HTTPS
+      - "8002:8082"   # HTTP
+      - "8003:8083"   # HTTPS
     environment:
       - Kafka__BootstrapServers=kafka:9092
       - DOTNET_ENVIRONMENT=Development
@@ -122,6 +152,25 @@ services:
       - sqlserver-suppliers
       - kafka
 
+  # API de Pagamentos
+  sellgold-api-payments:
+    build:
+      context: .
+      dockerfile: SellGold.Payments/Dockerfile
+    container_name: sellgold-api-payments
+    ports:
+      - "8004:8084"   # HTTP
+      - "8005:8085"   # HTTPS
+    environment:
+      - Kafka__BootstrapServers=kafka:9092
+      - DOTNET_ENVIRONMENT=Development
+      # - ConnectionStrings__SellGoldPaymentsConnection=Server=${DB_SERVER_PAYMENTS};Database=${DB_NAME_PAYMENTS};User Id=${DB_USER_PAYMENTS};Password=${DB_PASSWORD_PAYMENTS};TrustServerCertificate=True
+
+    depends_on:
+      - sqlserver-payments
+      - kafka
+
 volumes:
   sql_data_products:
   sql_data_suppliers:
+  sql_data_payments:

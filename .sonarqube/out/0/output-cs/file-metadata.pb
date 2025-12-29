@@ -1,0 +1,36 @@
+ÿ
+ÃC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\obj\Debug\net10.0\Microsoft.Extensions.Logging.Generators\Microsoft.Extensions.Logging.Generators.LoggerMessageGenerator\LoggerMessage.g.csutf-8
+‰C:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\obj\Debug\net10.0\Microsoft.AspNetCore.App.SourceGenerators\Microsoft.AspNetCore.SourceGenerators.PublicProgramSourceGenerator\PublicTopLevelProgram.Generated.g.csutf-8Ù
+ËC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.csutf-8ë
+ÖC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\obj\Debug\net10.0\SellGold.Orders.MvcApplicationPartsAssemblyInfo.csutf-8}
+rC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\obj\Debug\net10.0\SellGold.Orders.AssemblyInfo.csutf-8é
+ÇC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\obj\Debug\net10.0\.NETCoreApp,Version=v10.0.AssemblyAttributes.csutf-8
+tC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\obj\Debug\net10.0\SellGold.Orders.GlobalUsings.g.csutf-8[
+KC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Program.cswindows-1252Å
+xC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Infrastructure\Repositories\SellGoldOrdersRepository.csutf-8~
+uC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Infrastructure\Exceptions\InfrastructureException.csutf-8ë
+ÖC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Infrastructure\Data\Migrations\SellGoldOrdersContextModelSnapshot.csutf-8î
+àC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Infrastructure\Data\Migrations\20251216151307_InitialCreate.Designer.csutf-8à
+C:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Infrastructure\Data\Migrations\20251216151307_InitialCreate.csutf-8~
+uC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Infrastructure\Data\Context\SellGoldOrdersContext.csutf-8n
+eC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Domain\Exceptions\DomainException.csutf-8f
+]C:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Domain\Entities\OrderItem.csutf-8e
+\C:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Domain\Enums\OrderStatus.csutf-8b
+YC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Domain\Entities\Order.csutf-8Å
+xC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Queries\GraphQL\GetOrderByIdGraphQLQuery.csutf-8Å
+xC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Queries\GraphQL\GetAllOrdersGraphQLQuery.csutf-8Ç
+yC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Interfaces\Repositories\IOrdersRepository.csutf-8{
+rC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Handlers\Orders\CreateOrderHandler.csutf-8Ñ
+{C:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Handlers\GraphQL\GetOrderByIdGraphQLHandler.csutf-8Ñ
+{C:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Handlers\GraphQL\GetAllOrdersGraphQLHandler.csutf-8}
+tC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Contracts\Mappers\OrderProfileMapper.csutf-8
+vC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Contracts\DTOs\Responses\OrderResponse.csutf-8É
+zC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Contracts\DTOs\Responses\OrderItemResponse.csutf-8É
+zC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Contracts\DTOs\Requests\CreateOrderRequest.csutf-8á
+~C:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Contracts\DTOs\Requests\CreateOrderItemRequest.csutf-8j
+aC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Commons\OrderLogs.csutf-8r
+iC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Commons\NotFoundException.csutf-8n
+eC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Commons\ExceptionBase.csutf-8t
+kC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\Application\Commands\CreateOrderCommand.csutf-8r
+iC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\API\GraphQL\QueryTypes\OrderQueryType.csutf-8m
+dC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\API\Controllers\OrdersController.csutf-8

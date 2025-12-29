@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SellGold.Suppliers.API.GraphQL.QueryTypes;
+using SellGold.Suppliers.Application.Contracts.Mappers;
 using SellGold.Suppliers.Application.Handlers.Suppliers;
 using SellGold.Suppliers.Application.Interfaces.Repositories;
 using SellGold.Suppliers.Application.Queries.GraphQL;
@@ -28,15 +29,16 @@ builder.Services.AddScoped<ISupplierRepository, SellGoldSuppliersRepository>();
 builder.Services.AddDbContext<SellGoldSuppliersContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SellGoldSuppliersConnection")));
 
+// Adiciona AutoMapper e carrega todos os Profiles
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<SupplierProfileMapper>();
+});
+
 // MediatR Handlers
 builder.Services.AddMediatR(
     typeof(CreateSuplierHandler).Assembly
 );
-
-
-// Add services to the container.
-builder.Services.AddControllers();
-
 
 // Adiciona serviços GraphQL
 builder.Services

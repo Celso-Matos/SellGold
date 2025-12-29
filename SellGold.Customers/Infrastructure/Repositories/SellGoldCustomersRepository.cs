@@ -2,7 +2,7 @@
 using SellGold.Customers.Application.Interfaces.Repositories;
 using SellGold.Customers.Domain.Entities;
 using SellGold.Customers.Infrastructure.Data.Context;
-using KeyNotFoundException = System.Collections.Generic.KeyNotFoundException;
+using SellGold.Customers.Infrastructure.Exceptions;
 
 namespace SellGold.Customers.Infrastructure.Repositories
 {
@@ -18,7 +18,7 @@ namespace SellGold.Customers.Infrastructure.Repositories
         {
             return await _context.Customers
                                         .Include(c => c.Addresses)
-                                        .FirstOrDefaultAsync(c => c.CustomerId == customerId) ?? throw new KeyNotFoundException($"Cliente {customerId} não encontrado.");
+                                        .FirstOrDefaultAsync(c => c.CustomerId == customerId) ?? throw new InfrastructureException($"Cliente {customerId} não encontrado.");
 
         }
         public async Task<IEnumerable<Customer>> GetAllAsync()

@@ -1,0 +1,1 @@
+tRIC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold\SellGold.csproj¢net10.0-windows10.0.19041.0òCSharp14

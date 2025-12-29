@@ -1,6 +1,10 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using SellGold.Payments.Application.Contracts.Mappers;
+using SellGold.Payments.Application.Handlers.Payments;
+using SellGold.Payments.Application.Interfaces.Repositories;
 using SellGold.Payments.Infrastructure.Data.Context;
+using SellGold.Payments.Infrastructure.Repositories;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,9 +18,23 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Repositório
+builder.Services.AddScoped<IPaymentsRepository, SellGoldPaymentsRepository>();
+
 // DbContext 
 builder.Services.AddDbContext<SellGoldPaymentsContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SellGoldPaymentsConnection")));
+
+// Adiciona AutoMapper e carrega todos os Profiles
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<PaymentProfileMapper>();
+});
+
+// MediatR Handlers
+builder.Services.AddMediatR(
+    typeof(CreatePaymentHandler).Assembly
+);
 
 // Config Cors
 builder.Services.AddCors(options =>
@@ -36,8 +54,6 @@ var app = builder.Build();
 // Cors
 app.UseCors("AllowAll");
 
-// Mapeia o endpoint GraphQL
-app.MapGraphQL("/graphql");
 
 // Habilita Swagger apenas em Development
 void ConfigureSwaggerUI(SwaggerUIOptions c)

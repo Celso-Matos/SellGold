@@ -112,7 +112,7 @@ namespace SellGold.Payments.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("SellGold.Payments.Domain.ValueObjects.Money", "Amount", b1 =>
+                    b.OwnsOne("SellGold.Payments.Domain.ValueObjects.Money", "InvoiceMoney", b1 =>
                         {
                             b1.Property<Guid>("InvoiceId")
                                 .HasColumnType("uniqueidentifier");
@@ -125,7 +125,7 @@ namespace SellGold.Payments.Infrastructure.Data.Migrations
                                 .HasForeignKey("InvoiceId");
                         });
 
-                    b.Navigation("Amount")
+                    b.Navigation("InvoiceMoney")
                         .IsRequired();
                 });
 
@@ -137,7 +137,7 @@ namespace SellGold.Payments.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("SellGold.Payments.Domain.ValueObjects.Money", "Amount", b1 =>
+                    b.OwnsOne("SellGold.Payments.Domain.ValueObjects.Money", "PaymentMoney", b1 =>
                         {
                             b1.Property<Guid>("PaymentId")
                                 .HasColumnType("uniqueidentifier");
@@ -150,10 +150,10 @@ namespace SellGold.Payments.Infrastructure.Data.Migrations
                                 .HasForeignKey("PaymentId");
                         });
 
-                    b.Navigation("Amount")
-                        .IsRequired();
-
                     b.Navigation("PaymentMethod");
+
+                    b.Navigation("PaymentMoney")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SellGold.Payments.Domain.Entities.Payment", b =>

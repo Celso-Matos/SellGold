@@ -2,7 +2,7 @@
 using SellGold.Orders.Application.Interfaces.Repositories;
 using SellGold.Orders.Domain.Entities;
 using SellGold.Orders.Infrastructure.Data.Context;
-using KeyNotFoundException = System.Collections.Generic.KeyNotFoundException;
+using SellGold.Orders.Infrastructure.Exceptions;
 
 namespace SellGold.Orders.Infrastructure.Repositories
 {
@@ -17,7 +17,7 @@ namespace SellGold.Orders.Infrastructure.Repositories
         {
             return await _context.Orders
                                         .Include(o => o.OrderItems)
-                                        .FirstOrDefaultAsync(o => o.OrderId == orderId) ?? throw new KeyNotFoundException($"Pedido {orderId} não encontrado.");
+                                        .FirstOrDefaultAsync(o => o.OrderId == orderId) ?? throw new InfrastructureException($"Pedido {orderId} não encontrado.");
         }
         public async Task<IEnumerable<Order>> GetAllAsync()
         {

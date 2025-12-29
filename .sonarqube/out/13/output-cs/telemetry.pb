@@ -1,0 +1,1 @@
+pRYC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.AppHost\SellGold.AppHost.csproj¢net10.0òCSharp14

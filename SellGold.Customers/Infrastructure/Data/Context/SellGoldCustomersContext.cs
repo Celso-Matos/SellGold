@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SellGold.Customers.Domain.Entities;
 using SellGold.Customers.Domain.Exceptions;
-using SellGold.Customers.Domain.ValueObjects;
 
 namespace SellGold.Customers.Infrastructure.Data.Context
 {

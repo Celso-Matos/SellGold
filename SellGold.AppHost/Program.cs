@@ -18,37 +18,37 @@ var sqlSuppliers = builder.AddSqlServer("sqlserver-suppliers")
 // -----------------------------
 // SQL Server - Stock
 // -----------------------------
-var sqlStock = builder.AddSqlServer("sqlserver-stock")
-    .WithDataVolume()
-    .AddDatabase("SellGoldStock");
+//var sqlStock = builder.AddSqlServer("sqlserver-stock")
+//    .WithDataVolume()
+//    .AddDatabase("SellGoldStock");
 
 // -----------------------------
 // SQL Server - Prices
 // -----------------------------
-var sqlPrices = builder.AddSqlServer("sqlserver-prices")
-    .WithDataVolume()
-    .AddDatabase("SellGoldPrices");
+//var sqlPrices = builder.AddSqlServer("sqlserver-prices")
+//    .WithDataVolume()
+//    .AddDatabase("SellGoldPrices");
 
 // -----------------------------
 // SQL Server - Customers
 // -----------------------------
-var sqlCustomers = builder.AddSqlServer("sqlserver-customers")
-    .WithDataVolume()
-    .AddDatabase("SellGoldCustomers");
+//var sqlCustomers = builder.AddSqlServer("sqlserver-customers")
+//    .WithDataVolume()
+//    .AddDatabase("SellGoldCustomers");
 
 // -----------------------------
 // SQL Server - Orders
 // -----------------------------
-var sqlOrders = builder.AddSqlServer("sqlserver-orders")
-    .WithDataVolume()
-    .AddDatabase("SellGoldOrders");
+//var sqlOrders = builder.AddSqlServer("sqlserver-orders")
+//    .WithDataVolume()
+//    .AddDatabase("SellGoldOrders");
 
 // -----------------------------
 // SQL Server - Promotions
 // -----------------------------
-var sqlPromotions = builder.AddSqlServer("sqlserver-promotions")
-    .WithDataVolume()
-    .AddDatabase("SellGoldPromotions");
+//var sqlPromotions = builder.AddSqlServer("sqlserver-promotions")
+//    .WithDataVolume()
+//    .AddDatabase("SellGoldPromotions");
 
 // -----------------------------
 // SQL Server - Payments
@@ -63,8 +63,8 @@ var sqlPayments = builder.AddSqlServer("sqlserver-payments")
 // -----------------------------
 builder.AddProject<Projects.SellGold_Products>("sellgold-api-products")
     .WithReference(sqlProducts)
-    .WithEndpoint("http", e => { e.Port = 11000; })   // HTTP
-    .WithEndpoint("https", e => { e.Port = 11001; })  // HTTPS
+    .WithEndpoint("http", e => { e.Port = 8000; })   // HTTP
+    .WithEndpoint("https", e => { e.Port = 8001; })  // HTTPS
     .WithEnvironment("Kafka__BootstrapServers", "localhost:9093");
 
 // -----------------------------
@@ -72,57 +72,56 @@ builder.AddProject<Projects.SellGold_Products>("sellgold-api-products")
 // -----------------------------
 builder.AddProject<Projects.SellGold_Suppliers>("sellgold-api-suppliers")
     .WithReference(sqlSuppliers)
-    .WithEndpoint("http", e => { e.Port = 3000; })   // HTTP
-    .WithEndpoint("https", e => { e.Port = 3001; });   // HTTPS
+    .WithEndpoint("http", e => { e.Port = 8002; })   // HTTP
+    .WithEndpoint("https", e => { e.Port = 8003; });   // HTTPS
 
 // -----------------------------
 // API de Stock
 // -----------------------------
-builder.AddProject<Projects.SellGold_Stock>("sellgold-api-stock")
-    .WithReference(sqlStock)
-    .WithEndpoint("http", e => { e.Port = 1000; })   // HTTP
-    .WithEndpoint("https", e => { e.Port = 1001; });   // HTTPS
+//builder.AddProject<Projects.SellGold_Stock>("sellgold-api-stock")
+//    .WithReference(sqlStock)
+//    .WithEndpoint("http", e => { e.Port = 2000; })   // HTTP
+//    .WithEndpoint("https", e => { e.Port = 2001; });   // HTTPS
 
 // -----------------------------
 // API de Prices
 // -----------------------------
-builder.AddProject<Projects.SellGold_Prices>("sellgold-api-prices")
-    .WithReference(sqlPrices)
-    .WithEndpoint("http", e => { e.Port = 9000; })   // HTTP
-    .WithEndpoint("https", e => { e.Port = 9001; });   // HTTPS
+//builder.AddProject<Projects.SellGold_Prices>("sellgold-api-prices")
+//    .WithReference(sqlPrices)
+//    .WithEndpoint("http", e => { e.Port = 10000; })   // HTTP
+//    .WithEndpoint("https", e => { e.Port = 10001; });   // HTTPS
 
 // -----------------------------
 // API de Customers
 // -----------------------------
-builder.AddProject<Projects.SellGold_Customers>("sellgold-api-customers")
-    .WithReference(sqlCustomers)
-    .WithEndpoint("http", e => { e.Port = 5000; })   // HTTP
-    .WithEndpoint("https", e => { e.Port = 5001; });   // HTTPS
+//builder.AddProject<Projects.SellGold_Customers>("sellgold-api-customers")
+//    .WithReference(sqlCustomers)
+//    .WithEndpoint("http", e => { e.Port = 6000; })   // HTTP
+//    .WithEndpoint("https", e => { e.Port = 6001; });   // HTTPS
 
 // -----------------------------
 // API de Orders
 // -----------------------------
-builder.AddProject<Projects.SellGold_Orders>("sellgold-api-orders")
-    .WithReference(sqlOrders)
-    .WithEndpoint("http", e => { e.Port = 13000; })   // HTTP
-    .WithEndpoint("https", e => { e.Port = 13001; });   // HTTPS
+//builder.AddProject<Projects.SellGold_Orders>("sellgold-api-orders")
+//    .WithReference(sqlOrders)
+//    .WithEndpoint("http", e => { e.Port = 14000; })   // HTTP
+//    .WithEndpoint("https", e => { e.Port = 14001; });   // HTTPS
 
 // -----------------------------
 // API de Promotions
 // -----------------------------
-builder.AddProject<Projects.SellGold_Promotions>("sellgold-api-promotions")
-    .WithReference(sqlPromotions)
-    .WithEndpoint("http", e => { e.Port = 7000; })   // HTTP
-    .WithEndpoint("https", e => { e.Port = 7001; });   // HTTPS
+//builder.AddProject<Projects.SellGold_Promotions>("sellgold-api-promotions")
+//    .WithReference(sqlPromotions)
+//    .WithEndpoint("http", e => { e.Port = 8000; })   // HTTP
+//    .WithEndpoint("https", e => { e.Port = 8001; });   // HTTPS
 
 // -----------------------------
 // API de Payments
 // -----------------------------
 builder.AddProject<Projects.SellGold_Payments>("sellgold-api-payments")
     .WithReference(sqlPayments)
-    .WithEndpoint("http", e => { e.Port = 15000; })   // HTTP
-    .WithEndpoint("https", e => { e.Port = 15001; });   // HTTPS
-
+    .WithEndpoint("http", e => { e.Port = 8004; })   // HTTP
+    .WithEndpoint("https", e => { e.Port = 8005; });   // HTTPS
 
 
 // -----------------------------

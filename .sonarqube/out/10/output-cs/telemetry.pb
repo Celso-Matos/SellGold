@@ -1,0 +1,1 @@
+dRIC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold\SellGold.csproj¢net10.0-iosòCSharp14

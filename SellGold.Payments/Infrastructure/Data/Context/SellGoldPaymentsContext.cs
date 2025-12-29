@@ -16,8 +16,11 @@ namespace SellGold.Payments.Infrastructure.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Payment>().OwnsOne(p => p.Amount);
-            modelBuilder.Entity<Invoice>().OwnsOne(i => i.Amount);
+            modelBuilder.Entity<Payment>()
+            .OwnsOne(p => p.PaymentMoney);
+
+            modelBuilder.Entity<Invoice>()
+            .OwnsOne(p => p.InvoiceMoney);
         }
     }
 }

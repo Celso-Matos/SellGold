@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>SellGold.AppHost</ProjectName>
+  <ProjectLanguage>C#</ProjectLanguage>
+  <ProjectType>Product</ProjectType>
+  <ProjectGuid>9c4bab18-a8d6-defc-e048-3c3f2687d014</ProjectGuid>
+  <FullPath>C:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.AppHost\SellGold.AppHost.csproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResultFiles>
+    <AnalysisResultFile Id="FilesToAnalyze" Location="C:\Users\Celso Matos Costa\source\repos\SellGold\.sonarqube\conf\13\FilesToAnalyze.txt" />
+  </AnalysisResultFiles>
+  <AnalysisSettings>
+    <Property Name="sonar.cs.roslyn.reportFilePaths">C:\Users\Celso Matos Costa\source\repos\SellGold\.sonarqube\out\13\Issues.json</Property>
+    <Property Name="sonar.cs.analyzer.projectOutPaths">C:\Users\Celso Matos Costa\source\repos\SellGold\.sonarqube\out\13</Property>
+    <Property Name="sonar.cs.scanner.telemetry">C:\Users\Celso Matos Costa\source\repos\SellGold\.sonarqube\out\13\Telemetry.json</Property>
+  </AnalysisSettings>
+  <Configuration>Debug</Configuration>
+  <Platform>AnyCPU</Platform>
+  <TargetFramework>net10.0</TargetFramework>
+</ProjectInfo>

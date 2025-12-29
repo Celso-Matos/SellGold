@@ -1,12 +1,13 @@
 ﻿using SellGold.Payments.Domain.Enums;
 using SellGold.Payments.Domain.ValueObjects;
+using static MongoDB.Driver.WriteConcern;
 
 namespace SellGold.Payments.Domain.Entities
 {
     public class Payment
     {
         public Guid PaymentId { get; private set; }
-        public Money Amount { get; private set; }
+        public Money PaymentMoney { get; private set; }
         public PaymentMethod PaymentMethod { get; private set; }
         public PaymentStatus Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
@@ -15,16 +16,16 @@ namespace SellGold.Payments.Domain.Entities
 
         private Payment() { 
         
-            Amount = new Money(0, "");
+            PaymentMoney = new Money(0, "");
             PaymentMethod = new();
             Invoice = new();
 
         } // Para EF Core
 
-        public Payment(Money amount, PaymentMethod paymentMethod, Invoice invoice)
+        public Payment(Money paymentMoney, PaymentMethod paymentMethod, Invoice invoice)
         {
             PaymentId = Guid.NewGuid();
-            Amount = amount ?? throw new ArgumentNullException(nameof(amount));
+            PaymentMoney = paymentMoney ?? throw new ArgumentNullException(nameof(paymentMoney));
             PaymentMethod = paymentMethod ?? throw new ArgumentNullException(nameof(paymentMethod));
             Invoice = invoice ?? throw new ArgumentNullException(nameof(invoice));
             Status = PaymentStatus.Pending;
@@ -46,10 +47,21 @@ namespace SellGold.Payments.Domain.Entities
             CompletedAt = DateTime.UtcNow;
         }
 
-        public void Refund(decimal amount)
+        public void Refund(Money refundAmount)
         {
-            if (!PaymentMethod.SupportsPartialRefund && amount < Amount.Value)
+            if (refundAmount == null) throw new ArgumentNullException(nameof(refundAmount));
+            if (refundAmount.Currency != PaymentMoney.Currency)
+                throw new InvalidOperationException("Moeda do reembolso deve ser igual à do pagamento.");
+
+            // Parcial vs total
+            bool isPartial = refundAmount.Amount < PaymentMoney.Amount;
+
+            if (isPartial && !PaymentMethod.SupportsPartialRefund)
                 throw new InvalidOperationException("Método não suporta reembolso parcial.");
+
+            if (refundAmount.Amount > PaymentMoney.Amount)
+                throw new InvalidOperationException("Valor de reembolso não pode exceder o pagamento.");
+
             Status = PaymentStatus.Refunded;
             CompletedAt = DateTime.UtcNow;
         }

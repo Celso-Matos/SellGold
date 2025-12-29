@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using SellGold.Orders.Domain.Enums;
 
 namespace SellGold.Orders.Application.Contracts.DTOs.Requests
 {

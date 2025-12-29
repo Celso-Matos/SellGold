@@ -7,23 +7,23 @@ namespace SellGold.Payments.Domain.Entities
     {
         public Guid InvoiceId { get; private set; }
         public Guid PaymentId { get; private set; }
-        public Money Amount { get; private set; }
+        public Money InvoiceMoney { get; private set; }
         public DateTime IssuedAt { get; private set; }
         public string Number { get; private set; }
         public InvoiceStatus Status { get; private set; }
 
         public Invoice() { 
         
-            Amount = new Money(0, "");
+            InvoiceMoney = new Money(0, "");
             Number = string.Empty;
 
         } // Para EF Core
 
-        public Invoice(Guid paymentId, Money amount, string number)
+        public Invoice(Guid paymentId, Money invoiceMoney, string number)
         {
             InvoiceId = Guid.NewGuid();
             PaymentId = paymentId;
-            Amount = amount ?? throw new ArgumentNullException(nameof(amount));
+            InvoiceMoney = invoiceMoney ?? throw new ArgumentNullException(nameof(invoiceMoney));
             Number = number ?? throw new ArgumentNullException(nameof(number));
             IssuedAt = DateTime.UtcNow;
             Status = InvoiceStatus.Issued;

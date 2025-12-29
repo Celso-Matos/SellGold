@@ -1,0 +1,1 @@
+nRWC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Orders\SellGold.Orders.csproj¢net10.0òCSharp14
