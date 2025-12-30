@@ -3,8 +3,8 @@
     public static class ListCustomerGraphQLQuery
     {
         public const string GetCustomers = @"
-        query {
-            allCustomersGraphQL {
+        query($cpf: String!) {
+            allCustomersGraphQL(where: { document: $cpf }) {
             customerId
             name
             document

@@ -8,20 +8,20 @@ namespace SellGold.Contracts.DTOs.Customers.Requests
     {
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        public string Document { get; set; }
+        public string Document { get; set; } = string.Empty;
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [Newtonsoft.Json.JsonProperty("phone", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Phone { get; set; }
+        public string Phone { get; set; } = string.Empty;
 
         [Newtonsoft.Json.JsonProperty("addresses", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<CreateAddressRequest> Addresses { get; set; }
+        public System.Collections.Generic.ICollection<CreateAddressRequest> Addresses { get; set; } = new Collection<CreateAddressRequest>();
 
     }
 }

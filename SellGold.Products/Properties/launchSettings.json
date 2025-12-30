@@ -6,14 +6,14 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:8001;http://localhost:8000"
+      "applicationUrl": "https://localhost:8011;http://localhost:8111"
     },
     "Container (Dockerfile)": {
       "commandName": "Docker",
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "environmentVariables": {
-        "ASPNETCORE_HTTPS_PORTS": "8001",
-        "ASPNETCORE_HTTP_PORTS": "8000"
+        "ASPNETCORE_HTTPS_PORTS": "8011",
+        "ASPNETCORE_HTTP_PORTS": "8111"
       },
       "publishAllPorts": true,
       "useSSL": true

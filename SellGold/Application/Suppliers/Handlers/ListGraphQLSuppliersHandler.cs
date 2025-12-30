@@ -5,10 +5,10 @@ using SellGold.GraphQL.Suppliers.Services;
 
 namespace SellGold.Application.Suppliers.Handlers
 {
-    public class ListSupplierHandler : IRequestHandler<ListGraphQLSuppliersQuery, List<SupplierResponse>>
+    public class ListGraphQLSuppliersHandler : IRequestHandler<ListGraphQLSuppliersQuery, List<SupplierResponse>>
     {
         private readonly ListSupplierGraphQLService _service;
-        public ListSupplierHandler(ListSupplierGraphQLService service)
+        public ListGraphQLSuppliersHandler(ListSupplierGraphQLService service)
         {
             _service = service;
         }

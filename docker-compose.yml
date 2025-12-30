@@ -47,12 +47,29 @@ services:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver-payments
     ports:
-      - "57708:1433"
+      - "57709:1433"
     environment:
       SA_PASSWORD: ${SA_PASSWORD}
       ACCEPT_EULA: ${ACCEPT_EULA}      
     volumes:
-      - sql_data_suppliers:/var/opt/mssql
+      - sql_data_payments:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "echo > /dev/tcp/localhost/1433"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  # Banco de dados para Clientes
+  sqlserver-customers:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver-customers
+    ports:
+      - "57710:1433"
+    environment:
+      SA_PASSWORD: ${SA_PASSWORD}
+      ACCEPT_EULA: ${ACCEPT_EULA}      
+    volumes:
+      - sql_data_customers:/var/opt/mssql
     healthcheck:
       test: ["CMD-SHELL", "echo > /dev/tcp/localhost/1433"]
       interval: 10s
@@ -144,13 +161,13 @@ services:
       - "8002:8082"   # HTTP
       - "8003:8083"   # HTTPS
     environment:
-      - Kafka__BootstrapServers=kafka:9092
+      # - Kafka__BootstrapServers=kafka:9092
       - DOTNET_ENVIRONMENT=Development
       # - ConnectionStrings__SellGoldSuppliersConnection=Server=${DB_SERVER_SUPPLIERS};Database=${DB_NAME_SUPPLIERS};User Id=${DB_USER_SUPPLIERS};Password=${DB_PASSWORD_SUPPLIERS};TrustServerCertificate=True
 
     depends_on:
       - sqlserver-suppliers
-      - kafka
+      # - kafka
 
   # API de Pagamentos
   sellgold-api-payments:
@@ -162,15 +179,34 @@ services:
       - "8004:8084"   # HTTP
       - "8005:8085"   # HTTPS
     environment:
-      - Kafka__BootstrapServers=kafka:9092
+      # - Kafka__BootstrapServers=kafka:9092
       - DOTNET_ENVIRONMENT=Development
       # - ConnectionStrings__SellGoldPaymentsConnection=Server=${DB_SERVER_PAYMENTS};Database=${DB_NAME_PAYMENTS};User Id=${DB_USER_PAYMENTS};Password=${DB_PASSWORD_PAYMENTS};TrustServerCertificate=True
 
     depends_on:
       - sqlserver-payments
-      - kafka
+      # - kafka
+
+  # API de Clientes
+  sellgold-api-customers:
+    build:
+      context: .
+      dockerfile: SellGold.Customers/Dockerfile
+    container_name: sellgold-api-customers
+    ports:
+      - "8006:8086"   # HTTP
+      - "8007:8087"   # HTTPS
+    environment:
+      # - Kafka__BootstrapServers=kafka:9092
+      - DOTNET_ENVIRONMENT=Development
+      # - ConnectionStrings__SellGoldCustomersConnection=Server=${DB_SERVER_CUSTOMERS};Database=${DB_NAME_CUSTOMERS};User Id=${DB_USER_CUSTOMERS};Password=${DB_PASSWORD_CUSTOMERS};TrustServerCertificate=True
+
+    depends_on:
+      - sqlserver-customers
+      # - kafka
 
 volumes:
   sql_data_products:
   sql_data_suppliers:
   sql_data_payments:
+  sql_data_customers:

@@ -9,7 +9,7 @@ namespace SellGold.Contracts.DTOs.Promotions.Requests
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(150, MinimumLength = 1)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [Newtonsoft.Json.JsonProperty("startDate", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -25,6 +25,6 @@ namespace SellGold.Contracts.DTOs.Promotions.Requests
 
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(500)]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
     }
 }

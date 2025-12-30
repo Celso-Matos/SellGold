@@ -10,10 +10,10 @@ namespace SellGold.PageModels.Customers
     public class CustomerPageModel : BindableObject
     {
         private readonly IMediator _mediator;
-        public string Name { get; set; }
-        public string Document { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Document { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty;
         public System.Collections.Generic.ICollection<CreateAddressRequest> Addresses { get; set; } = new List<CreateAddressRequest>();
 
         private string? _errorMessage;

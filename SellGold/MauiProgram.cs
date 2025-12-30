@@ -109,101 +109,119 @@ public static class MauiProgram
         });
 
         // Stock
-        StockApiSettings? StockApiSettings;
+        StockApiSettings? stockApiSettings;
 
         if (DeviceInfo.Platform == DevicePlatform.Android)
-            StockApiSettings = aConfig.GetSection("StockApiSettingsAndroid").Get<StockApiSettings>();
+            stockApiSettings = aConfig.GetSection("StockApiSettingsAndroid").Get<StockApiSettings>();
         else if (DeviceInfo.Platform == DevicePlatform.iOS)
-            StockApiSettings = aConfig.GetSection("StockApiSettingsiOS").Get<StockApiSettings>();
+            stockApiSettings = aConfig.GetSection("StockApiSettingsiOS").Get<StockApiSettings>();
         else if (DeviceInfo.Platform == DevicePlatform.macOS)
-            StockApiSettings = aConfig.GetSection("StockApiSettingsMacOS").Get<StockApiSettings>();
+            stockApiSettings = aConfig.GetSection("StockApiSettingsMacOS").Get<StockApiSettings>();
         else if (DeviceInfo.Platform == DevicePlatform.WinUI)
-            StockApiSettings = aConfig.GetSection("StockApiSettingsWin").Get<StockApiSettings>();
+            stockApiSettings = aConfig.GetSection("StockApiSettingsWin").Get<StockApiSettings>();
         else
             throw new InvalidOperationException("Plataforma não suportada para StockApiSettings.");
 
-        if (StockApiSettings == null)
+        if (stockApiSettings == null)
             throw new InvalidOperationException("Configuração StockApiSettings não encontrada.");
 
         builder.Services.Configure<StockApiSettings>(options =>
         {
-            options.BaseUrl = StockApiSettings.BaseUrl;
-            options.Endpoints = StockApiSettings.Endpoints;
+            options.BaseUrl = stockApiSettings.BaseUrl;
+            options.Endpoints = stockApiSettings.Endpoints;
         });
 
         // Prices
-        PricesApiSettings? PricesApiSettings;
+        PricesApiSettings? pricesApiSettings;
 
         if (DeviceInfo.Platform == DevicePlatform.Android)
-            PricesApiSettings = aConfig.GetSection("PricesApiSettingsAndroid").Get<PricesApiSettings>();
+            pricesApiSettings = aConfig.GetSection("PricesApiSettingsAndroid").Get<PricesApiSettings>();
         else if (DeviceInfo.Platform == DevicePlatform.iOS)
-            PricesApiSettings = aConfig.GetSection("PricesApiSettingsiOS").Get<PricesApiSettings>();
+            pricesApiSettings = aConfig.GetSection("PricesApiSettingsiOS").Get<PricesApiSettings>();
         else if (DeviceInfo.Platform == DevicePlatform.macOS)
-            PricesApiSettings = aConfig.GetSection("PricesApiSettingsMacOS").Get<PricesApiSettings>();
+            pricesApiSettings = aConfig.GetSection("PricesApiSettingsMacOS").Get<PricesApiSettings>();
         else if (DeviceInfo.Platform == DevicePlatform.WinUI)
-            PricesApiSettings = aConfig.GetSection("PricesApiSettingsWin").Get<PricesApiSettings>();
+            pricesApiSettings = aConfig.GetSection("PricesApiSettingsWin").Get<PricesApiSettings>();
         else
             throw new InvalidOperationException("Plataforma não suportada para PricesApiSettings.");
 
-        if (PricesApiSettings == null)
+        if (pricesApiSettings == null)
             throw new InvalidOperationException("Configuração PricesApiSettings não encontrada.");
-
-
-        // Promotions
-        PromotionsApiSettings? PromotionsApiSettings;
-
-        if (DeviceInfo.Platform == DevicePlatform.Android)
-            PromotionsApiSettings = aConfig.GetSection("PromotionsApiSettingsAndroid").Get<PromotionsApiSettings>();
-        else if (DeviceInfo.Platform == DevicePlatform.iOS)
-            PromotionsApiSettings = aConfig.GetSection("PromotionsApiSettingsiOS").Get<PromotionsApiSettings>();
-        else if (DeviceInfo.Platform == DevicePlatform.macOS)
-            PromotionsApiSettings = aConfig.GetSection("PromotionsApiSettingsMacOS").Get<PromotionsApiSettings>();
-        else if (DeviceInfo.Platform == DevicePlatform.WinUI)
-            PromotionsApiSettings = aConfig.GetSection("PromotionsApiSettingsWin").Get<PromotionsApiSettings>();
-        else
-            throw new InvalidOperationException("Plataforma não suportada para PromotionsApiSettings.");
-
-        if (PromotionsApiSettings == null)
-            throw new InvalidOperationException("Configuração PromotionsApiSettings não encontrada.");
-
-        // Orders
-        OrdersApiSettings? OrdersApiSettings;
-
-        if (DeviceInfo.Platform == DevicePlatform.Android)
-            OrdersApiSettings = aConfig.GetSection("OrdersApiSettingsAndroid").Get<OrdersApiSettings>();
-        else if (DeviceInfo.Platform == DevicePlatform.iOS)
-            OrdersApiSettings = aConfig.GetSection("OrdersApiSettingsiOS").Get<OrdersApiSettings>();
-        else if (DeviceInfo.Platform == DevicePlatform.macOS)
-            OrdersApiSettings = aConfig.GetSection("OrdersApiSettingsMacOS").Get<OrdersApiSettings>();
-        else if (DeviceInfo.Platform == DevicePlatform.WinUI)
-            OrdersApiSettings = aConfig.GetSection("OrdersApiSettingsWin").Get<OrdersApiSettings>();
-        else
-            throw new InvalidOperationException("Plataforma não suportada para OrdersApiSettings.");
-
-        if (OrdersApiSettings == null)
-            throw new InvalidOperationException("Configuração OrdersApiSettings não encontrada.");
-
-        // Customers
-        CustomersApiSettings? CustomersApiSettings;
-
-        if (DeviceInfo.Platform == DevicePlatform.Android)
-            CustomersApiSettings = aConfig.GetSection("CustomersApiSettingsAndroid").Get<CustomersApiSettings>();
-        else if (DeviceInfo.Platform == DevicePlatform.iOS)
-            CustomersApiSettings = aConfig.GetSection("CustomersApiSettingsiOS").Get<CustomersApiSettings>();
-        else if (DeviceInfo.Platform == DevicePlatform.macOS)
-            CustomersApiSettings = aConfig.GetSection("CustomersApiSettingsMacOS").Get<CustomersApiSettings>();
-        else if (DeviceInfo.Platform == DevicePlatform.WinUI)
-            CustomersApiSettings = aConfig.GetSection("CustomersApiSettingsWin").Get<CustomersApiSettings>();
-        else
-            throw new InvalidOperationException("Plataforma não suportada para CustomersApiSettings.");
-
-        if (CustomersApiSettings == null)
-            throw new InvalidOperationException("Configuração CustomersApiSettings não encontrada.");
 
         builder.Services.Configure<PricesApiSettings>(options =>
         {
-            options.BaseUrl = PricesApiSettings.BaseUrl;
-            options.Endpoints = PricesApiSettings.Endpoints;
+            options.BaseUrl = pricesApiSettings.BaseUrl;
+            options.Endpoints = pricesApiSettings.Endpoints;
+        });
+
+
+        // Promotions
+        PromotionsApiSettings? promotionsApiSettings;
+
+        if (DeviceInfo.Platform == DevicePlatform.Android)
+            promotionsApiSettings = aConfig.GetSection("PromotionsApiSettingsAndroid").Get<PromotionsApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.iOS)
+            promotionsApiSettings = aConfig.GetSection("PromotionsApiSettingsiOS").Get<PromotionsApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.macOS)
+            promotionsApiSettings = aConfig.GetSection("PromotionsApiSettingsMacOS").Get<PromotionsApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.WinUI)
+            promotionsApiSettings = aConfig.GetSection("PromotionsApiSettingsWin").Get<PromotionsApiSettings>();
+        else
+            throw new InvalidOperationException("Plataforma não suportada para PromotionsApiSettings.");
+
+        if (promotionsApiSettings == null)
+            throw new InvalidOperationException("Configuração PromotionsApiSettings não encontrada.");
+
+        builder.Services.Configure<PromotionsApiSettings>(options =>
+        {
+            options.BaseUrl = promotionsApiSettings.BaseUrl;
+            options.Endpoints = promotionsApiSettings.Endpoints;
+        });
+
+        // Orders
+        OrdersApiSettings? ordersApiSettings;
+
+        if (DeviceInfo.Platform == DevicePlatform.Android)
+            ordersApiSettings = aConfig.GetSection("OrdersApiSettingsAndroid").Get<OrdersApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.iOS)
+            ordersApiSettings = aConfig.GetSection("OrdersApiSettingsiOS").Get<OrdersApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.macOS)
+            ordersApiSettings = aConfig.GetSection("OrdersApiSettingsMacOS").Get<OrdersApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.WinUI)
+            ordersApiSettings = aConfig.GetSection("OrdersApiSettingsWin").Get<OrdersApiSettings>();
+        else
+            throw new InvalidOperationException("Plataforma não suportada para OrdersApiSettings.");
+
+        if (ordersApiSettings == null)
+            throw new InvalidOperationException("Configuração OrdersApiSettings não encontrada.");
+
+        builder.Services.Configure<OrdersApiSettings>(options =>
+        {
+            options.BaseUrl = ordersApiSettings.BaseUrl;
+            options.Endpoints = ordersApiSettings.Endpoints;
+        });
+
+        // Customers
+        CustomersApiSettings? customersApiSettings;
+
+        if (DeviceInfo.Platform == DevicePlatform.Android)
+            customersApiSettings = aConfig.GetSection("CustomersApiSettingsAndroid").Get<CustomersApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.iOS)
+            customersApiSettings = aConfig.GetSection("CustomersApiSettingsiOS").Get<CustomersApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.macOS)
+            customersApiSettings = aConfig.GetSection("CustomersApiSettingsMacOS").Get<CustomersApiSettings>();
+        else if (DeviceInfo.Platform == DevicePlatform.WinUI)
+            customersApiSettings = aConfig.GetSection("CustomersApiSettingsWin").Get<CustomersApiSettings>();
+        else
+            throw new InvalidOperationException("Plataforma não suportada para CustomersApiSettings.");
+
+        if (customersApiSettings == null)
+            throw new InvalidOperationException("Configuração CustomersApiSettings não encontrada.");
+
+        builder.Services.Configure<CustomersApiSettings>(options =>
+        {
+            options.BaseUrl = customersApiSettings.BaseUrl;
+            options.Endpoints = customersApiSettings.Endpoints;
         });
 
         // Fim do ajuste dinâmico do BaseUrl
@@ -227,12 +245,15 @@ public static class MauiProgram
         // 🔹 MediatR
         builder.Services.AddMediatR(
                 typeof(CreateProductHandler).Assembly,
+                typeof(ListGraphQLProductsHandler).Assembly,
                 typeof(CreateSupplierHandler).Assembly,
+                typeof(ListGraphQLSuppliersHandler).Assembly,
                 typeof(CreateStockHandler).Assembly,
                 typeof(CreatePriceHandler).Assembly,
                 typeof(CreatePromotionHandler).Assembly,
                 typeof(CreateOrderHandler).Assembly,
-                typeof(CreateCustomerHandler).Assembly
+                typeof(CreateCustomerHandler).Assembly,
+                typeof(ListGraphQLCustomersHandler).Assembly
                 );
 
         // 🔹 Serviços e Repositórios (Singleton)    

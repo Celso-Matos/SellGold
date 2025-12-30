@@ -168,8 +168,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Application\Payments\Handlers\" />
+	  <Folder Include="Application\Payments\Queries\" />
 	  <Folder Include="Contracts\DTOs\Customers\Models\" />
 	  <Folder Include="Contracts\DTOs\Orders\Models\" />
+	  <Folder Include="Contracts\DTOs\Payments\Models\" />
 	  <Folder Include="Contracts\DTOs\Prices\Models\" />
 	  <Folder Include="Contracts\DTOs\Promotions\Models\" />
 	  <Folder Include="GraphQL\Customers\Mutations\" />
