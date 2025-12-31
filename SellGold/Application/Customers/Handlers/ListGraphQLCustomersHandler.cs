@@ -12,9 +12,9 @@ namespace SellGold.Application.Customers.Handlers
         {
             _service = service;
         }
-        public async Task<List<CustomerResponse>> Handle(ListGraphQLCustomersQuery request, CancellationToken cancellationToken)
+        public async Task<List<CustomerResponse>> Handle(ListGraphQLCustomersQuery query, CancellationToken cancellationToken)
         {
-            var customers = await _service.GetAllCustomersGraphQLAsync(cancellationToken);
+            var customers = await _service.GetAllCustomersGraphQLAsync(query.Cpf, cancellationToken);
             return customers ?? new List<CustomerResponse>();
         }
     }

@@ -22,12 +22,13 @@ namespace SellGold.GraphQL.Customers.Services
 
         }
 
-        public async Task<List<CustomerResponse>> GetAllCustomersGraphQLAsync(CancellationToken cancellationToken)
+        public async Task<List<CustomerResponse>> GetAllCustomersGraphQLAsync(string? cpf = null,
+                                                                                CancellationToken cancellationToken = default)
         {
-
             var request = new GraphQLRequest
             {
-                Query = ListCustomerGraphQLQuery.GetCustomers
+                Query = ListCustomerGraphQLQuery.GetCustomers,
+                Variables = new { cpf }
             };
             var response = await _client.SendQueryAsync<CustomerListWrapper>(request, cancellationToken);
             return response.Data.AllCustomersGraphQL;

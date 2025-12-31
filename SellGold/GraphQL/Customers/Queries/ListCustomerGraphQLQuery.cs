@@ -4,7 +4,7 @@
     {
         public const string GetCustomers = @"
         query($cpf: String!) {
-            allCustomersGraphQL(where: { document: $cpf }) {
+            allCustomersGraphQL(cpf: $cpf) {
             customerId
             name
             document

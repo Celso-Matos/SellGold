@@ -11,6 +11,8 @@ namespace SellGold.PageModels.Customers
     {
         private readonly IMediator _mediator;
 
+        public string Cpf { get; set; } = string.Empty;
+
         private List<CustomerResponse> _customers = new();
 
         public List<CustomerResponse> Customers
@@ -34,11 +36,11 @@ namespace SellGold.PageModels.Customers
             LoadCustomersCommand = new AsyncRelayCommand(LoadCustomersAsync);
         
         }
-        public async Task LoadCustomersAsync()
+        public async Task LoadCustomersAsync(CancellationToken cancellationToken = default)
         {
             try
             {
-                var customers = await _mediator.Send(new ListGraphQLCustomersQuery());
+                var customers = await _mediator.Send(new ListGraphQLCustomersQuery(Cpf, cancellationToken));
                 Customers = customers;
             }
             catch (ValidationException ex)

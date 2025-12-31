@@ -3,10 +3,10 @@ namespace SellGold.Customers.Application.Interfaces.Repositories
 {
     public interface ICustomersRepository
     {
-        Task<Customer> GetByIdAsync(Guid customerId);
-        Task<IEnumerable<Customer>> GetAllAsync();
-        Task AddAsync(Customer customer);
-        Task UpdateAsync(Customer customer);
-        Task DeleteAsync(Guid customerId);
+        Task<Customer> GetByIdAsync(Guid customerId, CancellationToken cancellationToken = default);
+        Task<IEnumerable<Customer>> GetAllAsync(string? cpf = null, CancellationToken cancellationToken = default);
+        Task AddAsync(Customer customer, CancellationToken cancellationToken = default);
+        Task UpdateAsync(Customer customer, CancellationToken cancellationToken = default);
+        Task DeleteAsync(Guid customerId, CancellationToken cancellationToken = default);
     }
 }

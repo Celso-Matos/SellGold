@@ -9,10 +9,5 @@ public partial class ListCustomerPage : ContentPage
     {
         InitializeComponent();
         BindingContext = _model = model;
-    }
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        await _model.LoadCustomersAsync();
-    }
+    }    
 }

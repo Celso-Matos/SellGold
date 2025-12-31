@@ -19,7 +19,7 @@ namespace SellGold.Customers.Application.Handlers.GraphQL
 
         public async Task<List<CustomerResponse>> Handle(GetAllCustomersGraphQLQuery query, CancellationToken cancellationToken)
         {
-            var customers = await _repository.GetAllAsync();
+            var customers = await _repository.GetAllAsync(query.Cpf, cancellationToken);
             return _mapper.Map<List<CustomerResponse>>(customers);
 
         }

@@ -6,19 +6,19 @@ namespace SellGold.Customers.API.GraphQL.QueryTypes
 {
     public class CustomerQueryType
     {
-        protected CustomerQueryType() {
-        }
         // Query para buscar cliente por ID
-        public static async Task<CustomerResponse> GetCustomerGraphQLByIdAsync(Guid CustomerId,
-                                                                        [Service] IMediator mediator)
+        public async Task<CustomerResponse> GetCustomerGraphQLByIdAsync(Guid CustomerId,
+                                                                        [Service] IMediator mediator,
+                                                                        CancellationToken cancellationToken = default)
         {
             return await mediator.Send(new GetCustomerByIdGraphQLQuery(CustomerId));
         }
         // Query para buscar todos os clientes
-        public static async Task<List<CustomerResponse>> GetAllCustomersGraphQLAsync(
-            [Service] IMediator mediator)
+        public async Task<List<CustomerResponse>> GetAllCustomersGraphQLAsync(string? cpf,
+                                                                                [Service] IMediator mediator,
+                                                                                CancellationToken cancellationToken = default)
         {
-            return await mediator.Send(new GetAllCustomersGraphQLQuery());
+            return await mediator.Send(new GetAllCustomersGraphQLQuery(cpf, cancellationToken));
         }
     }
 }

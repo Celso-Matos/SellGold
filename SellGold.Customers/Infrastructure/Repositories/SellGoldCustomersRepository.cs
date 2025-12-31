@@ -14,34 +14,42 @@ namespace SellGold.Customers.Infrastructure.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
 
         }
-        public async Task<Customer> GetByIdAsync(Guid customerId)
+        public async Task<Customer> GetByIdAsync(Guid customerId, CancellationToken cancellationToken = default)
         {
             return await _context.Customers
                                         .Include(c => c.Addresses)
-                                        .FirstOrDefaultAsync(c => c.CustomerId == customerId) ?? throw new InfrastructureException($"Cliente {customerId} não encontrado.");
+                                        .FirstOrDefaultAsync(c => c.CustomerId == customerId, cancellationToken) ?? throw new InfrastructureException($"Cliente {customerId} não encontrado.");
 
         }
-        public async Task<IEnumerable<Customer>> GetAllAsync()
+        public async Task<IEnumerable<Customer>> GetAllAsync(string? cpf = null,
+                                                                CancellationToken cancellationToken = default)
         {
-            return await _context.Customers.Include(c => c.Addresses).ToListAsync();
+            var query = _context.Customers.Include(c => c.Addresses).AsQueryable();
+
+            if (!string.IsNullOrEmpty(cpf))
+            {
+                query = query.Where(c => c.Document == cpf);
+            }
+
+            return await query.ToListAsync(cancellationToken);
         }
-        public async Task AddAsync(Customer customer)
+        public async Task AddAsync(Customer customer, CancellationToken cancellationToken = default)
         {
             await _context.Customers.AddAsync(customer);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
         }
-        public async Task UpdateAsync(Customer customer)
+        public async Task UpdateAsync(Customer customer, CancellationToken cancellationToken = default)
         {
             _context.Entry(customer).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
         }
-        public async Task DeleteAsync(Guid customerId)
+        public async Task DeleteAsync(Guid customerId, CancellationToken cancellationToken = default)
         {
             var customer = await _context.Customers.FindAsync(customerId);
             if (customer != null)
             {
                 _context.Customers.Remove(customer);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
             }
         }
     }

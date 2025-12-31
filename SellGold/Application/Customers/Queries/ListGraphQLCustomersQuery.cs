@@ -3,5 +3,13 @@ using SellGold.Contracts.DTOs.Customers.Responses;
 
 namespace SellGold.Application.Customers.Queries
 {
-    public record ListGraphQLCustomersQuery() : IRequest<List<CustomerResponse>>;
+    public class ListGraphQLCustomersQuery : IRequest<List<CustomerResponse>>
+    {
+        public string? Cpf { get; }
+
+        public ListGraphQLCustomersQuery(string? cpf = null, CancellationToken cancellationToken = default)
+        {
+            Cpf = cpf;
+        }
+    }
 }
