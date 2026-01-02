@@ -72,7 +72,7 @@ namespace SellGold.Customers.Infrastructure.Data.Context
                     address.ToTable("CustomerAddresses");
 
                     // Chave primária para a tabela
-                    address.Property<int>("Id")
+                    address.Property<int>("CustomerAddressesId")
                         .ValueGeneratedOnAdd();
 
                     address.HasKey("Id");
@@ -83,7 +83,7 @@ namespace SellGold.Customers.Infrastructure.Data.Context
                         .HasMaxLength(10)
                         .HasColumnName("ZipCode");
 
-                    address.Property(a => a.Type)
+                    address.Property(a => a.AddressType)
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnName("AddressType");

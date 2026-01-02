@@ -28,7 +28,7 @@ namespace SellGold.Customers.Application.Contracts.DTOs.Requests
         public string Country { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Tipo do endereço é obrigatório.")]
-        public string Type { get; set; } = string.Empty;
+        public string AddressType { get; set; } = string.Empty;
 
     }
 }

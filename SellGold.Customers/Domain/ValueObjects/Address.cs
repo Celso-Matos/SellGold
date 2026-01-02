@@ -10,7 +10,7 @@ namespace SellGold.Customers.Domain.ValueObjects
             StreetInfo = null!;
             Location = null!;
             ZipCode = null!;
-            Type = null!;
+            AddressType = null!;
 
         }
 
@@ -18,7 +18,7 @@ namespace SellGold.Customers.Domain.ValueObjects
             StreetInfo streetInfo,
             Place location,
             string zipCode,
-            string type)
+            string addressType)
         {
             if (streetInfo is null)
                 throw new DomainException("Logradouro é obrigatório.");
@@ -32,20 +32,20 @@ namespace SellGold.Customers.Domain.ValueObjects
             StreetInfo = streetInfo;
             Location = location;
             ZipCode = zipCode;
-            Type = type;
+            AddressType = addressType;
         }
 
         public StreetInfo StreetInfo { get; }
         public Place Location { get; }
         public string ZipCode { get; }
-        public string Type { get; }
+        public string AddressType { get; }
 
         protected override IEnumerable<object?> GetEqualityComponents()
         {
             yield return StreetInfo;
             yield return Location;
             yield return ZipCode;
-            yield return Type;
+            yield return AddressType;
         }
 
     }

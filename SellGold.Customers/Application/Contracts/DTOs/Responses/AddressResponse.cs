@@ -28,7 +28,7 @@ namespace SellGold.Customers.Application.Contracts.DTOs.Responses
         [JsonPropertyName("country")]
         public string Country { get; init; } = string.Empty;
 
-        [JsonPropertyName("type")]
-        public string Type { get; init; } = string.Empty;
+        [JsonPropertyName("addressType")]
+        public string AddressType { get; init; } = string.Empty;
     }
 }

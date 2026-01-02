@@ -23,13 +23,34 @@
             <Entry Text="{Binding Phone}" Placeholder="Digite o telefone" Keyboard="Telephone" />
 
             <!-- Endereços -->
-            <Label Text="Endereços" FontAttributes="Bold" />
+            <HorizontalStackLayout VerticalOptions="Center">
+                <Label Text="Endereços" 
+                       VerticalOptions="Center"
+                       Margin="5,0,0,0"
+                       FontAttributes="Bold" />
+                <ImageButton Source="mappinplus.png"
+                VerticalOptions="Center"
+                Command="{Binding AddAddressCommand}" />
+            </HorizontalStackLayout>
+            
+            <HorizontalStackLayout BindableLayout.ItemsSource="{Binding OptionsAddressType}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout>
+                            <CheckBox IsChecked="{Binding IsSelected}" />
+                            <Label Text="{Binding NameAddressType}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </HorizontalStackLayout>
+
 
             <!-- Lista de endereços -->
             <CollectionView ItemsSource="{Binding Addresses}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <VerticalStackLayout Padding="5">
+                            <Label Text="{Binding AddressType}" />
                             <Label Text="{Binding Street}" />
                             <Label Text="{Binding City}" />
                             <Label Text="{Binding ZipCode}" />
@@ -43,10 +64,7 @@
             <Entry Text="{Binding NewStreet}" Placeholder="Rua" />
             <Entry Text="{Binding NewCity}" Placeholder="Cidade" />
             <Entry Text="{Binding NewZipCode}" Placeholder="CEP" />
-
-            <Button Text="Adicionar Endereço"
-                    Command="{Binding AddAddressCommand}" />
-
+            
             <!-- Botão salvar -->
             <Button Text="Salvar Cliente"
                     Command="{Binding SaveCommand}"

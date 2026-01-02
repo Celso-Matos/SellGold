@@ -39,10 +39,8 @@ namespace SellGold.Customers.Domain.Entities
         public Guid CustomerId { get; private set; }
         public string Name { get; private set; }
         public string Document { get; private set; }
-
         public string Email { get; private set; }
         public string Phone { get; private set; }
-
         public bool IsActive { get; private set; }
 
         public IReadOnlyCollection<Address> Addresses => _addresses.AsReadOnly();

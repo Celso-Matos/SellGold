@@ -37,8 +37,8 @@ namespace SellGold.Contracts.DTOs.Customers.Requests
         [System.ComponentModel.DataAnnotations.Required]
         public string Country { get; set; } = string.Empty;
 
-        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
+        [Newtonsoft.Json.JsonProperty("addressType", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        public string Type { get; set; } = string.Empty;
+        public string AddressType { get; set; } = string.Empty;
     }
 }

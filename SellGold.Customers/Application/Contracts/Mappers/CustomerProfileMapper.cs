@@ -35,7 +35,7 @@ namespace SellGold.Customers.Application.Contracts.Mappers
                                 addressDto.State,
                                 addressDto.Country),
                             addressDto.ZipCode,
-                            addressDto.Type);
+                            addressDto.AddressType);
 
                         customer.AddAddress(address);
                     }
@@ -57,7 +57,7 @@ namespace SellGold.Customers.Application.Contracts.Mappers
                         State = address.Location.State,
                         ZipCode = address.ZipCode,
                         Country = address.Location.Country,
-                        Type = address.Type
+                        AddressType = address.AddressType
                     })));
         }
     }
