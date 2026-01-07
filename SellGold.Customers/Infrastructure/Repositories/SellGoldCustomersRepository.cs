@@ -33,6 +33,13 @@ namespace SellGold.Customers.Infrastructure.Repositories
 
             return await query.ToListAsync(cancellationToken);
         }
+        public async Task<Customer> GetByCpfAsync(string? cpf = null, CancellationToken cancellationToken = default)
+        {
+            return await _context.Customers
+                                        .Include(c => c.Addresses)
+                                        .FirstOrDefaultAsync(c => c.Document == cpf, cancellationToken) ?? throw new InfrastructureException($"Documento {cpf} não encontrado.");
+
+        }
         public async Task AddAsync(Customer customer, CancellationToken cancellationToken = default)
         {
             await _context.Customers.AddAsync(customer);

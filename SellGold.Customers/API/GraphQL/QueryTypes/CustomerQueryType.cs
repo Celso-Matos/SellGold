@@ -20,5 +20,13 @@ namespace SellGold.Customers.API.GraphQL.QueryTypes
         {
             return await mediator.Send(new GetAllCustomersGraphQLQuery(cpf, cancellationToken));
         }
+
+        // Query para buscar cliente por CPF
+        public async Task<CustomerResponse> GetCustomerGraphQLByCpfAsync(string cpf,
+                                                                        [Service] IMediator mediator,
+                                                                        CancellationToken cancellationToken = default)
+        {
+            return await mediator.Send(new GetCustomerByCpfGraphQLQuery(cpf, cancellationToken));
+        }
     }
 }

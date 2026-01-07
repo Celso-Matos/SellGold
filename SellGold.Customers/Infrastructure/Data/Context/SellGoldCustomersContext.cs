@@ -69,13 +69,7 @@ namespace SellGold.Customers.Infrastructure.Data.Context
                 entity.OwnsMany(e => e.Addresses, address =>
                 {
                     address.WithOwner().HasForeignKey("CustomerId");
-                    address.ToTable("CustomerAddresses");
-
-                    // Chave primária para a tabela
-                    address.Property<int>("CustomerAddressesId")
-                        .ValueGeneratedOnAdd();
-
-                    address.HasKey("Id");
+                    address.ToTable("Addresses");
 
                     // Propriedades simples do Address
                     address.Property(a => a.ZipCode)
@@ -108,7 +102,7 @@ namespace SellGold.Customers.Infrastructure.Data.Context
                     });
 
                     // Configurar Value Object Place como propriedade owned DENTRO de Address
-                    address.OwnsOne(a => a.Location, place =>
+                    address.OwnsOne(a => a.Place, place =>
                     {
                         // Configurações do Place
                         place.Property(p => p.District)

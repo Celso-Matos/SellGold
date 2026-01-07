@@ -11,6 +11,7 @@
     xmlns:Promotions="clr-namespace:SellGold.Pages.Promotions"
     xmlns:Orders="clr-namespace:SellGold.Pages.Orders"
     xmlns:Customers="clr-namespace:SellGold.Pages.Customers"
+    xmlns:Payments="clr-namespace:SellGold.Page.Payments"
     Shell.FlyoutBehavior="Flyout"
     Title="SellGold">
 
@@ -56,7 +57,7 @@
     ContentTemplate="{DataTemplate Prices:PricePage}"
     Route="prices" />
 
-        <ShellContent
+    <ShellContent
     Title="Ver Preços"
     Icon="{StaticResource IconProjects}"
     ContentTemplate="{DataTemplate Prices:ListPricePage}"
@@ -80,7 +81,7 @@
     ContentTemplate="{DataTemplate Orders:OrderPage}"
     Route="orders" />
 
-        <ShellContent
+    <ShellContent
     Title="Ver Pedidos"
     Icon="{StaticResource IconProjects}"
     ContentTemplate="{DataTemplate Orders:ListOrderPage}"
@@ -92,11 +93,18 @@
     ContentTemplate="{DataTemplate Customers:CustomerPage}"
     Route="customers" />
 
-        <ShellContent
+    <ShellContent
     Title="Ver Clientes"
     Icon="{StaticResource IconProjects}"
     ContentTemplate="{DataTemplate Customers:ListCustomerPage}"
     Route="ListCustomerPage" />
+
+
+    <ShellContent
+    Title="Validar Documento"
+    Icon="{StaticResource IconProjects}"
+    ContentTemplate="{DataTemplate Payments:ListPaymentCpfPage}"
+    Route="ListPaymentCpfPage" />
 
     <Shell.FlyoutFooter>
         <Grid Padding="15">

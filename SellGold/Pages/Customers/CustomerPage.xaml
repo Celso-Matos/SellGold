@@ -23,16 +23,6 @@
             <Entry Text="{Binding Phone}" Placeholder="Digite o telefone" Keyboard="Telephone" />
 
             <!-- Endereços -->
-            <HorizontalStackLayout VerticalOptions="Center">
-                <Label Text="Endereços" 
-                       VerticalOptions="Center"
-                       Margin="5,0,0,0"
-                       FontAttributes="Bold" />
-                <ImageButton Source="mappinplus.png"
-                VerticalOptions="Center"
-                Command="{Binding AddAddressCommand}" />
-            </HorizontalStackLayout>
-            
             <HorizontalStackLayout BindableLayout.ItemsSource="{Binding OptionsAddressType}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
@@ -42,7 +32,31 @@
                         </HorizontalStackLayout>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
-            </HorizontalStackLayout>
+            </HorizontalStackLayout>            
+
+            <!-- Formulário para adicionar endereço -->           
+            
+            <Label Text="Novo Endereço" FontAttributes="Bold" />
+            <Entry Text="{Binding NewStreet}" Placeholder="Rua" />
+            <Entry Text="{Binding NewNumber}" Placeholder="Number" />
+            <Entry Text="{Binding NewComplement}" Placeholder="Complement" />
+            <Entry Text="{Binding NewDistrict}" Placeholder="District" />
+            <Entry Text="{Binding NewCity}" Placeholder="City" />
+            <Entry Text="{Binding NewState}" Placeholder="State" />
+            <Entry Text="{Binding NewZipCode}" Placeholder="CEP" />
+            <Entry Text="{Binding NewCountry}" Placeholder="Country" />
+
+            <VerticalStackLayout>
+                <!-- Botão adicionar endereço-->
+                <Button Text="Adicione Endereços"
+                    Command="{Binding AddAddressCommand}"
+                    ImageSource="mappinplus.png"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    BorderWidth="0"
+                    TextColor="#FFD700"
+                    HorizontalOptions="Start"/>
+                    </VerticalStackLayout>
 
 
             <!-- Lista de endereços -->
@@ -52,24 +66,29 @@
                         <VerticalStackLayout Padding="5">
                             <Label Text="{Binding AddressType}" />
                             <Label Text="{Binding Street}" />
+                            <Label Text="{Binding Number}" />
+                            <Label Text="{Binding Complement}" />
+                            <Label Text="{Binding District}" />
                             <Label Text="{Binding City}" />
                             <Label Text="{Binding ZipCode}" />
+                            <Label Text="{Binding Country}" />
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- Formulário para adicionar endereço -->
-            <Label Text="Novo Endereço" FontAttributes="Bold" />
-            <Entry Text="{Binding NewStreet}" Placeholder="Rua" />
-            <Entry Text="{Binding NewCity}" Placeholder="Cidade" />
-            <Entry Text="{Binding NewZipCode}" Placeholder="CEP" />
-            
-            <!-- Botão salvar -->
-            <Button Text="Salvar Cliente"
+            <VerticalStackLayout>                
+                <!-- Botão salvar -->
+                <Button Text="Salvar"
                     Command="{Binding SaveCommand}"
-                    BackgroundColor="Green"
-                    TextColor="White" />
+                    ImageSource="save.png"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    BorderWidth="0"
+                    TextColor="#FFB700"
+                    FontAttributes="Bold"
+                    HorizontalOptions="End"/>
+            </VerticalStackLayout>            
 
             <!-- Mensagem de erro -->
             <Label Text="{Binding ErrorMessage}" TextColor="Red" />

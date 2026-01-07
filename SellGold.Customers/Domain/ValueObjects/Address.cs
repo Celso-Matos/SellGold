@@ -8,7 +8,7 @@ namespace SellGold.Customers.Domain.ValueObjects
 
             // EF Core only
             StreetInfo = null!;
-            Location = null!;
+            Place = null!;
             ZipCode = null!;
             AddressType = null!;
 
@@ -16,34 +16,34 @@ namespace SellGold.Customers.Domain.ValueObjects
 
         public Address(
             StreetInfo streetInfo,
-            Place location,
+            Place place,
             string zipCode,
             string addressType)
         {
             if (streetInfo is null)
                 throw new DomainException("Logradouro é obrigatório.");
 
-            if (location is null)
+            if (place is null)
                 throw new DomainException("Localização é obrigatória.");
 
             if (string.IsNullOrWhiteSpace(zipCode))
                 throw new DomainException("CEP é obrigatório.");
 
             StreetInfo = streetInfo;
-            Location = location;
+            Place = place;
             ZipCode = zipCode;
             AddressType = addressType;
         }
 
         public StreetInfo StreetInfo { get; }
-        public Place Location { get; }
+        public Place Place { get; }
         public string ZipCode { get; }
         public string AddressType { get; }
 
         protected override IEnumerable<object?> GetEqualityComponents()
         {
             yield return StreetInfo;
-            yield return Location;
+            yield return Place;
             yield return ZipCode;
             yield return AddressType;
         }

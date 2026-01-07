@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using SellGold.Customers.Application.Contracts.DTOs.Requests;
+using System.Text.Json.Serialization;
 
 namespace SellGold.Customers.Application.Contracts.DTOs.Responses
 {
@@ -25,7 +26,7 @@ namespace SellGold.Customers.Application.Contracts.DTOs.Responses
 
         // Endereços
         [JsonPropertyName("addresses")]
-        public List<AddressResponse> Addresses { get; set; } = new List<AddressResponse>();
+        public List<AddressResponse> Addresses { get; set; } = new();
 
         // Metadados
         [JsonPropertyName("createdAt")]

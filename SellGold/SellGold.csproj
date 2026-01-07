@@ -82,6 +82,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="akgul.Maui.DataGrid" Version="4.0.6" />
+		<PackageReference Include="FluentValidation" Version="12.1.1" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
 		<PackageReference Include="GraphQL.Client" Version="6.1.0" />
 		<PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="6.1.0" />
 		<PackageReference Include="GraphQL.Client.Serializer.SystemTextJson" Version="6.1.0" />
@@ -111,6 +113,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\Payments\ListPaymentCpfPage.xaml.cs">
+	    <DependentUpon>ListPaymentCpfPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Products\ListProductPage.xaml.cs">
 	    <DependentUpon>ListProductPage.xaml</DependentUpon>
 	  </Compile>
@@ -122,6 +127,9 @@
 	<ItemGroup>
 	  <MauiXaml Update="AppShell.xaml">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Payments\ListPaymentCpfPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Customers\CustomerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
@@ -168,8 +176,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Application\Payments\Handlers\" />
-	  <Folder Include="Application\Payments\Queries\" />
 	  <Folder Include="Contracts\DTOs\Customers\Models\" />
 	  <Folder Include="Contracts\DTOs\Orders\Models\" />
 	  <Folder Include="Contracts\DTOs\Payments\Models\" />
@@ -182,5 +188,10 @@
 	  <Folder Include="GraphQL\Promotions\Mutations\" />
 	  <Folder Include="GraphQL\Stock\Mutations\" />
 	  <Folder Include="GraphQL\Suppliers\Mutations\" />
+	  <Folder Include="Services\Payments\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Utils\CpfFluentValidation.cs" />
 	</ItemGroup>	
 </Project>

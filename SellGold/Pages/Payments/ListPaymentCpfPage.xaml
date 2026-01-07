@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"             
+             x:Class="SellGold.Page.Payments.ListPaymentCpfPage"
+             Title="Validar Cpf">
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <!-- Campo para CPF -->
+        <Entry Placeholder="Digite o CPF"
+               Text="{Binding Document}">
+            <Entry.Behaviors>
+                <!-- Máscara para CPF no formato XXX.XXX.XXX-XX -->
+                <xct:MaskedBehavior Mask="XXX.XXX.XXX-XX" />
+            </Entry.Behaviors>
+        </Entry>
+
+        <!-- Botão de busca -->
+        <Button Text="Buscar"
+                Command="{Binding FindCommand}" />
+
+        <!-- Mensagem de erro -->
+        <Label Text="{Binding ErrorMessage}"
+               TextColor="Red"
+               IsVisible="{Binding ErrorMessage, Converter={StaticResource NullToBoolConverter}}" />
+
+        <!-- Exibição dos dados do cliente -->
+        <Border Stroke="Gray" StrokeThickness="1" Padding="10" StrokeShape="RoundRectangle 8">
+            <VerticalStackLayout>
+                <Label Text="Dados do Cliente:" FontAttributes="Bold" />
+                <Label Text="{Binding Customers.Name}" />
+                <Label Text="{Binding Customers.Email}" />
+                <Label Text="{Binding Customers.Phone}" />
+            </VerticalStackLayout>
+        </Border>
+
+    </VerticalStackLayout>
+
+</ContentPage>

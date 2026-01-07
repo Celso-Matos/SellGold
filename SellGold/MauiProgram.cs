@@ -1,49 +1,55 @@
 ﻿using CommunityToolkit.Maui;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using SellGold.Application.Products.Handlers;
-using SellGold.Application.Suppliers.Handlers;
-using SellGold.Application.Stock.Handlers;
-using SellGold.Application.Prices.Handlers;
-using SellGold.Application.Promotions.Handlers;
-using SellGold.Application.Orders.Handlers;
 using SellGold.Application.Customers.Handlers;
-using SellGold.Services.Products;
-using SellGold.Services.Suppliers;
-using SellGold.Services.Stock;
-using SellGold.Services.Prices;
-using SellGold.Services.Promotions;
-using SellGold.Services.Orders;
-using SellGold.Services.Customers;
-using SellGold.Configurations.Products;
-using SellGold.Configurations.Suppliers;
-using SellGold.Configurations.Stock;
-using SellGold.Configurations.Prices;
-using SellGold.Configurations.Promotions;
-using SellGold.Configurations.Orders;
+using SellGold.Application.Orders.Handlers;
+using SellGold.Application.Payments.Handlers;
+using SellGold.Application.Prices.Handlers;
+using SellGold.Application.Products.Handlers;
+using SellGold.Application.Promotions.Handlers;
+using SellGold.Application.Stock.Handlers;
+using SellGold.Application.Suppliers.Handlers;
 using SellGold.Configurations.Customers;
-using SellGold.GraphQL.Products.Services;
-using SellGold.GraphQL.Suppliers.Services;
-using SellGold.GraphQL.Stock.Services;
-using SellGold.GraphQL.Prices.Services;
-using SellGold.GraphQL.Promotions.Services;
-using SellGold.GraphQL.Orders.Services;
+using SellGold.Configurations.Orders;
+using SellGold.Configurations.Prices;
+using SellGold.Configurations.Products;
+using SellGold.Configurations.Promotions;
+using SellGold.Configurations.Stock;
+using SellGold.Configurations.Suppliers;
 using SellGold.GraphQL.Customers.Services;
-using SellGold.PageModels.Products;
-using SellGold.PageModels.Suppliers;
-using SellGold.PageModels.Stock;
-using SellGold.PageModels.Prices;
-using SellGold.PageModels.Promotions;
-using SellGold.PageModels.Orders;
+using SellGold.GraphQL.Orders.Services;
+using SellGold.GraphQL.Payments.Services;
+using SellGold.GraphQL.Prices.Services;
+using SellGold.GraphQL.Products.Services;
+using SellGold.GraphQL.Promotions.Services;
+using SellGold.GraphQL.Stock.Services;
+using SellGold.GraphQL.Suppliers.Services;
+using SellGold.Page.Payments;
 using SellGold.PageModels.Customers;
-using SellGold.Pages.Products;
-using SellGold.Pages.Suppliers;
-using SellGold.Pages.Stock;
-using SellGold.Pages.Prices;
-using SellGold.Pages.Promotions;
-using SellGold.Pages.Orders;
+using SellGold.PageModels.Orders;
+using SellGold.PageModels.Payments;
+using SellGold.PageModels.Prices;
+using SellGold.PageModels.Products;
+using SellGold.PageModels.Promotions;
+using SellGold.PageModels.Stock;
+using SellGold.PageModels.Suppliers;
 using SellGold.Pages.Customers;
+using SellGold.Pages.Orders;
+using SellGold.Pages.Prices;
+using SellGold.Pages.Products;
+using SellGold.Pages.Promotions;
+using SellGold.Pages.Stock;
+using SellGold.Pages.Suppliers;
+using SellGold.Services.Customers;
+using SellGold.Services.Orders;
+using SellGold.Services.Prices;
+using SellGold.Services.Products;
+using SellGold.Services.Promotions;
+using SellGold.Services.Stock;
+using SellGold.Services.Suppliers;
+using SellGold.Utils;
 using Syncfusion.Maui.Toolkit.Hosting;
 using System.Runtime.Versioning;
 
@@ -253,7 +259,8 @@ public static class MauiProgram
                 typeof(CreatePromotionHandler).Assembly,
                 typeof(CreateOrderHandler).Assembly,
                 typeof(CreateCustomerHandler).Assembly,
-                typeof(ListGraphQLCustomersHandler).Assembly
+                typeof(ListGraphQLCustomersHandler).Assembly,
+                typeof(ListGraphQLPaymentCpfHandler).Assembly
                 );
 
         // 🔹 Serviços e Repositórios (Singleton)    
@@ -311,6 +318,8 @@ public static class MauiProgram
         builder.Services.AddTransient<ListCustomerPageModel>();
         builder.Services.AddTransient<ListCustomerGraphQLService>();
 
+        builder.Services.AddTransient<ListPaymentCpfGraphQLService>();
+
 
         // 🔹 Páginas com Shell Route
         builder.Services.AddTransientWithShellRoute<ProductPage, ProductPageModel>("products");
@@ -319,7 +328,7 @@ public static class MauiProgram
         builder.Services.AddTransientWithShellRoute<PricePage, PricePageModel>("prices");
         builder.Services.AddTransientWithShellRoute<PromotionPage, PromotionPageModel>("promotions");
         builder.Services.AddTransientWithShellRoute<OrderPage, OrderPageModel>("orders");
-        builder.Services.AddTransientWithShellRoute<CustomerPage, CustomerPageModel>("customers");
+             
 
 
         builder.Services.AddTransientWithShellRoute<ListProductPage, ListProductPageModel>(nameof(ListProductPage));
@@ -329,6 +338,7 @@ public static class MauiProgram
         builder.Services.AddTransientWithShellRoute<ListPromotionPage, ListPromotionPageModel>(nameof(ListPromotionPage));
         builder.Services.AddTransientWithShellRoute<ListOrderPage, ListOrderPageModel>(nameof(ListOrderPage));
         builder.Services.AddTransientWithShellRoute<ListCustomerPage, ListCustomerPageModel>(nameof(ListCustomerPage));
+        builder.Services.AddTransientWithShellRoute<ListPaymentCpfPage, ListPaymentCpfPageModel>(nameof(ListPaymentCpfPage));
 
         // Injeta ApiSettings via IOptions
         builder.Services.Configure<ProductsApiSettings>(builder.Configuration.GetSection("ProductsApiSettings"));
@@ -344,7 +354,11 @@ public static class MauiProgram
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-            });        
+            });
+
+        // Registra todos os validators automaticamente
+        builder.Services.AddValidatorsFromAssemblyContaining<CpfFluentValidation>();
+        builder.Services.AddValidatorsFromAssemblyContaining<ContactFluentValidator>();
 
 
         return builder.Build();
