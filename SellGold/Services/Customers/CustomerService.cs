@@ -29,7 +29,7 @@ namespace SellGold.Services.Customers
             else
             {
                 var error = await response.Content.ReadAsStringAsync();
-                throw new HttpRequestException($"Erro ao adicionar produto: {response.StatusCode} - {error}");
+                throw new HttpRequestException($"Erro ao adicionar cliente: {response.StatusCode} - {error}");
             }
         }
 

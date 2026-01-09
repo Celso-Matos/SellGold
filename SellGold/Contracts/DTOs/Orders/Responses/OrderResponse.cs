@@ -16,13 +16,13 @@ namespace SellGold.Contracts.DTOs.Orders.Responses
         public System.DateTimeOffset Date { get; set; }
 
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Status { get; set; }
+        public string Status { get; set; } = string.Empty;
 
         [Newtonsoft.Json.JsonProperty("totalValue", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double TotalValue { get; set; }
 
         [Newtonsoft.Json.JsonProperty("items", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<OrderItemResponse> Items { get; set; }
+        public System.Collections.Generic.ICollection<OrderItemResponse> Items { get; set; } = new System.Collections.ObjectModel.Collection<OrderItemResponse>();
 
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset CreatedAt { get; set; }

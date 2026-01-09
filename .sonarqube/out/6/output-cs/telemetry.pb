@@ -1,1 +1,0 @@
-lRUC:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Stock\SellGold.Stock.csproj¢net10.0òCSharp14

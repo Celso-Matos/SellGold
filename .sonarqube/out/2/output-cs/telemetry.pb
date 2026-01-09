@@ -1,1 +1,0 @@
-vR_C:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Promotions\SellGold.Promotions.csproj¢net10.0òCSharp14

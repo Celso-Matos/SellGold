@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageModels="clr-namespace:SellGold.PageModels.Customers"
+             xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="SellGold.Pages.Customers.CustomerPage"
              Title="Cliente">
+    
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
 
@@ -34,8 +37,15 @@
                 </BindableLayout.ItemTemplate>
             </HorizontalStackLayout>            
 
-            <!-- Formulário para adicionar endereço -->           
-            
+            <!-- Formulário para adicionar endereço -->
+            <Entry
+                Placeholder="Digite o CEP"
+                Keyboard="Numeric"
+                MaxLength="9"
+                Text="{Binding NewZipCode, Mode=TwoWay}"
+                Unfocused="{Binding ValidateCepCommand}"/>
+
+
             <Label Text="Novo Endereço" FontAttributes="Bold" />
             <Entry Text="{Binding NewStreet}" Placeholder="Rua" />
             <Entry Text="{Binding NewNumber}" Placeholder="Number" />
@@ -43,7 +53,6 @@
             <Entry Text="{Binding NewDistrict}" Placeholder="District" />
             <Entry Text="{Binding NewCity}" Placeholder="City" />
             <Entry Text="{Binding NewState}" Placeholder="State" />
-            <Entry Text="{Binding NewZipCode}" Placeholder="CEP" />
             <Entry Text="{Binding NewCountry}" Placeholder="Country" />
 
             <VerticalStackLayout>

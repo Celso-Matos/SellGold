@@ -1,5 +1,13 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using SellGold.Pages.Customers;
+using SellGold.Pages.Orders;
+using SellGold.Pages.Payments;
+using SellGold.Pages.Prices;
+using SellGold.Pages.Products;
+using SellGold.Pages.Promotions;
+using SellGold.Pages.Stock;
+using SellGold.Pages.Suppliers;
 using Font = Microsoft.Maui.Font;
 using MauiApp = Microsoft.Maui.Controls.Application;
 
@@ -12,16 +20,42 @@ public partial class AppShell : Shell
 		InitializeComponent();
 		var currentTheme = MauiApp.Current!.RequestedTheme;		
 		ThemeSegmentedControl.SelectedIndex = currentTheme == AppTheme.Light ? 0 : 1;
-	}
+		Routing.RegisterRoute("products",typeof(ProductPage));
+		Routing.RegisterRoute("list-products", typeof(ListProductPage));
+
+        Routing.RegisterRoute("suppliers", typeof(SupplierPage));
+        Routing.RegisterRoute("list-suppliers", typeof(ListSupplierPage));
+
+        Routing.RegisterRoute("customers", typeof(CustomerPage));
+        Routing.RegisterRoute("list-customers", typeof(ListCustomerPage));
+
+        Routing.RegisterRoute("stock", typeof(StockPage));
+        Routing.RegisterRoute("list-stock", typeof(ListStockPage));
+
+        Routing.RegisterRoute("prices", typeof(PricePage));
+        Routing.RegisterRoute("list-prices", typeof(ListPricePage));
+
+        Routing.RegisterRoute("promotions", typeof(PromotionPage));
+        Routing.RegisterRoute("list-promotions", typeof(ListPromotionPage));
+
+        Routing.RegisterRoute("orders", typeof(OrderPage));
+        Routing.RegisterRoute("list-orders", typeof(ListOrderPage));
+
+        Routing.RegisterRoute("products", typeof(ProductPage));
+        Routing.RegisterRoute("list-products", typeof(ListProductPage));
+
+        
+        Routing.RegisterRoute("list-payment-cpf", typeof(ListPaymentCpfPage));
+    }
 	public static async Task DisplaySnackbarAsync(string message)
 	{
-		CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+		using var cancellationTokenSource = new CancellationTokenSource();
 
 		var snackbarOptions = new SnackbarOptions
 		{
-			BackgroundColor = Color.FromArgb("#FF3300"),
+			BackgroundColor = Color.FromArgb("#FF3300"),	
 			TextColor = Colors.White,
-			ActionButtonTextColor = Colors.Yellow,
+			ActionButtonTextColor = Colors.Yellow,	
 			CornerRadius = new CornerRadius(0),
 			Font = Font.SystemFontOfSize(18),
 			ActionButtonFont = Font.SystemFontOfSize(14)
@@ -38,13 +72,11 @@ public partial class AppShell : Shell
 		if (OperatingSystem.IsWindows())
 			return;
 
-		var toast = Toast.Make(message, textSize: 18);
-
-		var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
-		await toast.Show(cts.Token);
+		using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+		await Toast.Make(message, textSize: 18).Show(cts.Token);
 	}
 
-	private void SfSegmentedControl_SelectionChanged(object? sender, Syncfusion.Maui.Toolkit.SegmentedControl.SelectionChangedEventArgs e)
+	private static void SfSegmentedControl_SelectionChanged(object? sender, Syncfusion.Maui.Toolkit.SegmentedControl.SelectionChangedEventArgs e)
     {
         MauiApp.Current!.UserAppTheme = e.NewIndex == 0 ? AppTheme.Light : AppTheme.Dark;
     }

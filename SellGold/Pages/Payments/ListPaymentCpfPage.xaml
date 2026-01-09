@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"             
-             x:Class="SellGold.Page.Payments.ListPaymentCpfPage"
+             x:Class="SellGold.Pages.Payments.ListPaymentCpfPage"
              Title="Validar Cpf">
     <VerticalStackLayout Padding="20" Spacing="15">
 

@@ -1,12 +1,12 @@
 using SellGold.PageModels.Payments;
 
-namespace SellGold.Page.Payments;
+namespace SellGold.Pages.Payments;
 
 public partial class ListPaymentCpfPage : ContentPage
 {
 	public ListPaymentCpfPage(ListPaymentCpfPageModel model)
 	{
-		InitializeComponent();
-		BindingContext = model;
+        BindingContext = model;
+        InitializeComponent();		
 	}
 }

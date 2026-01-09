@@ -1,1 +1,0 @@
-tR]C:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Customers\SellGold.Customers.csproj¢net10.0òCSharp14

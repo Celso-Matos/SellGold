@@ -39,9 +39,6 @@
     <ProjectReference Include="..\SellGold.Stock\SellGold.Stock.csproj" />
     <ProjectReference Include="..\SellGold.Suppliers\SellGold.Suppliers.csproj" />
     <ProjectReference Include="..\SellGold.Products\SellGold.Products.csproj" />
-    <ProjectReference Include="..\SellGold\SellGold.csproj" IsAspireProjectResource="false">
-      <SetTargetFramework>TargetFramework=net10.0</SetTargetFramework>
-    </ProjectReference>
   </ItemGroup>
 
 </Project>

@@ -15,13 +15,13 @@ namespace SellGold.Contracts.DTOs.Prices.Responses
         public string BasePriceCurrency { get; set; } = string.Empty;
 
         [Newtonsoft.Json.JsonProperty("discounts", Required = Newtonsoft.Json.Required.AllowNull)]
-        public System.Collections.Generic.ICollection<PriceDiscountResponse> Discounts { get; set; }
+        public System.Collections.Generic.ICollection<PriceDiscountResponse> Discounts { get; set; } = new System.Collections.ObjectModel.Collection<PriceDiscountResponse>();
 
         [Newtonsoft.Json.JsonProperty("policies", Required = Newtonsoft.Json.Required.AllowNull)]
-        public System.Collections.Generic.ICollection<PricePolicyResponse> Policies { get; set; }
+        public System.Collections.Generic.ICollection<PricePolicyResponse> Policies { get; set; } = new System.Collections.ObjectModel.Collection<PricePolicyResponse>();
 
         [Newtonsoft.Json.JsonProperty("taxes", Required = Newtonsoft.Json.Required.AllowNull)]
-        public System.Collections.Generic.ICollection<PriceTaxResponse> Taxes { get; set; }
+        public System.Collections.Generic.ICollection<PriceTaxResponse> Taxes { get; set; } = new System.Collections.ObjectModel.Collection<PriceTaxResponse>();
 
         [Newtonsoft.Json.JsonProperty("isActive", Required = Newtonsoft.Json.Required.Always)]
         public bool IsActive { get; set; }

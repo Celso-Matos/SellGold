@@ -1,8 +1,5 @@
 ﻿using FluentValidation;
-using SellGold.Contracts.DTOs.Customers.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using SellGold.Contracts.DTOs.Customers.Requests;
 
 namespace SellGold.Utils
 {

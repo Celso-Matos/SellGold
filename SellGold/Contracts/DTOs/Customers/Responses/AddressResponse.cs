@@ -32,5 +32,9 @@ namespace SellGold.Contracts.DTOs.Customers.Responses
 
         [Newtonsoft.Json.JsonProperty("addressType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string AddressType { get; set; } = string.Empty;
+
+        [Newtonsoft.Json.JsonProperty("erro", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Erro { get; set; } = false;
+
     }
 }

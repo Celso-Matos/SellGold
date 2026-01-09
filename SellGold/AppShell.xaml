@@ -4,113 +4,103 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
-    xmlns:products="clr-namespace:SellGold.Pages.Products"
-    xmlns:suppliers="clr-namespace:SellGold.Pages.Suppliers"
-    xmlns:stock="clr-namespace:SellGold.Pages.Stock"    
+    xmlns:Products="clr-namespace:SellGold.Pages.Products"
+    xmlns:Suppliers="clr-namespace:SellGold.Pages.Suppliers"
+    xmlns:Stock="clr-namespace:SellGold.Pages.Stock"
     xmlns:Prices="clr-namespace:SellGold.Pages.Prices"
     xmlns:Promotions="clr-namespace:SellGold.Pages.Promotions"
     xmlns:Orders="clr-namespace:SellGold.Pages.Orders"
     xmlns:Customers="clr-namespace:SellGold.Pages.Customers"
-    xmlns:Payments="clr-namespace:SellGold.Page.Payments"
+    xmlns:Payments="clr-namespace:SellGold.Pages.Payments"
     Shell.FlyoutBehavior="Flyout"
     Title="SellGold">
 
-    <ShellContent
-        Title="Produto"
-        Icon="{StaticResource IconDashboard}"
-        ContentTemplate="{DataTemplate products:ProductPage}"
-        Route="products" />
+    <!-- Produtos -->
+    <FlyoutItem Title="Produtos" Icon="{StaticResource IconDashboard}">
+        <ShellContent Title="Cadastrar Produto"
+                      ContentTemplate="{DataTemplate Products:ProductPage}"
+                      Route="products" />
+        <ShellContent Title="Ver Produtos"
+                      ContentTemplate="{DataTemplate Products:ListProductPage}"
+                      Route="list-products" />
+    </FlyoutItem>
 
-    <ShellContent
-        Title="Ver Produtos"
-        Icon="{StaticResource IconProjects}"
-        ContentTemplate="{DataTemplate products:ListProductPage}"
-        Route="ListProductPage" />
+    <!-- Fornecedores -->
+    <FlyoutItem Title="Fornecedores" Icon="{StaticResource IconProjects}">
+        <ShellContent Title="Cadastrar Fornecedor"
+                      ContentTemplate="{DataTemplate Suppliers:SupplierPage}"
+                      Route="suppliers" />
+        <ShellContent Title="Ver Fornecedores"
+                      ContentTemplate="{DataTemplate Suppliers:ListSupplierPage}"
+                      Route="list-suppliers" />
+    </FlyoutItem>
 
-    <ShellContent
-        Title="Fornecedores"
-        Icon="{StaticResource IconDashboard}"
-        ContentTemplate="{DataTemplate suppliers:SupplierPage}"
-        Route="suppliers" />
+    <!-- Clientes -->
+    <FlyoutItem Title="Clientes" Icon="{StaticResource IconDashboard}">
+        <ShellContent Title="Cadastrar Cliente"
+                      ContentTemplate="{DataTemplate Customers:CustomerPage}"
+                      Route="customers" />
+        <ShellContent Title="Ver Clientes"
+                      ContentTemplate="{DataTemplate Customers:ListCustomerPage}"
+                      Route="list-customers" />
+    </FlyoutItem>
 
-    <ShellContent
-    Title="Ver Fornecedores"
-    Icon="{StaticResource IconProjects}"
-    ContentTemplate="{DataTemplate suppliers:ListSupplierPage}"
-    Route="ListSupplierPage" />
+    <!-- Estoque -->
+    <FlyoutItem Title="Estoque" Icon="{StaticResource IconProjects}">
+        <ShellContent Title="Cadastrar Estoque"
+                      ContentTemplate="{DataTemplate Stock:StockPage}"
+                      Route="stock" />
+        <ShellContent Title="Ver Estoque"
+                      ContentTemplate="{DataTemplate Stock:ListStockPage}"
+                      Route="list-stock" />
+    </FlyoutItem>
 
-    <ShellContent
-    Title="Estoque"
-    Icon="{StaticResource IconDashboard}"
-    ContentTemplate="{DataTemplate stock:StockPage}"
-    Route="stock" />
+    <!-- Preços -->
+    <FlyoutItem Title="Preços" Icon="{StaticResource IconDashboard}">
+        <ShellContent Title="Cadastrar Preço"
+                      ContentTemplate="{DataTemplate Prices:PricePage}"
+                      Route="prices" />
+        <ShellContent Title="Ver Preços"
+                      ContentTemplate="{DataTemplate Prices:ListPricePage}"
+                      Route="list-prices" />
+    </FlyoutItem>
 
-    <ShellContent
-    Title="Ver Estoque"
-    Icon="{StaticResource IconProjects}"
-    ContentTemplate="{DataTemplate stock:ListStockPage}"
-    Route="ListStockPage" />
+    <!-- Promoções -->
+    <FlyoutItem Title="Promoções" Icon="{StaticResource IconProjects}">
+        <ShellContent Title="Cadastrar Promoção"
+                      ContentTemplate="{DataTemplate Promotions:PromotionPage}"
+                      Route="promotions" />
+        <ShellContent Title="Ver Promoções"
+                      ContentTemplate="{DataTemplate Promotions:ListPromotionPage}"
+                      Route="list-promotions" />
+    </FlyoutItem>
 
-    <ShellContent
-    Title="Preços"
-    Icon="{StaticResource IconDashboard}"
-    ContentTemplate="{DataTemplate Prices:PricePage}"
-    Route="prices" />
+    <!-- Pedidos -->
+    <FlyoutItem Title="Pedidos" Icon="{StaticResource IconDashboard}">
+        <ShellContent Title="Cadastrar Pedido"
+                      ContentTemplate="{DataTemplate Orders:OrderPage}"
+                      Route="orders" />
+        <ShellContent Title="Ver Pedidos"
+                      ContentTemplate="{DataTemplate Orders:ListOrderPage}"
+                      Route="list-orders" />
+    </FlyoutItem>
 
-    <ShellContent
-    Title="Ver Preços"
-    Icon="{StaticResource IconProjects}"
-    ContentTemplate="{DataTemplate Prices:ListPricePage}"
-    Route="ListPricesPage" />
+    <!-- Pagamentos -->
+    <FlyoutItem Title="Pagamentos" Icon="{StaticResource IconProjects}">
+        <ShellContent Title="Validar Documento"
+                      ContentTemplate="{DataTemplate Payments:ListPaymentCpfPage}"
+                      Route="list-payment-cpf" />
+    </FlyoutItem>
 
-    <ShellContent
-    Title="Promoção"
-    Icon="{StaticResource IconDashboard}"
-    ContentTemplate="{DataTemplate Promotions:PromotionPage}"
-    Route="promotions" />
-
-    <ShellContent
-    Title="Ver Promoções"
-    Icon="{StaticResource IconProjects}"
-    ContentTemplate="{DataTemplate Promotions:ListPromotionPage}"
-    Route="ListPricesPage" />
-
-    <ShellContent
-    Title="Pedido"
-    Icon="{StaticResource IconDashboard}"
-    ContentTemplate="{DataTemplate Orders:OrderPage}"
-    Route="orders" />
-
-    <ShellContent
-    Title="Ver Pedidos"
-    Icon="{StaticResource IconProjects}"
-    ContentTemplate="{DataTemplate Orders:ListOrderPage}"
-    Route="ListOrdersPage" />
-
-    <ShellContent
-    Title="Cliente"
-    Icon="{StaticResource IconDashboard}"
-    ContentTemplate="{DataTemplate Customers:CustomerPage}"
-    Route="customers" />
-
-    <ShellContent
-    Title="Ver Clientes"
-    Icon="{StaticResource IconProjects}"
-    ContentTemplate="{DataTemplate Customers:ListCustomerPage}"
-    Route="ListCustomerPage" />
-
-
-    <ShellContent
-    Title="Validar Documento"
-    Icon="{StaticResource IconProjects}"
-    ContentTemplate="{DataTemplate Payments:ListPaymentCpfPage}"
-    Route="ListPaymentCpfPage" />
-
+    <!-- Rodapé do menu -->
     <Shell.FlyoutFooter>
         <Grid Padding="15">
-            <sf:SfSegmentedControl x:Name="ThemeSegmentedControl" 
-                VerticalOptions="Center" HorizontalOptions="Center" SelectionChanged="SfSegmentedControl_SelectionChanged"
-                SegmentWidth="40" SegmentHeight="40">
+            <sf:SfSegmentedControl x:Name="ThemeSegmentedControl"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   SelectionChanged="SfSegmentedControl_SelectionChanged"
+                                   SegmentWidth="40"
+                                   SegmentHeight="40">
                 <sf:SfSegmentedControl.ItemsSource>
                     <x:Array Type="{x:Type sf:SfSegmentItem}">
                         <sf:SfSegmentItem ImageSource="{StaticResource IconLight}" SemanticProperties.Description="Light mode"/>
@@ -120,5 +110,4 @@
             </sf:SfSegmentedControl>
         </Grid>
     </Shell.FlyoutFooter>
-
 </Shell>

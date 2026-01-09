@@ -1,1 +1,0 @@
-rR[C:\Users\Celso Matos Costa\source\repos\SellGold\SellGold.Payments\SellGold.Payments.csproj¢net10.0òCSharp14

@@ -12,5 +12,6 @@ namespace SellGold.Configurations.Customers
     {
         public string AddCustomer { get; set; } = "";
         public string GetCustomersGraphQL { get; set; } = "";
+        public string ViaCepUrl { get; set; } = "";
     }
 }

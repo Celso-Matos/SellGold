@@ -9,7 +9,7 @@ namespace SellGold.Contracts.DTOs.Prices.Responses
         public System.Guid PriceTaxId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.AllowNull)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [Newtonsoft.Json.JsonProperty("rate", Required = Newtonsoft.Json.Required.Always)]
         public double Rate { get; set; }

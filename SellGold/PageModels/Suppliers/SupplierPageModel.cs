@@ -11,23 +11,23 @@ namespace SellGold.PageModels.Suppliers
         private readonly IMediator _mediator;
         
         // Propriedades ligadas aos campos da tela
-        public string CorporateName { get; set; }   // Razão Social
-        public string TradeName { get; set; }       // Nome Fantasia
-        public string Cnpj { get; set; }
+        public string CorporateName { get; set; } = string.Empty;   // Razão Social
+        public string TradeName { get; set; } = string.Empty;       // Nome Fantasia
+        public string Cnpj { get; set; } = string.Empty;
         public string? StateRegistration { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        public string Email { get; set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty;
         public bool IsActive { get; set; } = true;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-        public string Street { get; set; }       
-        public string Number { get; set; }
+        public string Street { get; set; } = string.Empty;       
+        public string Number { get; set; } = string.Empty;
         public string? Complement { get; set; }
-        public string District { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string ZipCode { get; set; }
-        public string Country { get; set; }
+        public string District { get; set; } = string.Empty;
+        public string City { get; set; } = string.Empty;
+        public string State { get; set; } = string.Empty;
+        public string ZipCode { get; set; } = string.Empty;
+        public string Country { get; set; } = string.Empty;
 
         private string? _errorMessage;
         public string? ErrorMessage
