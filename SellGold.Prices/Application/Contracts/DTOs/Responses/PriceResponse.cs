@@ -4,13 +4,16 @@ namespace SellGold.Prices.Application.Contracts.DTOs.Responses
     public class PriceResponse
     {
         [JsonPropertyName("priceId")]
-        public required Guid PriceId { get; set; }
+        public required Guid PriceId { get; set; }        
 
         [JsonPropertyName("basePriceAmount")]
         public required decimal BasePriceAmount { get; set; }
 
         [JsonPropertyName("basePriceCurrency")]
         public required string BasePriceCurrency { get; set; }
+
+        [JsonPropertyName("priceProducts")]
+        public required List<PriceProductResponse> PriceProducts { get; set; }
 
         [JsonPropertyName("discounts")]
         public required List<PriceDiscountResponse> Discounts { get; set; }

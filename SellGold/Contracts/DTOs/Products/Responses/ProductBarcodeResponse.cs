@@ -10,7 +10,7 @@ namespace SellGold.Contracts.DTOs.Products.Responses
         [JsonPropertyName("barcode")]
         public required string Barcode { get; set; }
 
-        [JsonPropertyName("type")]
-        public required string Type { get; set; }
+        [JsonPropertyName("barcodeType")]
+        public required string BarcodeType { get; set; }
     }
 }

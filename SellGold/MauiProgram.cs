@@ -18,6 +18,7 @@ using SellGold.Configurations.Products;
 using SellGold.Configurations.Promotions;
 using SellGold.Configurations.Stock;
 using SellGold.Configurations.Suppliers;
+using SellGold.Contracts.DTOs.Customers.Requests;
 using SellGold.GraphQL.Customers.Services;
 using SellGold.GraphQL.Orders.Services;
 using SellGold.GraphQL.Payments.Services;
@@ -26,7 +27,6 @@ using SellGold.GraphQL.Products.Services;
 using SellGold.GraphQL.Promotions.Services;
 using SellGold.GraphQL.Stock.Services;
 using SellGold.GraphQL.Suppliers.Services;
-using SellGold.Pages.Payments;
 using SellGold.PageModels.Customers;
 using SellGold.PageModels.Orders;
 using SellGold.PageModels.Payments;
@@ -37,6 +37,7 @@ using SellGold.PageModels.Stock;
 using SellGold.PageModels.Suppliers;
 using SellGold.Pages.Customers;
 using SellGold.Pages.Orders;
+using SellGold.Pages.Payments;
 using SellGold.Pages.Prices;
 using SellGold.Pages.Products;
 using SellGold.Pages.Promotions;
@@ -44,6 +45,8 @@ using SellGold.Pages.Stock;
 using SellGold.Pages.Suppliers;
 using SellGold.Services.Customers;
 using SellGold.Services.Orders;
+using SellGold.Services.Payments.Interfaces;
+using SellGold.Services.Payments.Readers;
 using SellGold.Services.Prices;
 using SellGold.Services.Products;
 using SellGold.Services.Promotions;
@@ -51,7 +54,6 @@ using SellGold.Services.Stock;
 using SellGold.Services.Suppliers;
 using SellGold.Utils;
 using Syncfusion.Maui.Toolkit.Hosting;
-using SellGold.Contracts.DTOs.Customers.Requests;
 using System.Runtime.Versioning;
 
 namespace SellGold;
@@ -345,6 +347,7 @@ public static class MauiProgram
             builder.Services.AddTransientWithShellRoute<PromotionPage, PromotionPageModel>("promotions");
             builder.Services.AddTransientWithShellRoute<OrderPage, OrderPageModel>("orders");
             builder.Services.AddTransientWithShellRoute<CustomerPage, CustomerPageModel>("customers");
+            builder.Services.AddTransientWithShellRoute<PaymentPage, PaymentPageModel>("payments");
 
 
 
@@ -376,6 +379,10 @@ public static class MauiProgram
 
             // CepService
             builder.Services.AddScoped<CepService>();
+
+            // Payments Reader - Keyboard
+            builder.Services.AddSingleton<IBarcodeReader, KeyboardBarcodeReader>();
+
 
             return builder.Build();
 

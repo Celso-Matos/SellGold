@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SellGold.Pages.Payments.PaymentPage"
+             Title="Payment">
+    <VerticalStackLayout Padding="10" Spacing="12">
+        <!-- Campo para escanear código -->
+        <Entry x:Name="BarcodeEntry"
+               Placeholder="Escaneie ou digite o código"
+               Completed="OnBarcodeScanned"
+               ClearButtonVisibility="WhileEditing" />
+
+        <!-- Lista de produtos -->
+        <CollectionView x:Name="ProdutosCollection"
+                        ItemsSource="{Binding Products}"
+                        SelectionMode="None"
+                        HeightRequest="300">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="5" ColumnDefinitions="2*,3*,1*,1*">
+                        <Label Text="{Binding Codigo}" />
+                        <Label Text="{Binding Nome}" />
+                        <Label Text="{Binding Quantidade}" HorizontalOptions="Center" />
+                        <Label Text="{Binding PrecoUnitario, StringFormat='R$ {0:F2}'}" HorizontalOptions="End" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Totais -->
+        <Grid ColumnDefinitions="2*,1*" Padding="5">
+            <Label Text="Subtotal:" />
+            <Label Text="{Binding Subtotal, StringFormat='R$ {0:F2}'}" HorizontalOptions="End" />
+
+            <Label Text="Descontos:" Grid.Row="1" />
+            <Label Text="{Binding Descontos, StringFormat='R$ {0:F2}'}" Grid.Row="1" HorizontalOptions="End" />
+
+            <Label Text="Impostos:" Grid.Row="2" />
+            <Label Text="{Binding Impostos, StringFormat='R$ {0:F2}'}" Grid.Row="2" HorizontalOptions="End" />
+
+            <Label Text="TOTAL:" Grid.Row="3" FontAttributes="Bold" />
+            <Label Text="{Binding Total, StringFormat='R$ {0:F2}'}" Grid.Row="3" HorizontalOptions="End" FontAttributes="Bold" />
+        </Grid>
+
+        <!-- Ações -->
+        <HorizontalStackLayout Spacing="10">
+            <Button Text="Remover Produto" Command="{Binding RemoverProdutoCommand}" />
+            <Button Text="Cancelar Compra" Command="{Binding CancelarCompraCommand}" />
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Spacing="10">
+            <Button Text="Aplicar Cupom" Command="{Binding AplicarCupomCommand}" />
+            <Button Text="Finalizar Venda" Command="{Binding FinalizarVendaCommand}" />
+        </HorizontalStackLayout>
+
+        <!-- Forma de pagamento -->
+        <Picker Title="Forma de Pagamento"
+                ItemsSource="{Binding FormasPagamento}"
+                SelectedItem="{Binding FormaSelecionada}" />
+
+        <!-- Confirmação -->
+        <Button Text="Confirmar Pagamento"
+                Command="{Binding ConfirmarPagamentoCommand}"
+                BackgroundColor="Green"
+                TextColor="White" />
+
+    </VerticalStackLayout>
+</ContentPage>

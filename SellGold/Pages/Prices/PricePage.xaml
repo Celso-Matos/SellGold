@@ -6,21 +6,46 @@
         <ScrollView>
             <VerticalStackLayout Padding="20" Spacing="15">
 
-                <!-- Valor e Moeda -->
-                <Entry Placeholder="Valor base"
-                   Keyboard="Numeric"
-                   Text="{Binding BasePriceAmount}" />
-                <Picker Title="Moeda"
-                    ItemsSource="{Binding AvailableCurrencies}"
-                    SelectedItem="{Binding BasePriceCurrency}" />
+            <!-- Produtos -->
+                <Label Text="Produtos"/>
+                <SearchBar x:Name="ProductSearchBar" Placeholder="Buscar produto..." TextChanged="OnSearchTextChanged"/>
+                <CollectionView x:Name="ProductListView" SelectionMode="Multiple">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="5">
+                                <Label Text="{Binding Name}" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-                <!-- Status -->
+            <!-- Valor e Moeda -->
+                <Label Text="Moeda" />
+                <Picker Title="Moeda"
+                ItemsSource="{Binding AvailableCurrencies}"
+                SelectedItem="{Binding BasePriceCurrency}" />
+
+                <Label Text="Preço"/>
+                <Entry Placeholder="Valor"
+                Keyboard="Numeric"
+                Text="{Binding BasePriceAmount}" />
+                
+                <Label Text="Data de Início da Vigência"/>
+                <DatePicker x:Name="EffectiveDatePicker" />
+                <Label Text="Data de Expiração da Vigência"/>
+                <DatePicker x:Name="ExpirationDatePicker" />
+
+
+            <!-- Status -->
                 <HorizontalStackLayout>
                     <Label Text="Ativo" VerticalOptions="Center" />
                     <Switch IsToggled="{Binding IsActive}" />
                 </HorizontalStackLayout>
 
-                <!-- Descontos -->
+                
+                
+
+            <!-- Descontos -->
                 <Label Text="Descontos" FontAttributes="Bold" />
                 <CollectionView ItemsSource="{Binding Discounts}">
                     <CollectionView.ItemTemplate>

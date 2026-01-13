@@ -24,7 +24,7 @@ namespace SellGold.Products.Application.Contracts.Mappers
             {
                 BarcodeId = Guid.NewGuid(),
                 Barcode = request.Barcode,
-                Type = request.BarcodeType
+                BarcodeType = request.BarcodeType
             });
 
             return product;
@@ -39,7 +39,7 @@ namespace SellGold.Products.Application.Contracts.Mappers
                 Description = product.Description,
                 IsActive = product.IsActive,
                 Barcode = product.Barcode.FirstOrDefault()?.Barcode ?? string.Empty,
-                BarcodeType = product.Barcode.FirstOrDefault()?.Type ?? string.Empty
+                BarcodeType = product.Barcode.FirstOrDefault()?.BarcodeType ?? string.Empty
             };
         }
 
@@ -58,7 +58,7 @@ namespace SellGold.Products.Application.Contracts.Mappers
                 {
                     BarcodeId = b.BarcodeId,
                     Barcode = b.Barcode,
-                    Type = b.Type
+                    BarcodeType = b.BarcodeType
                 }).ToList()
             };
         }

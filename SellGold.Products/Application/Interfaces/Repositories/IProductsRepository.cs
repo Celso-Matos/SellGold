@@ -4,11 +4,13 @@ namespace SellGold.Products.Application.Interfaces.Repositories
 {
     public interface IProductsRepository
     {
-        Task<Product> GetByIdAsync(Guid productId);
-        Task<IEnumerable<Product>> GetAllAsync();
-        Task AddAsync(Product product);
-        Task UpdateAsync(Product product);
-        Task DeleteAsync(Guid productId);
-        Task<Product> GetByProductBarcodeAsync(string barcode);
+        Task<Product?> GetByIdAsync(Guid productId, CancellationToken cancellationToken = default);
+        Task<IEnumerable<Product>> GetAllAsync(CancellationToken cancellationToken = default);
+        Task<Product?> GetByNameAsync(string name, CancellationToken cancellationToken = default);
+        Task<Product?> GetByBarcodeAsync(string barcode, CancellationToken cancellationToken = default);
+        Task AddAsync(Product product, CancellationToken cancellationToken = default);
+        Task UpdateAsync(Product product, CancellationToken cancellationToken = default);
+        Task DeleteAsync(Guid productId, CancellationToken cancellationToken = default);
+        
     }
 }

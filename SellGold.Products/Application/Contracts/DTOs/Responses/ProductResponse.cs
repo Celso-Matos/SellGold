@@ -8,10 +8,10 @@ namespace SellGold.Products.Application.Contracts.DTOs.Responses
         public Guid ProductId { get; init; }
 
         [JsonPropertyName("name")]
-        public required string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [JsonPropertyName("description")]
-        public required string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         [JsonPropertyName("isActive")]
         public bool IsActive { get; set; }
@@ -23,6 +23,12 @@ namespace SellGold.Products.Application.Contracts.DTOs.Responses
         public DateTime UpdatedAt { get; set; }
 
         [JsonPropertyName("barcodes")]
-        public required List<ProductBarcodeResponse> Barcodes { get; set; }
+        public List<ProductBarcodeResponse> Barcodes { get; set; } = new();
+
+        [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Success { get; set; } = true;
+
+        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? Message { get; set; }
     }
 }

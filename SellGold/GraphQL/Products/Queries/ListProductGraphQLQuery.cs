@@ -14,7 +14,7 @@
             barcodes {
                 barcodeId
                 barcode
-                type
+                barcodeType
              }
             }
         }";

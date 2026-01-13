@@ -56,12 +56,20 @@ public partial class ListPaymentCpfPageModel : ObservableObject
                 throw new System.ComponentModel.DataAnnotations.ValidationException(result.Errors[0].ErrorMessage);
             }
 
-            var customers = await _mediator.Send(
+            var customerResponse = await _mediator.Send(
                 new ListGraphQLPaymentCpfQuery(validaCpfRequest.CPF, cancellationToken)
             );
 
-            Customers = customers;
-
+            if (customerResponse == null || !customerResponse.Success)
+            {
+                ErrorMessage = customerResponse?.Message ?? $"CPF {validaCpfRequest.CPF} não encontrado.";
+                Customers = new();
+            }
+            else
+            {
+                Customers = customerResponse;
+                ErrorMessage = null;
+            }
 
         }
         catch (System.ComponentModel.DataAnnotations.ValidationException ex)

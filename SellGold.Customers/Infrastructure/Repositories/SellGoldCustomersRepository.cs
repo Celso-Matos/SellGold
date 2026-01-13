@@ -14,11 +14,11 @@ namespace SellGold.Customers.Infrastructure.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
 
         }
-        public async Task<Customer> GetByIdAsync(Guid customerId, CancellationToken cancellationToken = default)
+        public async Task<Customer?> GetByIdAsync(Guid customerId, CancellationToken cancellationToken = default)
         {
             return await _context.Customers
-                                        .Include(c => c.Addresses)
-                                        .FirstOrDefaultAsync(c => c.CustomerId == customerId, cancellationToken) ?? throw new InfrastructureException($"Cliente {customerId} não encontrado.");
+                        .Include(c => c.Addresses)
+                        .FirstOrDefaultAsync(c => c.CustomerId == customerId, cancellationToken);
 
         }
         public async Task<IEnumerable<Customer>> GetAllAsync(string? cpf = null,
@@ -33,12 +33,11 @@ namespace SellGold.Customers.Infrastructure.Repositories
 
             return await query.ToListAsync(cancellationToken);
         }
-        public async Task<Customer> GetByCpfAsync(string? cpf = null, CancellationToken cancellationToken = default)
+        public async Task<Customer?> GetByCpfAsync(string? cpf = null, CancellationToken cancellationToken = default)
         {
             return await _context.Customers
-                                        .Include(c => c.Addresses)
-                                        .FirstOrDefaultAsync(c => c.Document == cpf, cancellationToken) ?? throw new InfrastructureException($"Documento {cpf} não encontrado.");
-
+                .Include(c => c.Addresses)
+                .FirstOrDefaultAsync(c => c.Document == cpf, cancellationToken);
         }
         public async Task AddAsync(Customer customer, CancellationToken cancellationToken = default)
         {

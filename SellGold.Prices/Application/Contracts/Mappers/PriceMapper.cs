@@ -19,6 +19,12 @@ namespace SellGold.Prices.Application.Contracts.Mappers
                     Amount = request.BasePriceAmount,
                     Currency = request.BasePriceCurrency
                 },
+                PriceProducts = request.PriceProducts?.Select(a => new PriceProduct
+                {
+                    ProductId = a.ProductId,
+                    EffectiveDate = a.EffectiveDate,
+                    ExpirationDate = a.ExpirationDate
+                }).ToList() ?? new List<PriceProduct>(),
                 Discounts = request.Discounts?.Select(d => new PriceDiscount
                 {
                     PriceDiscountId = d.PriceDiscountId,
@@ -50,6 +56,13 @@ namespace SellGold.Prices.Application.Contracts.Mappers
             {
                 BasePriceAmount = price.BasePrice.Amount,
                 BasePriceCurrency = price.BasePrice.Currency,
+                PriceProducts = price.PriceProducts?.Select(a => new PriceProductRequest
+                {
+                    ProductId = a.ProductId,
+                    PriceId = a.PriceId,
+                    EffectiveDate = a.EffectiveDate,
+                    ExpirationDate = a.ExpirationDate
+                }).ToList() ?? new List<PriceProductRequest>(),
                 Discounts = price.Discounts.Select(d => new PriceDiscountRequest
                 {
                     PriceDiscountId = d.PriceDiscountId,
@@ -83,7 +96,12 @@ namespace SellGold.Prices.Application.Contracts.Mappers
                 PriceId = price.PriceId,
                 BasePriceAmount = price.BasePrice.Amount,
                 BasePriceCurrency = price.BasePrice.Currency,
-
+                PriceProducts = price.PriceProducts?.Select(a => new PriceProductResponse
+                {
+                    ProductId = a.ProductId,
+                    EffectiveDate = a.EffectiveDate,
+                    ExpirationDate = a.ExpirationDate
+                }).ToList() ?? new List<PriceProductResponse>(),
                 Discounts = price.Discounts.Select(d => new PriceDiscountResponse
                 {
                     PriceDiscountId = d.PriceDiscountId,

@@ -143,6 +143,9 @@
 		<MauiXaml Update="Pages\Orders\OrderPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Pages\Payments\PaymentPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Pages\Prices\ListPricePage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -188,7 +191,6 @@
 		<Folder Include="GraphQL\Promotions\Mutations\" />
 		<Folder Include="GraphQL\Stock\Mutations\" />
 		<Folder Include="GraphQL\Suppliers\Mutations\" />
-		<Folder Include="Services\Payments\" />
 	</ItemGroup>
 
 	<ItemGroup>

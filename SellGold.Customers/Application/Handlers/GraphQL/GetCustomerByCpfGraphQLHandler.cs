@@ -18,6 +18,14 @@ namespace SellGold.Customers.Application.Handlers.GraphQL
         public async Task<CustomerResponse> Handle(GetCustomerByCpfGraphQLQuery query, CancellationToken cancellationToken)
         {
             var customer =  await _repository.GetByCpfAsync(query.Cpf, cancellationToken);
+            if (customer == null)
+            {
+                return new CustomerResponse
+                {
+                    Message = $"CPF {query.Cpf} não encontrado.",
+                    Success = false
+                };
+            }
             return _mapper.Map<CustomerResponse>(customer);
         }   
     

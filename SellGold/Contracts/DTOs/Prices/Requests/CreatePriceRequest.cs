@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace SellGold.Contracts.DTOs.Prices.Requests
 {
     public partial class CreatePriceRequest
@@ -8,9 +10,8 @@ namespace SellGold.Contracts.DTOs.Prices.Requests
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public System.Guid PriceId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("basePriceAmount", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Range(0D, 79228162514264337593543950335D)]
-        public double BasePriceAmount { get; set; }
+        [Range(typeof(decimal), "0", "79228162514264337593543950335", ErrorMessage = "O preço deve ser maior que zero.")]
+        public decimal BasePriceAmount { get; set; }
 
         [Newtonsoft.Json.JsonProperty("basePriceCurrency", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]

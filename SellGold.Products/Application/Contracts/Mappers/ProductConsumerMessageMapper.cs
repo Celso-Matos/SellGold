@@ -24,7 +24,7 @@ namespace SellGold.Products.Application.Contracts.Mappers
                 {
                     BarcodeId = barcode.BarcodeId,
                     Barcode = barcode.Barcode,
-                    Type = barcode.Type,
+                    BarcodeType = barcode.Type,
                     Product = product
                 });
             }

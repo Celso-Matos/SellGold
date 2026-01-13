@@ -12,6 +12,7 @@ namespace SellGold.Prices.Domain.Entities
         public required ICollection<PriceDiscount> Discounts { get; set; } = new List<PriceDiscount>();
         public required ICollection<PricePolicy> Policies { get; set; } = new List<PricePolicy>();
         public required ICollection<PriceTax> Taxes { get; set; } = new List<PriceTax>();
+        public required ICollection<PriceProduct> PriceProducts { get; set; } = new List<PriceProduct>();
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

@@ -35,5 +35,12 @@ namespace SellGold.Customers.Application.Contracts.DTOs.Responses
         [JsonPropertyName("updatedAt")]
         public DateTime UpdatedAt { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Success { get; set; } = true;
+
+        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? Message { get; set; }
+
+
     }
 }

@@ -20,11 +20,10 @@
                 state
                 zipCode
                 country
-                type
+                addressType
             }
             createdAt
-            updatedAt
-                
+            updatedAt                
                 }
             }";
     }

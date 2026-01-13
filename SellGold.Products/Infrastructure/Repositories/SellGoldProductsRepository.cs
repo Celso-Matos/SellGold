@@ -16,47 +16,55 @@ namespace SellGold.Products.Infrastructure.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         
         }
-        public async Task<Product> GetByIdAsync(Guid productId)
+        public async Task<Product?> GetByIdAsync(Guid productId, CancellationToken cancellationToken = default)
         {
             return await _context.Products
                                         .Include(p => p.Barcode)
-                                        .FirstOrDefaultAsync(p => p.ProductId == productId) ?? throw new KeyNotFoundException($"Produto {productId} não encontrado.");
+                                        .FirstOrDefaultAsync(p => p.ProductId == productId, cancellationToken);
             
         }
 
-        public async Task<IEnumerable<Product>> GetAllAsync()
+        public async Task<Product?> GetByNameAsync(string name, CancellationToken cancellationToken = default)
         {
-            return await _context.Products.Include(p => p.Barcode).ToListAsync();
+            return await _context.Products
+                                        .Include(p => p.Barcode)
+                                        .FirstOrDefaultAsync(p => p.Name == name, cancellationToken);
         }
-
-        public async Task AddAsync(Product product)
-        {
-            await _context.Products.AddAsync(product);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task UpdateAsync(Product product)
-        {
-            _context.Entry(product).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteAsync(Guid productId)
-        {
-            var product = await _context.Products.FindAsync(productId);
-            if (product != null)
-            {
-                _context.Products.Remove(product);
-                await _context.SaveChangesAsync();
-            }
-        }
-        public async Task<Product> GetByProductBarcodeAsync(string barcode)
+        public async Task<Product?> GetByBarcodeAsync(string barcode, CancellationToken cancellationToken = default)
         {
             return await _context.ProductBarcodes
                             .Where(pb => pb.Barcode == barcode)
                             .Select(pb => pb.Product)
                             .Include(pb => pb.Barcode)
-                            .SingleOrDefaultAsync() ?? throw new KeyNotFoundException($"Produto {barcode} não encontrado.");            
+                            .SingleOrDefaultAsync(cancellationToken);
         }
+
+        public async Task<IEnumerable<Product>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            return await _context.Products.Include(p => p.Barcode).ToListAsync(cancellationToken);
+        }
+
+        public async Task AddAsync(Product product, CancellationToken cancellationToken = default)
+        {
+            await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task UpdateAsync(Product product, CancellationToken cancellationToken = default)
+        {
+            _context.Entry(product).State = EntityState.Modified;
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task DeleteAsync(Guid productId, CancellationToken cancellationToken = default)
+        {
+            var product = await _context.Products.FindAsync(productId);
+            if (product != null)
+            {
+                _context.Products.Remove(product);
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+        }
+        
     }
 }
