@@ -24,13 +24,13 @@ namespace SellGold.Products.Infrastructure.Repositories
             
         }
 
-        public async Task<Product?> GetByNameAsync(string name, CancellationToken cancellationToken = default)
+        public async Task<Product?> GetByNameAsync(string? name, CancellationToken cancellationToken = default)
         {
             return await _context.Products
                                         .Include(p => p.Barcode)
                                         .FirstOrDefaultAsync(p => p.Name == name, cancellationToken);
         }
-        public async Task<Product?> GetByBarcodeAsync(string barcode, CancellationToken cancellationToken = default)
+        public async Task<Product?> GetByBarcodeAsync(string? barcode, CancellationToken cancellationToken = default)
         {
             return await _context.ProductBarcodes
                             .Where(pb => pb.Barcode == barcode)

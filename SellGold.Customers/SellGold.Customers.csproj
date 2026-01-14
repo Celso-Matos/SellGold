@@ -10,13 +10,7 @@
 	<Nullable>enable</Nullable>
 	<ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Application\Contracts\DTOs\Messaging\**" />
-    <Content Remove="Application\Contracts\DTOs\Messaging\**" />
-    <EmbeddedResource Remove="Application\Contracts\DTOs\Messaging\**" />
-    <None Remove="Application\Contracts\DTOs\Messaging\**" />
-  </ItemGroup>
+ 
 
   <ItemGroup>
     <PackageReference Include="Aspire.Confluent.Kafka" Version="13.0.2" />
@@ -41,12 +35,5 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="10.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.0.1" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Application\Interfaces\Messaging\" />
-    <Folder Include="Application\Queries\Customers\" />
-    <Folder Include="Infrastructure\Data\Migrations\" />
-    <Folder Include="Infrastructure\Messsaging\" />
-  </ItemGroup>
-
+ 
 </Project>

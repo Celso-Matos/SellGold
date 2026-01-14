@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using MediatR;
 using SellGold.Application.Prices.Commands;
+using SellGold.Application.Products.Queries;
 using SellGold.Contracts.DTOs.Prices.Requests;
 using SellGold.Contracts.DTOs.Products.Responses;
 using SellGold.Mappings.Prices;
@@ -54,14 +55,14 @@ namespace SellGold.PageModels.Prices
             set { _errorMessage = value; OnPropertyChanged(); }
         }
 
-        public IAsyncRelayCommand SearchProductsCommand { get; }
+        public ICommand SearchProductsCommand { get; }
 
         public IAsyncRelayCommand SaveCommand { get; }
 
         public PricePageModel(IMediator mediator)
         {
             _mediator = mediator;
-            SearchProductsCommand = new AsyncRelayCommand(SearchProductsAsync);
+            SearchProductsCommand = new Command<string>(async (query) => await SearchProductsAsync(query));
             SaveCommand = new AsyncRelayCommand(SaveAsync);
         }
 
@@ -89,10 +90,27 @@ namespace SellGold.PageModels.Prices
             }
         }
 
-        private async Task SearchProductsAsync()
+        private async Task SearchProductsAsync(string query)
         {
-            // Implement product search logic here
-            await Task.Delay(500); // Simulate async work
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                SearchResults.Clear();
+                return;
+            }
+
+            var products = await _mediator.Send(new ListGraphQLProductNameQuery(query));
+
+            if (products == null || !products.Any())
+            {
+                SearchResults.Clear();
+                return;
+            }
+
+            SearchResults.Clear();
+            foreach (var p in products)
+                SearchResults.Add(p);
+
+
         }
         private void CleanFields()
         {

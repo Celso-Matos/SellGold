@@ -47,6 +47,7 @@ using SellGold.Services.Customers;
 using SellGold.Services.Orders;
 using SellGold.Services.Payments.Interfaces;
 using SellGold.Services.Payments.Readers;
+using SellGold.Services.Payments;
 using SellGold.Services.Prices;
 using SellGold.Services.Products;
 using SellGold.Services.Promotions;
@@ -305,6 +306,9 @@ public static class MauiProgram
 
             builder.Services.AddScoped<CustomerService>();
             builder.Services.AddHttpClient<CustomerService>();
+
+            builder.Services.AddScoped<PaymentService>();
+            builder.Services.AddHttpClient<PaymentService>();
 
 
             // 🔹 PageModels principais (Transient)  

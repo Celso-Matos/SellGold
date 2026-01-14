@@ -5,7 +5,7 @@ namespace SellGold.GraphQL.Products.Responses
 {
     public class ProductByBarcodeWrapper
     {
-        [JsonProperty("productByBarcodeGraphQL")]
-        public ProductResponse? ProductByBarcodeGraphQL { get; set; }
+        [JsonProperty("productGraphQLByBarcode")]
+        public ProductResponse? ProductGraphQLByBarcode { get; set; }
     }
 }

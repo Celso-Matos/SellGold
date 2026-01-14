@@ -6,7 +6,7 @@ using SellGold.Products.Application.Queries.GraphQL;
 
 namespace SellGold.Products.Application.Handlers.GraphQL
 {
-    public class GetProductByNameGraphQLHandler : IRequestHandler<GetProductByNameGraphQL, ProductResponse>
+    public class GetProductByNameGraphQLHandler : IRequestHandler<GetProductByNameGraphQLQuery, List<ProductResponse>?>
     {
         private readonly IProductsRepository _repository;
         private readonly IMapper _mapper;
@@ -15,19 +15,22 @@ namespace SellGold.Products.Application.Handlers.GraphQL
             _repository = repository;
             _mapper = mapper;
         }
-        public async Task<ProductResponse> Handle(GetProductByNameGraphQL query, CancellationToken cancellationToken)
+        public async Task<List<ProductResponse>?> Handle(GetProductByNameGraphQLQuery query, CancellationToken cancellationToken)
         {
             var product = await _repository.GetByNameAsync(query.Name, cancellationToken);
             
             if (product == null)
-            {
-                return new ProductResponse
+            {   
+                return new List<ProductResponse>
                 {
-                    Message = $"Produto com nome {query.Name} não encontrado.",
-                    Success = false
+                    new ProductResponse
+                    {
+                        Message = $"Produto com nome {query.Name} não encontrado.",
+                        Success = false
+                    }
                 };
             }
-            return _mapper.Map<ProductResponse>(product);
+            return new List<ProductResponse> { _mapper.Map<ProductResponse>(product) };
         } 
     }
 }

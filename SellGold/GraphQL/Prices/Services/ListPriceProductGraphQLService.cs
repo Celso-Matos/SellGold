@@ -9,23 +9,23 @@ using SellGold.GraphQL.Prices.Responses;
 
 namespace SellGold.GraphQL.Prices.Services
 {
-    public class ListPriceGraphQLService
+    public class ListPriceProductGraphQLService
     {
         private readonly GraphQLHttpClient _client;
-        public ListPriceGraphQLService(IOptions<PricesApiSettings> apiSettings)
+        public ListPriceProductGraphQLService(IOptions<PricesApiSettings> apiSettings)
         {
             var settings = apiSettings.Value; 
             var graphQlEndpoint = $"{settings.BaseUrl}{settings.Endpoints.GetPricesGraphQL}";
             _client = new GraphQLHttpClient(graphQlEndpoint, new SystemTextJsonSerializer());
         }
-        public async Task<List<PriceResponse>> GetAllPricesGraphQLAsync()
+        public async Task<List<PriceResponse>> GetAllPricesProductGraphQLAsync()
         {
             var request = new GraphQLRequest
             {
-                Query = ListPriceGraphQLQuery.GetPrices
+                Query = ListPriceProductGraphQLQuery.GetPriceByProduct
             };
-            var response = await _client.SendQueryAsync<PriceListWrapper>(request);
-            return response.Data.AllPricesGraphQL;
+            var response = await _client.SendQueryAsync<PriceProductListWrapper>(request);
+            return response.Data.AllPricesProductGraphQL;
         }   
     }
 }

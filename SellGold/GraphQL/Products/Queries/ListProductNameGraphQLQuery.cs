@@ -1,10 +1,10 @@
 ﻿namespace SellGold.GraphQL.Products.Queries
 {
-    public static class ListProductBarcodeGraphQLQuery
+    public static class ListProductNameGraphQLQuery
     {
-        public const string GetProductByBarcode = @"
-            query($barcode: String!) {
-                productGraphQLByBarcode(barcode: $barcode) {
+        public const string GetProductsByName = @"
+            query($name: String!) {
+                productsGraphQLByName(name: $name) {
                     productId
                     name
                     description

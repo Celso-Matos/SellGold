@@ -11,6 +11,6 @@
     {
         public string AddPrice { get; set; } = "";
         public string GetPrices { get; set; } = "";
-        public string PriceGraphQL { get; set; } = "";
+        public string GetPricesGraphQL { get; set; } = "";
     }
 }

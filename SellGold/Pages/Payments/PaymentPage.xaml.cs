@@ -21,7 +21,7 @@ public partial class PaymentPage : ContentPage
         if (!string.IsNullOrWhiteSpace(codigo))
         {
             _keyboardReader.RaiseScan(codigo);
-            BarcodeEntry.Text = string.Empty; // limpa para próxima leitura
+            BarcodeEntry.Text = string.Empty;
         }
     }
 

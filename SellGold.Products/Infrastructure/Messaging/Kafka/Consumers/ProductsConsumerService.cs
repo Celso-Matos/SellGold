@@ -73,7 +73,7 @@ namespace SellGold.Products.Infrastructure.Messaging.Kafka.Consumers
             if (consumeResult?.Message?.Value == null)
                 return;
 
-            var productDtos = JsonConvert.DeserializeObject<List<ProductRequest>>(consumeResult.Message.Value);
+            var productDtos = JsonConvert.DeserializeObject<List<CreateProductRequest>>(consumeResult.Message.Value);
             if (productDtos == null || !productDtos.Any())
                 return;
 

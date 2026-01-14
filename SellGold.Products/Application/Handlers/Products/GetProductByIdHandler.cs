@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using AutoMapper;
 using SellGold.Products.Application.Contracts.DTOs.Responses;
 using SellGold.Products.Application.Contracts.Mappers;
 using SellGold.Products.Application.Interfaces.Repositories;
@@ -9,10 +10,12 @@ namespace SellGold.Products.Application.Handlers.Products
     public class GetProductByIdHandler : IRequestHandler<GetProductByIdQuery, ProductResponse>
     {
         private readonly IProductsRepository _repository;
+        private readonly IMapper _mapper;
 
-        public GetProductByIdHandler(IProductsRepository repository)
+        public GetProductByIdHandler(IProductsRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
         public async Task<ProductResponse> Handle(GetProductByIdQuery query, CancellationToken cancellationToken)
         {
@@ -21,7 +24,7 @@ namespace SellGold.Products.Application.Handlers.Products
             if (product == null)
                 return null!;
 
-            return ProductMapper.ToResponse(product);
+            return _mapper.Map<ProductResponse>(product);
         }
 
 

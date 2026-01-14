@@ -46,7 +46,7 @@ namespace SellGold.Products.API.Controllers
         }
 
         [HttpPost("ProductProduceMessage")]            
-        public async Task<IActionResult> ProductProduceMessage([FromBody] List<ProductRequest> produceMessageProducts)
+        public async Task<IActionResult> ProductProduceMessage([FromBody] List<CreateProductRequest> produceMessageProducts)
         {
             if (produceMessageProducts == null || !produceMessageProducts.Any())
             {

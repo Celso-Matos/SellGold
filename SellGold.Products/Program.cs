@@ -5,6 +5,7 @@ using SellGold.Products.API.GraphQL.QueryTypes;
 using SellGold.Products.Application.Handlers.Products;
 using SellGold.Products.Application.Interfaces.Messaging;
 using SellGold.Products.Application.Interfaces.Repositories;
+using SellGold.Products.Application.Contracts.Mappers;
 using SellGold.Products.Infrastructure.Data.Context;
 using SellGold.Products.Infrastructure.Messaging.Kafka.Producers;
 using SellGold.Products.Infrastructure.Repositories;
@@ -29,6 +30,12 @@ builder.Services.AddScoped<IProductsRepository, SellGoldProductsRepository>();
 // DbContext 
 builder.Services.AddDbContext<SellGoldProductsContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SellGoldProductsConnection")));
+
+// Adiciona AutoMapper e carrega todos os Profiles
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<ProductProfileMapper>();
+});
 
 // MediatR Handlers
 builder.Services.AddMediatR(

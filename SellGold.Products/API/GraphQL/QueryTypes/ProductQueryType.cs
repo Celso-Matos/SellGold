@@ -24,5 +24,21 @@ namespace SellGold.Products.API.GraphQL.QueryTypes
             return await mediator.Send(new GetAllProductsGraphQLQuery());
         }
 
+        // Query para buscar produtos por nome
+        public static async Task<List<ProductResponse>?> GetProductsGraphQLByNameAsync(
+            string? Name,
+            [Service] IMediator mediator)
+        {
+            return await mediator.Send(new GetProductByNameGraphQLQuery(Name));
+        }
+
+        // Query para buscar produto por código de barras
+        public static async Task<ProductResponse?> GetProductGraphQLByBarcodeAsync(
+            string BarCode,
+            [Service] IMediator mediator)
+        {
+            return await mediator.Send(new GetProductByBarcodeGraphQLQuery(BarCode));
+        }
+
     }
 }

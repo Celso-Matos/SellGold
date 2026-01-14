@@ -9,26 +9,24 @@ using SellGold.GraphQL.Products.Responses;
 
 namespace SellGold.GraphQL.Products.Services
 {
-    public class ListProductBarcodeGraphQLService
+    public class ListProductNameGraphQLService
     {
         private readonly GraphQLHttpClient _client;
-
-        public ListProductBarcodeGraphQLService(IOptions<ProductsApiSettings> apiSettings)
+        public ListProductNameGraphQLService(IOptions<ProductsApiSettings> apiSettings)
         {
             var settings = apiSettings.Value;
             var graphQlEndpoint = $"{settings.BaseUrl}{settings.Endpoints.GetProductsGraphQL}";
             _client = new GraphQLHttpClient(graphQlEndpoint, new SystemTextJsonSerializer());
         }
-
-        public async Task<ProductResponse?> GetProductByBarcodeGraphQLAsync(string? barcode, CancellationToken cancellationToken)
+        public async Task<List<ProductResponse>?> GetProductsByNameGraphQLAsync(string? name, CancellationToken cancellationToken)
         {
             var request = new GraphQLRequest
             {
-                Query = ListProductBarcodeGraphQLQuery.GetProductByBarcode,
-                Variables = new { Barcode = barcode }
+                Query = ListProductNameGraphQLQuery.GetProductsByName,
+                Variables = new { Name = name }
             };
-            var response = await _client.SendQueryAsync<ProductByBarcodeWrapper>(request, cancellationToken);
-            return response.Data.ProductGraphQLByBarcode;
+            var response = await _client.SendQueryAsync<ProductByNameWrapper>(request, cancellationToken);
+            return response.Data.ProductsGraphQLByName;
         }
     }
 }
