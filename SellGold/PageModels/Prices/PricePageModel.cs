@@ -22,7 +22,7 @@ namespace SellGold.PageModels.Prices
             set { _basePriceAmount = value; OnPropertyChanged(); }
         }
 
-        private string _basePriceCurrency;
+        private string _basePriceCurrency = string.Empty;
         public string BasePriceCurrency
         {
             get => _basePriceCurrency;
@@ -38,6 +38,7 @@ namespace SellGold.PageModels.Prices
 
 
         // Produtos
+        public string NameProductSearchBar { get; set; } = string.Empty;
         public ObservableCollection<ProductResponse> SearchResults { get; set; } = new();
         public ObservableCollection<ProductResponse> SelectedProducts { get; set; } = new();
         public DateTime EffectiveDate { get; set; } = DateTime.Today;
@@ -54,15 +55,14 @@ namespace SellGold.PageModels.Prices
             get => _errorMessage;
             set { _errorMessage = value; OnPropertyChanged(); }
         }
-
-        public ICommand SearchProductsCommand { get; }
+        public IAsyncRelayCommand SearchProductsCommand { get; }
 
         public IAsyncRelayCommand SaveCommand { get; }
 
         public PricePageModel(IMediator mediator)
         {
             _mediator = mediator;
-            SearchProductsCommand = new Command<string>(async (query) => await SearchProductsAsync(query));
+            SearchProductsCommand = new AsyncRelayCommand(SearchProductsAsync);
             SaveCommand = new AsyncRelayCommand(SaveAsync);
         }
 
@@ -90,27 +90,23 @@ namespace SellGold.PageModels.Prices
             }
         }
 
-        private async Task SearchProductsAsync(string query)
+        public async Task SearchProductsAsync()
         {
-            if (string.IsNullOrWhiteSpace(query))
+            if (string.IsNullOrWhiteSpace(NameProductSearchBar))
             {
                 SearchResults.Clear();
-                return;
+                
             }
 
-            var products = await _mediator.Send(new ListGraphQLProductNameQuery(query));
-
-            if (products == null || !products.Any())
-            {
-                SearchResults.Clear();
-                return;
-            }
+            var products = await _mediator.Send(new ListGraphQLProductNameQuery(NameProductSearchBar));
 
             SearchResults.Clear();
-            foreach (var p in products)
-                SearchResults.Add(p);
+            if (products != null && products.Any())
+            {
+                foreach (var p in products)
+                    SearchResults.Add(p);
 
-
+            }            
         }
         private void CleanFields()
         {

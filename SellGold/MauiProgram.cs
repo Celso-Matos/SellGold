@@ -271,6 +271,8 @@ public static class MauiProgram
             builder.Services.AddMediatR(
                     typeof(CreateProductHandler).Assembly,
                     typeof(ListGraphQLProductsHandler).Assembly,
+                    typeof(ListGraphQLProductBarcodeHandler).Assembly,
+                    typeof(ListGraphQLProductNameHandler).Assembly,
                     typeof(CreateSupplierHandler).Assembly,
                     typeof(ListGraphQLSuppliersHandler).Assembly,
                     typeof(CreateStockHandler).Assembly,
@@ -279,7 +281,7 @@ public static class MauiProgram
                     typeof(CreateOrderHandler).Assembly,
                     typeof(CreateCustomerHandler).Assembly,
                     typeof(ListGraphQLCustomersHandler).Assembly,
-                    typeof(ListGraphQLPaymentCpfHandler).Assembly
+                    typeof(ListGraphQLPaymentCpfHandler).Assembly                    
                     );
 
             // 🔹 Serviços e Repositórios (Singleton)    
@@ -319,6 +321,8 @@ public static class MauiProgram
             builder.Services.AddTransient<SupplierPageModel>();
             builder.Services.AddTransient<ListSupplierPageModel>();
             builder.Services.AddTransient<ListSupplierGraphQLService>();
+            builder.Services.AddTransient<ListProductBarcodeGraphQLService>();
+            builder.Services.AddTransient<ListProductNameGraphQLService>();
 
             builder.Services.AddTransient<StockPageModel>();
             builder.Services.AddTransient<ListStockPageModel>();

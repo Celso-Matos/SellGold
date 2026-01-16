@@ -18,7 +18,7 @@ namespace SellGold.GraphQL.Products.Services
             var graphQlEndpoint = $"{settings.BaseUrl}{settings.Endpoints.GetProductsGraphQL}";
             _client = new GraphQLHttpClient(graphQlEndpoint, new SystemTextJsonSerializer());
         }
-        public async Task<List<ProductResponse>?> GetProductsByNameGraphQLAsync(string? name, CancellationToken cancellationToken)
+        public async Task<List<ProductResponse>?> GetProductsGraphQLByNameAsync(string? name, CancellationToken cancellationToken)
         {
             var request = new GraphQLRequest
             {

@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="SellGold.Pages.Prices.PricePage"
-             Title="Preço">
-        <ScrollView>
+             Title="Preço">    
+
+    <ScrollView>
             <VerticalStackLayout Padding="20" Spacing="15">
 
             <!-- Produtos -->
-                <Label Text="Produtos"/>
-                <SearchBar x:Name="ProductSearchBar" Placeholder="Buscar produto..." TextChanged="OnSearchTextChanged"/>
-                <CollectionView x:Name="ProductListView" SelectionMode="Multiple">
+            <Label Text="Produtos"/>
+            <SearchBar x:Name="ProductSearchBar"
+               Placeholder="Buscar produto..."
+               Text="{Binding NameProductSearchBar, Mode=TwoWay}">
+                    <SearchBar.Behaviors>
+                        <xct:EventToCommandBehavior EventName="TextChanged"
+                                        Command="{Binding Source={x:Reference ProductSearchBar}, Path=BindingContext.SearchProductsCommand}"
+                                        CommandParameter="{Binding Source={x:Reference ProductSearchBar}, Path=BindingContext.NameProductSearchBar}" />
+                    </SearchBar.Behaviors>
+            </SearchBar>
+
+
+            <!-- Botão de teste para validar o binding -->
+            <Button Text="Testar comando"
+                Command="{Binding SearchProductsCommand}" />
+
+
+            <CollectionView x:Name="ProductListView" SelectionMode="Multiple">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="5">

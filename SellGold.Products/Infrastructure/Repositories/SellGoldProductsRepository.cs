@@ -26,9 +26,15 @@ namespace SellGold.Products.Infrastructure.Repositories
 
         public async Task<Product?> GetByNameAsync(string? name, CancellationToken cancellationToken = default)
         {
+            if (string.IsNullOrWhiteSpace(name))
+                return null;
+
+            // Monta o padrão: contém o texto informado
+            var pattern = $"%{name}%";
+
             return await _context.Products
                                         .Include(p => p.Barcode)
-                                        .FirstOrDefaultAsync(p => p.Name == name, cancellationToken);
+                                        .FirstOrDefaultAsync(p => EF.Functions.Like(p.Name, pattern), cancellationToken);
         }
         public async Task<Product?> GetByBarcodeAsync(string? barcode, CancellationToken cancellationToken = default)
         {

@@ -27,7 +27,5 @@ namespace SellGold.Products.Application.Handlers.Products
             return _mapper.Map<ProductResponse>(product);
         }
 
-
-
     }
 }

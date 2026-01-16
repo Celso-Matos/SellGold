@@ -14,7 +14,7 @@ namespace SellGold.Application.Products.Handlers
         }
         public async Task<List<ProductResponse>?> Handle(ListGraphQLProductNameQuery query, CancellationToken cancellationToken)
         {
-            var products = await _service.GetProductsByNameGraphQLAsync(query.Name, cancellationToken);
+            var products = await _service.GetProductsGraphQLByNameAsync(query.Name, cancellationToken);
             return products;
         }
     }
