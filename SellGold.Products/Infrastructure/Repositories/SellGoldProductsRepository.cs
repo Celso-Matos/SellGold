@@ -19,7 +19,7 @@ namespace SellGold.Products.Infrastructure.Repositories
         public async Task<Product?> GetByIdAsync(Guid productId, CancellationToken cancellationToken = default)
         {
             return await _context.Products
-                                        .Include(p => p.Barcode)
+                                        .Include(p => p.Barcodes)
                                         .FirstOrDefaultAsync(p => p.ProductId == productId, cancellationToken);
             
         }
@@ -33,7 +33,7 @@ namespace SellGold.Products.Infrastructure.Repositories
             var pattern = $"%{name}%";
 
             return await _context.Products
-                                        .Include(p => p.Barcode)
+                                        .Include(p => p.Barcodes)
                                         .FirstOrDefaultAsync(p => EF.Functions.Like(p.Name, pattern), cancellationToken);
         }
         public async Task<Product?> GetByBarcodeAsync(string? barcode, CancellationToken cancellationToken = default)
@@ -41,13 +41,13 @@ namespace SellGold.Products.Infrastructure.Repositories
             return await _context.ProductBarcodes
                             .Where(pb => pb.Barcode == barcode)
                             .Select(pb => pb.Product)
-                            .Include(pb => pb.Barcode)
+                            .Include(pb => pb.Barcodes)
                             .SingleOrDefaultAsync(cancellationToken);
         }
 
         public async Task<IEnumerable<Product>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            return await _context.Products.Include(p => p.Barcode).ToListAsync(cancellationToken);
+            return await _context.Products.Include(p => p.Barcodes).ToListAsync(cancellationToken);
         }
 
         public async Task AddAsync(Product product, CancellationToken cancellationToken = default)

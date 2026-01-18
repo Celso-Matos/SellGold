@@ -27,7 +27,7 @@ namespace SellGold.Products.Domain.Entities
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-        public List<ProductBarcode> Barcode { get; set; } = new();
+        public List<ProductBarcode> Barcodes { get; set; } = new();
 
         public void Activate()
         {

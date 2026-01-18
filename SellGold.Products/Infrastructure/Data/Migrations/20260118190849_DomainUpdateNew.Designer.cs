@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SellGold.Products.Infrastructure.Data.Context;
 
@@ -11,9 +12,11 @@ using SellGold.Products.Infrastructure.Data.Context;
 namespace SellGold.Products.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(SellGoldProductsContext))]
-    partial class SellGoldProductsContextModelSnapshot : ModelSnapshot
+    [Migration("20260118190849_DomainUpdateNew")]
+    partial class DomainUpdateNew
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

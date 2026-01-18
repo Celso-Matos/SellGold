@@ -6,26 +6,23 @@ namespace SellGold.Products.API.GraphQL.QueryTypes
 {
     public class ProductQueryType
     {
-        protected ProductQueryType() {
-
-        }
-
+        
         // Query para buscar produto por ID
-        public static async Task<ProductResponse> GetProductGraphQLByIdAsync(Guid ProductId,
+        public async Task<ProductResponse> GetProductGraphQLByIdAsync(Guid ProductId,
                                                                         [Service] IMediator mediator)
         {
             return await mediator.Send(new GetProductByIdGraphQLQuery(ProductId));
         }
 
         // Query para buscar todos os produtos
-        public static async Task<List<ProductResponse>> GetAllProductsGraphQLAsync(
+        public async Task<List<ProductResponse>> GetAllProductsGraphQLAsync(
             [Service] IMediator mediator)
         {
             return await mediator.Send(new GetAllProductsGraphQLQuery());
         }
 
         // Query para buscar produtos por nome
-        public static async Task<List<ProductResponse>?> GetProductsGraphQLByNameAsync(
+        public async Task<List<ProductResponse>?> GetProductsGraphQLByNameAsync(
             string? Name,
             [Service] IMediator mediator)
         {
@@ -33,7 +30,7 @@ namespace SellGold.Products.API.GraphQL.QueryTypes
         }
 
         // Query para buscar produto por código de barras
-        public static async Task<ProductResponse?> GetProductGraphQLByBarcodeAsync(
+        public async Task<ProductResponse?> GetProductGraphQLByBarcodeAsync(
             string BarCode,
             [Service] IMediator mediator)
         {

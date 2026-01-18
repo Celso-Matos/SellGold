@@ -14,9 +14,7 @@ namespace SellGold.Products.Application.Contracts.DTOs.Requests
 
         [Required(ErrorMessage = "Tipo do Códgo de Barras é obrigatório")]
         public string BarcodeType { get; set; } = string.Empty;
-
         public List<string> Barcodes { get; set; } = new();
-
 
     }
 }

@@ -9,9 +9,7 @@ namespace SellGold.Products.Application.Contracts.Mappers
     {
         public ProductProfileMapper() 
         {
-            // =========================
             // Request → Domain
-            // =========================
             CreateMap<CreateProductRequest, Product>()
                 .ConstructUsing(dto => new Product(
                     dto.Name,
@@ -19,17 +17,12 @@ namespace SellGold.Products.Application.Contracts.Mappers
                 ))
                 .AfterMap((dto, product) =>
                 {
-                    foreach (var code in dto.Barcodes)
-                    {
-                        var barcode = new ProductBarcode(dto.Barcode, dto.BarcodeType);
-                        product.Barcode.Add(barcode);
-                    }
+                    var barcode = new ProductBarcode(dto.Barcode, dto.BarcodeType);
+                    product.Barcodes.Add(barcode);
                 });
 
 
-            // =========================
             // Domain → Response
-            // =========================
             CreateMap<Product, ProductResponse>()
                 .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.ProductId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
@@ -37,8 +30,10 @@ namespace SellGold.Products.Application.Contracts.Mappers
                 .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.IsActive))
                 .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
                 .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => src.UpdatedAt))
-                .ForMember(dest => dest.Barcodes, opt => opt.MapFrom(src => src.Barcode));
+                .ForMember(dest => dest.Barcodes, opt => opt.MapFrom(src => src.Barcodes));
 
+            // Mapear também os tipos internos
+            CreateMap<ProductBarcode, ProductBarcodeResponse>();
 
         }
     }

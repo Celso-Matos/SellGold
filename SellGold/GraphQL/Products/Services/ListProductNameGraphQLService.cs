@@ -2,6 +2,7 @@
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.SystemTextJson;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using SellGold.Configurations.Products;
 using SellGold.Contracts.DTOs.Products.Responses;
 using SellGold.GraphQL.Products.Queries;
@@ -25,7 +26,9 @@ namespace SellGold.GraphQL.Products.Services
                 Query = ListProductNameGraphQLQuery.GetProductsByName,
                 Variables = new { Name = name }
             };
-            var response = await _client.SendQueryAsync<ProductByNameWrapper>(request, cancellationToken);
+            Console.WriteLine($"Query: {request.Query}");
+            Console.WriteLine($"Variables: {JsonConvert.SerializeObject(request.Variables)}");
+            var response = await _client.SendQueryAsync<ProductByNameWrapper>(request, cancellationToken);           
             return response.Data.ProductsGraphQLByName;
         }
     }

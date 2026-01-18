@@ -34,7 +34,7 @@ namespace SellGold.Products.Infrastructure.Data.Context
             
             modelBuilder.Entity<ProductBarcode>()
                 .HasOne(pb => pb.Product)
-                .WithMany(p => p.Barcode)
+                .WithMany(p => p.Barcodes)
                 .HasForeignKey(pb => pb.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
 
