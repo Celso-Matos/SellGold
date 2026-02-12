@@ -26,8 +26,6 @@ namespace SellGold.GraphQL.Products.Services
                 Query = ListProductNameGraphQLQuery.GetProductsByName,
                 Variables = new { Name = name }
             };
-            Console.WriteLine($"Query: {request.Query}");
-            Console.WriteLine($"Variables: {JsonConvert.SerializeObject(request.Variables)}");
             var response = await _client.SendQueryAsync<ProductByNameWrapper>(request, cancellationToken);           
             return response.Data.ProductsGraphQLByName;
         }

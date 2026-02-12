@@ -13,7 +13,7 @@ namespace SellGold.Prices.Application.Contracts.DTOs.Requests
         [Required(ErrorMessage = "A moeda é obrigatório")]
         [StringLength(3, ErrorMessage = "A moeda deve ter até 3 caracteres (ISO).")]
         public string BasePriceCurrency { get; set; } = string.Empty;        
-        public List<PriceProductRequest> PriceProducts { get; set; } = new();
+        public List<PriceProducstRequest> PriceProducts { get; set; } = new();
         public List<PriceDiscountRequest> Discounts { get; set; } = new();        
         public List<PricePolicyRequest> Policies { get; set; } = new();        
         public List<PriceTaxRequest> Taxes { get; set; } = new();

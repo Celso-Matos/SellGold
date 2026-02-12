@@ -6,22 +6,19 @@ namespace SellGold.Prices.API.GraphQL.QueryTypes
 {
     public class PriceQueryType
     {
-        protected PriceQueryType() { 
-        
-        }
-
         // Query para buscar preço por ID
-        public static async Task<PriceResponse> GetPriceGraphQLByIdAsync(Guid PriceId,
+        public async Task<PriceResponse> GetAllPricesByIdGraphQLAsync(Guid PriceId,
                                                                         [Service] IMediator mediator)
-        {
-            return await mediator.Send(new GetPriceByIdGraphQLQuery(PriceId));
-        }
+            => await mediator.Send(new GetPriceByIdGraphQLQuery(PriceId));
 
         // Query para buscar todos os preços
-        public static async Task<List<PriceResponse>> GetAllPricesGraphQLAsync(
-            [Service] IMediator mediator)
-        {
-            return await mediator.Send(new GetAllPricesGraphQLQuery());
-        }
+        public async Task<List<PriceResponse>> GetAllPricesGraphQLAsync(
+                                                                        [Service] IMediator mediator) 
+            => await mediator.Send(new GetAllPricesGraphQLQuery());
+
+        // Query para buscar os preços de um produto específico allPriceProductsGraphQL
+        public async Task<List<PriceProductsResponse>?> GetAllPricesProductsByIdGraphQLAsync(Guid ProductId,
+                                                                        [Service] IMediator mediator) 
+            => await mediator.Send(new GetPriceProductsByIdGraphQLQuery(ProductId));
     }
 }

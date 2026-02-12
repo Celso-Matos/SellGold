@@ -25,10 +25,10 @@ namespace SellGold.Products.Application.Contracts.DTOs.Responses
         [JsonPropertyName("barcodes")]
         public List<ProductBarcodeResponse> Barcodes { get; set; } = new();
 
-        [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonPropertyName("success")]
         public bool Success { get; set; } = true;
 
-        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonPropertyName("message")]
         public string? Message { get; set; }
     }
 }

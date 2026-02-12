@@ -18,11 +18,15 @@ namespace SellGold.GraphQL.Prices.Services
             var graphQlEndpoint = $"{settings.BaseUrl}{settings.Endpoints.GetPricesGraphQL}";
             _client = new GraphQLHttpClient(graphQlEndpoint, new SystemTextJsonSerializer());
         }
-        public async Task<List<PriceResponse>> GetAllPricesByIdGraphQLAsync()
+        public async Task<List<PriceResponse>> GetAllPricesByIdGraphQLAsync(Guid? priceId, CancellationToken cancellationToken)
         {
             var request = new GraphQLRequest
             {
-                Query = ListPriceByIdGraphQLQuery.GetPricesById
+                Query = ListPriceByIdGraphQLQuery.GetPricesById,
+                Variables = new
+                {
+                    PriceId = priceId
+                }
             };
             var response = await _client.SendQueryAsync<PriceByIdListWrapper>(request);
             return response.Data.AllPricesByIdGraphQL;

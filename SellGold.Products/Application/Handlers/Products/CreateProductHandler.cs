@@ -2,7 +2,6 @@
 using MediatR;
 using SellGold.Products.Application.Commands;
 using SellGold.Products.Application.Contracts.DTOs.Requests;
-using SellGold.Products.Application.Contracts.Mappers;
 using SellGold.Products.Application.Interfaces.Repositories;
 using SellGold.Products.Domain.Entities;
 

@@ -40,6 +40,8 @@ namespace SellGold.GraphQL.Prices.Queries
                 isActive
                 createdAt
                 updatedAt
+                message
+                success
             }
         }";
     }

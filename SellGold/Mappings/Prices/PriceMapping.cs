@@ -9,11 +9,11 @@ namespace SellGold.Mappings.Prices
             new CreatePriceRequest
             {
                 PriceId = Guid.NewGuid(),
-                BasePriceAmount = model.BasePriceAmount,
-                BasePriceCurrency = model.BasePriceCurrency,
-                Discounts = model.Discounts?.ToList() ?? new List<PriceDiscountRequest>(),
-                Policies = model.Policies?.ToList() ?? new List<PricePolicyRequest>(),
-                Taxes = model.Taxes?.ToList() ?? new List<PriceTaxRequest>()
+                BasePriceAmount = model.NewBasePriceAmount,
+                BasePriceCurrency = model.NewBasePriceCurrency,
+                Discounts = model.NewDiscounts?.ToList() ?? new List<PriceDiscountRequest>(),
+                Policies = model.NewPolicies?.ToList() ?? new List<PricePolicyRequest>(),
+                Taxes = model.NewTaxes?.ToList() ?? new List<PriceTaxRequest>()
             };
     }
 }

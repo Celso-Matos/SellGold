@@ -4,33 +4,39 @@ namespace SellGold.Prices.Application.Contracts.DTOs.Responses
     public class PriceResponse
     {
         [JsonPropertyName("priceId")]
-        public required Guid PriceId { get; set; }        
+        public Guid PriceId { get; set; }        
 
         [JsonPropertyName("basePriceAmount")]
-        public required decimal BasePriceAmount { get; set; }
+        public decimal BasePriceAmount { get; set; }
 
         [JsonPropertyName("basePriceCurrency")]
-        public required string BasePriceCurrency { get; set; }
+        public string BasePriceCurrency { get; set; } = string.Empty;
 
         [JsonPropertyName("priceProducts")]
-        public required List<PriceProductResponse> PriceProducts { get; set; }
+        public List<PriceProductsResponse> PriceProducts { get; set; } = new();
 
         [JsonPropertyName("discounts")]
-        public required List<PriceDiscountResponse> Discounts { get; set; }
+        public List<PriceDiscountResponse> Discounts { get; set; } = new();
 
         [JsonPropertyName("policies")]
-        public required List<PricePolicyResponse> Policies { get; set; }
+        public List<PricePolicyResponse> Policies { get; set; } = new();
 
         [JsonPropertyName("taxes")]
-        public required List<PriceTaxResponse> Taxes { get; set; }
+        public List<PriceTaxResponse> Taxes { get; set; } = new();
 
         [JsonPropertyName("isActive")]
-        public required bool IsActive { get; set; }
+        public bool IsActive { get; set; }
 
         [JsonPropertyName("createdAt")]
         public DateTime CreatedAt { get; set; }
 
         [JsonPropertyName("updatedAt")]
         public DateTime? UpdatedAt { get; set; }
+
+        [JsonPropertyName("success")]
+        public bool Success { get; set; } = true;
+
+        [JsonPropertyName("message")]
+        public string? Message { get; set; }
     }
 }

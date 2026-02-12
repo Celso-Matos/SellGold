@@ -25,9 +25,9 @@ var sqlSuppliers = builder.AddSqlServer("sqlserver-suppliers")
 // -----------------------------
 // SQL Server - Prices
 // -----------------------------
-//var sqlPrices = builder.AddSqlServer("sqlserver-prices")
-//    .WithDataVolume()
-//    .AddDatabase("SellGoldPrices");
+var sqlPrices = builder.AddSqlServer("sqlserver-prices")
+    .WithDataVolume()
+    .AddDatabase("SellGoldPrices");
 
 // -----------------------------
 // SQL Server - Customers
@@ -86,10 +86,10 @@ builder.AddProject<Projects.SellGold_Suppliers>("sellgold-api-suppliers")
 // -----------------------------
 // API de Prices
 // -----------------------------
-//builder.AddProject<Projects.SellGold_Prices>("sellgold-api-prices")
-//    .WithReference(sqlPrices)
-//    .WithEndpoint("http", e => { e.Port = 10000; })   // HTTP
-//    .WithEndpoint("https", e => { e.Port = 10001; });   // HTTPS
+builder.AddProject<Projects.SellGold_Prices>("sellgold-api-prices")
+    .WithReference(sqlPrices)
+    .WithEndpoint("http", e => { e.Port = 9000; })   // HTTP
+    .WithEndpoint("https", e => { e.Port = 9001; });   // HTTPS
 
 // -----------------------------
 // API de Customers

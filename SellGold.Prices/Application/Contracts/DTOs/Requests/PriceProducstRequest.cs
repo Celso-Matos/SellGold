@@ -2,11 +2,12 @@
 
 namespace SellGold.Prices.Application.Contracts.DTOs.Requests
 {
-    public class PriceProductRequest
+    public class PriceProducstRequest
     {
         public Guid ProductId { get; set; }
         public Guid PriceId { get; set; }
         public DateTime EffectiveDate { get; set; }
         public DateTime? ExpirationDate { get; set; }
-    }
+        public bool IsActive { get; set; }
+        }
 }

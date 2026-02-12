@@ -24,5 +24,22 @@ namespace SellGold.Contracts.DTOs.Products.Responses
 
         [JsonPropertyName("barcodes")]
         public required List<ProductBarcodeResponse> Barcodes { get; set; }
+
+        [JsonPropertyName("success")]
+        public bool Success { get; set; }
+
+        [JsonPropertyName("message")]
+        public string? Message { get; set; }
+        public string Barcode => Barcodes?.FirstOrDefault()?.Barcode ?? string.Empty;
+        public string BarcodeType => Barcodes?.FirstOrDefault()?.BarcodeType ?? string.Empty;
+        public string Status => IsActive ? "Ativo" : "Desativo";
+
+        [JsonPropertyName("basePriceAmount")]
+        public double BasePriceAmount { get; set; }
+
+        [JsonPropertyName("basePriceCurrency")]
+        public string BasePriceCurrency { get; set; } = string.Empty;
+
+
     }
 }

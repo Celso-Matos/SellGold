@@ -11,6 +11,8 @@
                     isActive
                     createdAt
                     updatedAt
+                    message
+                    success
                     barcodes {
                         barcodeId
                         barcode

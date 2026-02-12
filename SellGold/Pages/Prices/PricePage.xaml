@@ -3,128 +3,195 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="SellGold.Pages.Prices.PricePage"
-             Title="Preço">    
+             Title="Preço">
+
 
     <ScrollView>
-            <VerticalStackLayout Padding="20" Spacing="15">
+        <VerticalStackLayout Padding="20" Spacing="15">
 
             <!-- Produtos -->
-            <Label Text="Produtos"/>
+            <Label Text="Produtos" FontAttributes="Bold" />
             <SearchBar x:Name="ProductSearchBar"
-               Placeholder="Buscar produto..."
-               Text="{Binding NameProductSearchBar, Mode=TwoWay}">
-                    <SearchBar.Behaviors>
-                        <xct:EventToCommandBehavior EventName="TextChanged"
-                                        Command="{Binding Source={x:Reference ProductSearchBar}, Path=BindingContext.SearchProductsCommand}"
-                                        CommandParameter="{Binding Source={x:Reference ProductSearchBar}, Path=BindingContext.NameProductSearchBar}" />
-                    </SearchBar.Behaviors>
+                       Placeholder="Buscar produto..."
+                       Text="{Binding NameProductSearchBar, Mode=TwoWay}">
+                <SearchBar.Behaviors>
+                    <xct:EventToCommandBehavior EventName="TextChanged"
+                                                Command="{Binding Source={x:Reference ProductSearchBar}, Path=BindingContext.SearchProductsCommand}"
+                                                CommandParameter="{Binding Source={x:Reference ProductSearchBar}, Path=BindingContext.NameProductSearchBar}" />
+                </SearchBar.Behaviors>
             </SearchBar>
 
+            <CollectionView ItemsSource="{Binding ProductsWithPrice}">
+                <CollectionView.Triggers>
+                    <DataTrigger TargetType="CollectionView"
+                     Binding="{Binding ProductsWithPrice.Count}"
+                     Value="0">
+                        <Setter Property="IsVisible" Value="False"/>
+                    </DataTrigger>
+                </CollectionView.Triggers>
+                <CollectionView.Header>
+                    <ContentView>
+                        <Grid Padding="5" ColumnDefinitions="2*,3*,2*,2*,Auto">
+                            <Label Text="Produto" FontAttributes="Bold" Grid.Column="0"/>
+                            <Label Text="Descrição" FontAttributes="Bold" Grid.Column="1"/>
+                            <Label Text="Status" FontAttributes="Bold" Grid.Column="2"/>
+                            <Label Text="Preço" FontAttributes="Bold" Grid.Column="3"/>
+                            <Label Text="Ações" FontAttributes="Bold" Grid.Column="4"/>
+                        </Grid>
+                        <ContentView.Triggers>
+                            <DataTrigger TargetType="ContentView"
+                                         Binding="{Binding NewProductsWithPrice.Count}"
+                                         Value="0">
+                                <Setter Property="IsVisible" Value="False"/>
+                            </DataTrigger>
+                        </ContentView.Triggers>
+                    </ContentView>
+                </CollectionView.Header>
 
-            <!-- Botão de teste para validar o binding -->
-            <Button Text="Testar comando"
-                Command="{Binding SearchProductsCommand}" />
+                <!-- Template dos itens -->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5" ColumnDefinitions="2*,3*,2*,2*,Auto">
+                            <Label Text="{Binding Name}" Grid.Column="0"/>
+                            <Label Text="{Binding Description}" Grid.Column="1"/>
+                            <Label Text="{Binding Status}" Grid.Column="2"/>
+                            <Label Text="{Binding BasePriceAmount, StringFormat='{0:C}'}" Grid.Column="3"/>
+                            <Button Text="Editar"
+                                    Grid.Column="4"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type CollectionView}}, Path=BindingContext.EditPriceProductsCommand}"
+                                    CommandParameter="{Binding .}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
+            <!-- Seleção de Moeda -->
+            <Label Text="Valor" FontAttributes="Bold" />
+            <HorizontalStackLayout Spacing="20">
+                <!-- Exemplo: Real -->
+                <VerticalStackLayout>
+                    <Image Source="br_flag.png" WidthRequest="30" HeightRequest="20"/>
+                    <RadioButton Content="BRL"
+                     Value="BRL"
+                     IsChecked="{Binding NewBasePriceCurrency, Converter={StaticResource EqualityConverter}, ConverterParameter=BRL}"
+                     GroupName="CurrencyGroup"/>
+                </VerticalStackLayout>
 
-            <CollectionView x:Name="ProductListView" SelectionMode="Multiple">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Padding="5">
-                                <Label Text="{Binding Name}" />
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <!-- Exemplo: Dólar -->
+                <VerticalStackLayout>
+                    <Image Source="us_flag.png" WidthRequest="30" HeightRequest="20"/>
+                    <RadioButton Content="USD"
+                     Value="USD"
+                     IsChecked="{Binding NewBasePriceCurrency, Converter={StaticResource EqualityConverter}, ConverterParameter=USD}"
+                     GroupName="CurrencyGroup"/>
+                </VerticalStackLayout>
 
-            <!-- Valor e Moeda -->
-                <Label Text="Moeda" />
-                <Picker Title="Moeda"
-                ItemsSource="{Binding AvailableCurrencies}"
-                SelectedItem="{Binding BasePriceCurrency}" />
+                <!-- Exemplo: Euro -->
+                <VerticalStackLayout>
+                    <Image Source="eu_flag.png" WidthRequest="30" HeightRequest="20"/>
+                    <RadioButton Content="EUR"
+                     Value="EUR"
+                     IsChecked="{Binding NewBasePriceCurrency, Converter={StaticResource EqualityConverter}, ConverterParameter=EUR}"
+                     GroupName="CurrencyGroup"/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
 
-                <Label Text="Preço"/>
-                <Entry Placeholder="Valor"
-                Keyboard="Numeric"
-                Text="{Binding BasePriceAmount}" />
-                
-                <Label Text="Data de Início da Vigência"/>
-                <DatePicker x:Name="EffectiveDatePicker" />
-                <Label Text="Data de Expiração da Vigência"/>
-                <DatePicker x:Name="ExpirationDatePicker" />
+            <Entry Placeholder="Valor"
+               Keyboard="Numeric"
+               Text="{Binding NewBasePriceAmount}"
+               MaxLength="15"
+               TextChanged="OnPriceTextChanged"
+               HeightRequest="40"
+               VerticalOptions="Center"
+               Grid.Column="1"/>
 
+            <!-- Datas de Vigência -->
+            <Grid ColumnDefinitions="*,*" Padding="10" ColumnSpacing="15">
+                <VerticalStackLayout>
+                    <Label Text="Data de Início"/>
+                    <DatePicker x:Name="EffectiveDatePicker"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Text="Data de Expiração"/>
+                    <DatePicker x:Name="ExpirationDatePicker"/>
+                </VerticalStackLayout>
+            </Grid>
 
             <!-- Status -->
-                <HorizontalStackLayout>
-                    <Label Text="Ativo" VerticalOptions="Center" />
-                    <Switch IsToggled="{Binding IsActive}" />
-                </HorizontalStackLayout>
-
-                
-                
+            <HorizontalStackLayout>
+                <Label Text="Ativo" VerticalOptions="Center" />
+                <Switch IsToggled="{Binding NewIsActive}" />
+            </HorizontalStackLayout>
 
             <!-- Descontos -->
-                <Label Text="Descontos" FontAttributes="Bold" />
-                <CollectionView ItemsSource="{Binding Discounts}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <VerticalStackLayout>
-                                <Picker Title="Tipo"
+            <Label Text="Descontos" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding NewDiscounts}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                            <Picker Title="Tipo"
                                     ItemsSource="{Binding DiscountTypes}"
-                                    SelectedItem="{Binding Type}" />
-                                <Entry Placeholder="Valor"
+                                    SelectedItem="{Binding Type}"
+                                    Grid.Column="0" Grid.Row="0"/>
+                            <Entry Placeholder="Valor"
                                    Keyboard="Numeric"
-                                   Text="{Binding Value}" />
-                                <DatePicker Date="{Binding StartDate}" />
-                                <DatePicker Date="{Binding EndDate}" />
-                            </VerticalStackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                <Button Text="Adicionar desconto"
+                                   Text="{Binding Value}"
+                                   Grid.Column="1" Grid.Row="0"/>
+                            <DatePicker Date="{Binding StartDate}" Grid.Column="0" Grid.Row="1"/>
+                            <DatePicker Date="{Binding EndDate}" Grid.Column="1" Grid.Row="1"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="Adicionar desconto"
                     Command="{Binding AddDiscountCommand}" />
 
-                <!-- Políticas -->
-                <Label Text="Políticas" FontAttributes="Bold" />
-                <CollectionView ItemsSource="{Binding Policies}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <VerticalStackLayout>
-                                <Picker Title="Estratégia"
+            <!-- Políticas -->
+            <Label Text="Políticas" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding NewPolicies}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Picker Title="Estratégia"
                                     ItemsSource="{Binding PolicyStrategies}"
                                     SelectedItem="{Binding Strategy}" />
-                                <Editor Placeholder="Regras"
+                            <Editor Placeholder="Regras"
                                     MaxLength="500"
                                     Text="{Binding Rules}" />
-                            </VerticalStackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                <Button Text="Adicionar política"
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="Adicionar política"
                     Command="{Binding AddPolicyCommand}" />
 
-                <!-- Impostos -->
-                <Label Text="Impostos" FontAttributes="Bold" />
-                <CollectionView ItemsSource="{Binding Taxes}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <VerticalStackLayout>
-                                <Entry Placeholder="Nome do imposto"
-                                   Text="{Binding Name}" />
-                                <Slider Minimum="0" Maximum="100"
-                                    Value="{Binding Rate}" />
-                                <Label Text="{Binding Rate, StringFormat='{0:F2}%'}" />
-                            </VerticalStackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                <Button Text="Adicionar imposto"
+            <!-- Impostos -->
+            <Label Text="Impostos" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding NewTaxes}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="2*,*,Auto" ColumnSpacing="10" Padding="5">
+                            <Entry Placeholder="Nome do imposto"
+                                   Text="{Binding Name}"
+                                   Grid.Column="0"/>
+                            <Slider Minimum="0" Maximum="100"
+                                    Value="{Binding Rate}"
+                                    Grid.Column="1"/>
+                            <Label Text="{Binding Rate, StringFormat='{0:F2}%'}"
+                                   VerticalOptions="Center"
+                                   Grid.Column="2"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="Adicionar imposto"
                     Command="{Binding AddTaxCommand}" />
 
-                <!-- Mensagem de erro -->
-                <Label Text="{Binding ErrorMessage}"
+            <!-- Mensagem de erro -->
+            <Label Text="{Binding ErrorMessage}"
                    TextColor="Red"
                    IsVisible="{Binding ErrorMessage, Converter={StaticResource NullToBoolConverter}}" />
 
-            </VerticalStackLayout>
-        </ScrollView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

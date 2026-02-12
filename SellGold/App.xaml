@@ -1,7 +1,7 @@
 ﻿<?xml version = "1.0" encoding = "UTF-8" ?>
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:SellGold"
+             xmlns:local="clr-namespace:SellGold.Utils"
              x:Class="SellGold.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -9,7 +9,8 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
                 <ResourceDictionary Source="Resources/Styles/AppStyles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary.MergedDictionaries>            
+            <local:EqualityConverter x:Key="EqualityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

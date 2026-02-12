@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace SellGold.Prices.Application.Contracts.DTOs.Responses
 {
-    public class PriceProductResponse
+    public class PriceProductsResponse
     {
         [JsonPropertyName("priceProductId")]
         public Guid PriceProductId { get; set; }
@@ -23,10 +23,19 @@ namespace SellGold.Prices.Application.Contracts.DTOs.Responses
         [JsonPropertyName("expirationDate")]
         public DateTime? ExpirationDate { get; set; }
 
+        [JsonPropertyName("isActive")]
+        public bool IsActive { get; set; }
+
         [JsonPropertyName("createdAt")]
         public DateTime CreatedAt { get; set; }
 
         [JsonPropertyName("updatedAt")]
         public DateTime? UpdatedAt { get; set; }
+
+        [JsonPropertyName("success")]
+        public bool Success { get; set; } = true;
+
+        [JsonPropertyName("message")]
+        public string? Message { get; set; }
     }
 }

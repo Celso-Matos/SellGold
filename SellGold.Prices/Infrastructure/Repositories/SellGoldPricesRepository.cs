@@ -13,14 +13,20 @@ namespace SellGold.Prices.Infrastructure.Repositories
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public async Task<Price> GetByIdAsync(Guid priceId)
+        public async Task<Price?> GetByIdAsync(Guid priceId, CancellationToken cancellationToken = default)
         {
             return await _context.Prices
-                                        .FirstOrDefaultAsync(p => p.PriceId == priceId) ?? throw new KeyNotFoundException($"Preço {priceId} não encontrado.");
+                                        .FirstOrDefaultAsync(p => p.PriceId == priceId, cancellationToken);
         }
         public async Task<IEnumerable<Price>> GetAllAsync()
         {
             return await _context.Prices.ToListAsync();
+        }
+        public async Task<IEnumerable<PriceProduct?>> GetPriceProductsByProductIdAsync(Guid productId, CancellationToken cancellationToken = default)
+        {
+            return await _context.PriceProducts
+                                        .Where(pp => pp.ProductId == productId)
+                                        .ToListAsync(cancellationToken);
         }
         public async Task AddAsync(Price price)
         {

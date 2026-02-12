@@ -39,7 +39,9 @@ builder.Services.AddAutoMapper(cfg =>
 
 // MediatR Handlers
 builder.Services.AddMediatR(
-    typeof(CreateProductHandler).Assembly
+    typeof(CreateProductHandler).Assembly,
+    typeof(GetProductByIdHandler).Assembly
+
 );
 
 // Kafka Producer

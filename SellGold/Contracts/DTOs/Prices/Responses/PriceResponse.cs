@@ -1,36 +1,44 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace SellGold.Contracts.DTOs.Prices.Responses
 {
     public partial class PriceResponse
     {
 
-        [Newtonsoft.Json.JsonProperty("priceId", Required = Newtonsoft.Json.Required.Always)]
+        [JsonPropertyName("priceId")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public System.Guid PriceId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("basePriceAmount", Required = Newtonsoft.Json.Required.Always)]
+        [JsonPropertyName("basePriceAmount")]
         public double BasePriceAmount { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("basePriceCurrency", Required = Newtonsoft.Json.Required.AllowNull)]
+        [JsonPropertyName("basePriceCurrency")]
         public string BasePriceCurrency { get; set; } = string.Empty;
 
-        [Newtonsoft.Json.JsonProperty("discounts", Required = Newtonsoft.Json.Required.AllowNull)]
+        [JsonPropertyName("discounts")]
         public System.Collections.Generic.ICollection<PriceDiscountResponse> Discounts { get; set; } = new System.Collections.ObjectModel.Collection<PriceDiscountResponse>();
 
-        [Newtonsoft.Json.JsonProperty("policies", Required = Newtonsoft.Json.Required.AllowNull)]
+        [JsonPropertyName("policies")]
         public System.Collections.Generic.ICollection<PricePolicyResponse> Policies { get; set; } = new System.Collections.ObjectModel.Collection<PricePolicyResponse>();
 
-        [Newtonsoft.Json.JsonProperty("taxes", Required = Newtonsoft.Json.Required.AllowNull)]
+        [JsonPropertyName("taxes")]
         public System.Collections.Generic.ICollection<PriceTaxResponse> Taxes { get; set; } = new System.Collections.ObjectModel.Collection<PriceTaxResponse>();
 
-        [Newtonsoft.Json.JsonProperty("isActive", Required = Newtonsoft.Json.Required.Always)]
+        [JsonPropertyName("isActive")]
         public bool IsActive { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonPropertyName("createdAt")]
         public System.DateTimeOffset CreatedAt { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("updatedAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonPropertyName("updatedAt")]
         public System.DateTimeOffset? UpdatedAt { get; set; }
+
+        [JsonPropertyName("success")]
+        public bool Success { get; set; } = true;
+
+        [JsonPropertyName("message")]
+        public string? Message { get; set; }
 
     }
 }

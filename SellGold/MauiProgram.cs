@@ -277,11 +277,13 @@ public static class MauiProgram
                     typeof(ListGraphQLSuppliersHandler).Assembly,
                     typeof(CreateStockHandler).Assembly,
                     typeof(CreatePriceHandler).Assembly,
+                    typeof(ListGraphQLPriceProductsByIdHandler).Assembly,
+                    typeof(ListGraphQLPriceByIdHandler).Assembly,
                     typeof(CreatePromotionHandler).Assembly,
                     typeof(CreateOrderHandler).Assembly,
                     typeof(CreateCustomerHandler).Assembly,
                     typeof(ListGraphQLCustomersHandler).Assembly,
-                    typeof(ListGraphQLPaymentCpfHandler).Assembly                    
+                    typeof(ListGraphQLPaymentCpfHandler).Assembly
                     );
 
             // 🔹 Serviços e Repositórios (Singleton)    
@@ -331,6 +333,8 @@ public static class MauiProgram
             builder.Services.AddTransient<PricePageModel>();
             builder.Services.AddTransient<ListPricePageModel>();
             builder.Services.AddTransient<ListPriceGraphQLService>();
+            builder.Services.AddTransient<ListPriceProductsByIdGraphQLService>();
+            builder.Services.AddTransient<ListPriceByIdGraphQLService>();
 
             builder.Services.AddTransient<PromotionPageModel>();
             builder.Services.AddTransient<ListPromotionPageModel>();
