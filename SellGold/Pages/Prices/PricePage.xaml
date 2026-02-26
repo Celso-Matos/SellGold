@@ -21,7 +21,8 @@
                 </SearchBar.Behaviors>
             </SearchBar>
 
-            <CollectionView ItemsSource="{Binding ProductsWithPrice}">
+            <CollectionView HorizontalOptions="Start"
+                            ItemsSource="{Binding ProductsWithPrice}">
                 <CollectionView.Triggers>
                     <DataTrigger TargetType="CollectionView"
                      Binding="{Binding ProductsWithPrice.Count}"
@@ -56,8 +57,8 @@
                             <Label Text="{Binding Description}" Grid.Column="1"/>
                             <Label Text="{Binding Status}" Grid.Column="2"/>
                             <Label Text="{Binding BasePriceAmount, StringFormat='{0:C}'}" Grid.Column="3"/>
-                            <Button Text="Editar"
-                                    Grid.Column="4"
+                            <Button Grid.Column="4"
+                                    Text="{Binding PriceId, Converter={StaticResource PriceIdToButtonTextConverter}}"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type CollectionView}}, Path=BindingContext.EditPriceProductsCommand}"
                                     CommandParameter="{Binding .}" />
                         </Grid>
@@ -67,7 +68,7 @@
 
             <!-- Seleção de Moeda -->
             <Label Text="Valor" FontAttributes="Bold" />
-            <HorizontalStackLayout Spacing="20">
+            <HorizontalStackLayout Spacing="20" IsEnabled="{Binding IsEditing}">
                 <!-- Exemplo: Real -->
                 <VerticalStackLayout>
                     <Image Source="br_flag.png" WidthRequest="30" HeightRequest="20"/>
@@ -103,10 +104,11 @@
                TextChanged="OnPriceTextChanged"
                HeightRequest="40"
                VerticalOptions="Center"
+               IsEnabled="{Binding IsEditing}"
                Grid.Column="1"/>
 
             <!-- Datas de Vigência -->
-            <Grid ColumnDefinitions="*,*" Padding="10" ColumnSpacing="15">
+            <Grid ColumnDefinitions="*,*" Padding="10" ColumnSpacing="15" IsEnabled="{Binding IsEditing}">
                 <VerticalStackLayout>
                     <Label Text="Data de Início"/>
                     <DatePicker x:Name="EffectiveDatePicker"/>
@@ -118,14 +120,14 @@
             </Grid>
 
             <!-- Status -->
-            <HorizontalStackLayout>
+            <HorizontalStackLayout IsEnabled="{Binding IsEditing}">
                 <Label Text="Ativo" VerticalOptions="Center" />
                 <Switch IsToggled="{Binding NewIsActive}" />
             </HorizontalStackLayout>
 
             <!-- Descontos -->
             <Label Text="Descontos" FontAttributes="Bold" />
-            <CollectionView ItemsSource="{Binding NewDiscounts}">
+            <CollectionView ItemsSource="{Binding NewDiscounts}" IsEnabled="{Binding IsEditing}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
@@ -144,11 +146,12 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <Button Text="Adicionar desconto"
+                    IsEnabled="{Binding IsEditing}"
                     Command="{Binding AddDiscountCommand}" />
 
             <!-- Políticas -->
             <Label Text="Políticas" FontAttributes="Bold" />
-            <CollectionView ItemsSource="{Binding NewPolicies}">
+            <CollectionView ItemsSource="{Binding NewPolicies}" IsEnabled="{Binding IsEditing}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <VerticalStackLayout>
@@ -163,11 +166,12 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <Button Text="Adicionar política"
+                    IsEnabled="{Binding IsEditing}"
                     Command="{Binding AddPolicyCommand}" />
 
             <!-- Impostos -->
             <Label Text="Impostos" FontAttributes="Bold" />
-            <CollectionView ItemsSource="{Binding NewTaxes}">
+            <CollectionView ItemsSource="{Binding NewTaxes}" IsEnabled="{Binding IsEditing}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid ColumnDefinitions="2*,*,Auto" ColumnSpacing="10" Padding="5">
@@ -185,6 +189,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <Button Text="Adicionar imposto"
+                    IsEnabled="{Binding IsEditing}"
                     Command="{Binding AddTaxCommand}" />
 
             <!-- Mensagem de erro -->

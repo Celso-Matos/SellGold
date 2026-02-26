@@ -34,6 +34,9 @@ namespace SellGold.Contracts.DTOs.Products.Responses
         public string BarcodeType => Barcodes?.FirstOrDefault()?.BarcodeType ?? string.Empty;
         public string Status => IsActive ? "Ativo" : "Desativo";
 
+        [JsonPropertyName("priceId")]
+        public Guid PriceId { get; set; }
+
         [JsonPropertyName("basePriceAmount")]
         public double BasePriceAmount { get; set; }
 

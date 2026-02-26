@@ -26,17 +26,14 @@ namespace SellGold.PageModels.Prices
             set { _basePriceAmount = value; OnPropertyChanged(); }
         }
 
-        private string _basePriceCurrency = "BRL";
+        private string _newBasePriceCurrency;
         public string NewBasePriceCurrency
         {
-            get => _basePriceCurrency;
+            get => string.IsNullOrEmpty(_newBasePriceCurrency) ? "BRL" : _newBasePriceCurrency;
             set
             {
-                if (_basePriceCurrency != value)
-                {
-                    _basePriceCurrency = value;
-                    OnPropertyChanged();
-                }
+                _newBasePriceCurrency = value;
+                OnPropertyChanged();
             }
         }
 
@@ -74,6 +71,16 @@ namespace SellGold.PageModels.Prices
         public ObservableCollection<PricePolicyRequest> NewPolicies { get; set; } = new();
         public ObservableCollection<PriceTaxRequest> NewTaxes { get; set; } = new();
 
+        private bool _isEditing;
+        public bool IsEditing
+        {
+            get => _isEditing;
+            set
+            {
+                _isEditing = value;
+                OnPropertyChanged();
+            }
+        }
 
         private string? _errorMessage;
         public string? ErrorMessage
@@ -163,6 +170,8 @@ namespace SellGold.PageModels.Prices
         public void EditPriceProducts(ProductResponse product)
         {
             SelectedPriceProducts = product;
+            IsEditing = true;
+
         }
         private void CleanFields()
         {

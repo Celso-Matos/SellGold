@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Resources/Styles/AppStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>            
             <local:EqualityConverter x:Key="EqualityConverter"/>
+            <local:PriceIdToButtonTextConverter x:Key="PriceIdToButtonTextConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
